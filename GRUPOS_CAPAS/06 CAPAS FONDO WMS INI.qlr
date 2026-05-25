@@ -1,0 +1,953 @@
+<!DOCTYPE qgis-layer-definition>
+<qlr>
+  <layer-tree-group name="" expanded="1" checked="Qt::Checked">
+    <customproperties/>
+    <layer-tree-group name="CAPAS FONDO (WMS)" expanded="1" checked="Qt::Checked">
+      <customproperties/>
+      <layer-tree-group name="Catastro (WMS capas)" expanded="0" checked="Qt::Checked">
+        <customproperties/>
+        <layer-tree-layer name="TOPOGRAFIA" expanded="1" id="ELEMLIN2020011616480755930127" providerKey="wms" source="contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=ELEMLIN&amp;styles=&amp;url=http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx" checked="Qt::Unchecked">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer name="POLIGONOS" expanded="1" id="POLIGONOS2020011616480755911856" providerKey="wms" source="contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=TXTMASA&amp;layers=MASA&amp;styles=&amp;styles=&amp;url=http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx" checked="Qt::Checked">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer name="PARCELAS" expanded="1" id="PARCELAS2020011616480755920594" providerKey="wms" source="contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=PARCELA&amp;layers=TXTPARCELA&amp;styles=&amp;styles=&amp;url=http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx" checked="Qt::Checked">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer name="SUBPARCELAS" expanded="1" id="SUBPARCELAS202001161648075591644" providerKey="wms" source="contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=TXTSUBPARCE&amp;layers=SUBPARCE&amp;styles=&amp;styles=&amp;url=http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx" checked="Qt::Checked">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer name="CONSTRUCCIONES" expanded="1" id="CONSTRUCCIONES2020011616480756019981" providerKey="wms" source="contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=TXTCONSTRU&amp;layers=CONSTRU&amp;styles=&amp;styles=&amp;url=http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx" checked="Qt::Checked">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer name="EJES VIALES" expanded="1" id="EJES2020011616480756015977" providerKey="wms" source="contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=EJES&amp;styles=&amp;url=http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx" checked="Qt::Checked">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer name="LIMITES Term.Munic." expanded="1" id="LIMITES2020011616480756019401" providerKey="wms" source="contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=LIMITES&amp;styles=&amp;url=http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx" checked="Qt::Checked">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer name="TEXTOS CATASTRO" expanded="1" id="TEXTOS_CATASTRO2020011616480756011203" providerKey="wms" source="contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=TEXTOS&amp;styles=&amp;url=http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx" checked="Qt::Checked">
+          <customproperties/>
+        </layer-tree-layer>
+      </layer-tree-group>
+      <layer-tree-layer name="Mapas raster IGN (WMS)" expanded="0" id="Mapas_raster__IGN_2016201612016201802020011616315736728946" providerKey="wms" source="contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=mtn_rasterizado&amp;styles=&amp;url=http://www.ign.es/wms-inspire/mapa-raster" checked="Qt::Unchecked">
+        <customproperties>
+          <property value="1" key="overview"/>
+        </customproperties>
+      </layer-tree-layer>
+      <layer-tree-layer name="ORTOFOTO PNOA (WMS)" expanded="1" id="Ortoimagen201602016020160201612016120180202001161631573675213" providerKey="wms" source="contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=OI.OrthoimageCoverage&amp;styles=&amp;url=http://www.ign.es/wms-inspire/pnoa-ma" checked="Qt::Checked">
+        <customproperties>
+          <property value="1" key="overview"/>
+        </customproperties>
+      </layer-tree-layer>
+      <layer-tree-layer name="Relieve de Fondo" expanded="1" id="Raster_MapaBase_r_ETRS89_30N_MB22020011616315736719398" providerKey="wms" source="contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/jpeg&amp;layers=Raster_MapaBase_r_ETRS89_30N_MB2&amp;styles=default&amp;tileMatrixSet=default028mm&amp;url=https://geoservicios.castillalamancha.es/arcgis/rest/services/Raster/MapaBase_r_ETRS89_30N_MB2/MapServer/WMTS/1.0.0/WMTSCapabilities.xml" checked="Qt::Checked">
+        <customproperties/>
+      </layer-tree-layer>
+    </layer-tree-group>
+  </layer-tree-group>
+  <maplayers>
+    <maplayer refreshOnNotifyMessage="" minScale="1e+08" autoRefreshTime="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" type="raster" maxScale="0" styleCategories="AllStyleCategories">
+      <extent>
+        <xmin>-1050000</xmin>
+        <ymin>3000000</ymin>
+        <xmax>1150000</xmax>
+        <ymax>5000000</ymax>
+      </extent>
+      <id>ELEMLIN2020011616480755930127</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=ELEMLIN&amp;styles=&amp;url=http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>TOPOGRAFIA</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="predeterminado">
+        <map-layer-style name="predeterminado"/>
+      </map-layer-style-manager>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property value="Undefined" key="identify/format"/>
+      </customproperties>
+      <pipe>
+        <rasterrenderer opacity="1" band="1" alphaBand="-1" type="singlebandcolordata">
+          <rasterTransparency/>
+          <minMaxOrigin>
+            <limits>None</limits>
+            <extent>WholeRaster</extent>
+            <statAccuracy>Estimated</statAccuracy>
+            <cumulativeCutLower>0.02</cumulativeCutLower>
+            <cumulativeCutUpper>0.98</cumulativeCutUpper>
+            <stdDevFactor>2</stdDevFactor>
+          </minMaxOrigin>
+        </rasterrenderer>
+        <brightnesscontrast contrast="0" brightness="0"/>
+        <huesaturation colorizeGreen="128" saturation="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeOn="0" colorizeRed="255"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer refreshOnNotifyMessage="" minScale="1e+08" autoRefreshTime="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" type="raster" maxScale="0" styleCategories="AllStyleCategories">
+      <extent>
+        <xmin>-1050000</xmin>
+        <ymin>3000000</ymin>
+        <xmax>1150000</xmax>
+        <ymax>5000000</ymax>
+      </extent>
+      <id>POLIGONOS2020011616480755911856</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=TXTMASA&amp;layers=MASA&amp;styles=&amp;styles=&amp;url=http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>POLIGONOS</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="predeterminado">
+        <map-layer-style name="predeterminado"/>
+      </map-layer-style-manager>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property value="Undefined" key="identify/format"/>
+      </customproperties>
+      <pipe>
+        <rasterrenderer opacity="1" band="1" alphaBand="-1" type="singlebandcolordata">
+          <rasterTransparency/>
+          <minMaxOrigin>
+            <limits>None</limits>
+            <extent>WholeRaster</extent>
+            <statAccuracy>Estimated</statAccuracy>
+            <cumulativeCutLower>0.02</cumulativeCutLower>
+            <cumulativeCutUpper>0.98</cumulativeCutUpper>
+            <stdDevFactor>2</stdDevFactor>
+          </minMaxOrigin>
+        </rasterrenderer>
+        <brightnesscontrast contrast="0" brightness="0"/>
+        <huesaturation colorizeGreen="128" saturation="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeOn="0" colorizeRed="255"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer refreshOnNotifyMessage="" minScale="1e+08" autoRefreshTime="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" type="raster" maxScale="0" styleCategories="AllStyleCategories">
+      <extent>
+        <xmin>-1050000</xmin>
+        <ymin>3000000</ymin>
+        <xmax>1150000</xmax>
+        <ymax>5000000</ymax>
+      </extent>
+      <id>PARCELAS2020011616480755920594</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=PARCELA&amp;layers=TXTPARCELA&amp;styles=&amp;styles=&amp;url=http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>PARCELAS</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="predeterminado">
+        <map-layer-style name="predeterminado"/>
+      </map-layer-style-manager>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property value="Html" key="identify/format"/>
+      </customproperties>
+      <pipe>
+        <rasterrenderer opacity="1" band="1" alphaBand="-1" type="singlebandcolordata">
+          <rasterTransparency/>
+          <minMaxOrigin>
+            <limits>None</limits>
+            <extent>WholeRaster</extent>
+            <statAccuracy>Estimated</statAccuracy>
+            <cumulativeCutLower>0.02</cumulativeCutLower>
+            <cumulativeCutUpper>0.98</cumulativeCutUpper>
+            <stdDevFactor>2</stdDevFactor>
+          </minMaxOrigin>
+        </rasterrenderer>
+        <brightnesscontrast contrast="0" brightness="0"/>
+        <huesaturation colorizeGreen="128" saturation="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeOn="0" colorizeRed="255"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer refreshOnNotifyMessage="" minScale="1e+08" autoRefreshTime="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" type="raster" maxScale="0" styleCategories="AllStyleCategories">
+      <extent>
+        <xmin>-1050000</xmin>
+        <ymin>3000000</ymin>
+        <xmax>1150000</xmax>
+        <ymax>5000000</ymax>
+      </extent>
+      <id>SUBPARCELAS202001161648075591644</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=TXTSUBPARCE&amp;layers=SUBPARCE&amp;styles=&amp;styles=&amp;url=http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>SUBPARCELAS</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="predeterminado">
+        <map-layer-style name="predeterminado"/>
+      </map-layer-style-manager>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property value="Undefined" key="identify/format"/>
+      </customproperties>
+      <pipe>
+        <rasterrenderer opacity="1" band="1" alphaBand="-1" type="singlebandcolordata">
+          <rasterTransparency/>
+          <minMaxOrigin>
+            <limits>None</limits>
+            <extent>WholeRaster</extent>
+            <statAccuracy>Estimated</statAccuracy>
+            <cumulativeCutLower>0.02</cumulativeCutLower>
+            <cumulativeCutUpper>0.98</cumulativeCutUpper>
+            <stdDevFactor>2</stdDevFactor>
+          </minMaxOrigin>
+        </rasterrenderer>
+        <brightnesscontrast contrast="0" brightness="0"/>
+        <huesaturation colorizeGreen="128" saturation="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeOn="0" colorizeRed="255"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer refreshOnNotifyMessage="" minScale="1e+08" autoRefreshTime="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" type="raster" maxScale="0" styleCategories="AllStyleCategories">
+      <extent>
+        <xmin>-1050000</xmin>
+        <ymin>3000000</ymin>
+        <xmax>1150000</xmax>
+        <ymax>5000000</ymax>
+      </extent>
+      <id>CONSTRUCCIONES2020011616480756019981</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=TXTCONSTRU&amp;layers=CONSTRU&amp;styles=&amp;styles=&amp;url=http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>CONSTRUCCIONES</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="predeterminado">
+        <map-layer-style name="predeterminado"/>
+      </map-layer-style-manager>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property value="Undefined" key="identify/format"/>
+      </customproperties>
+      <pipe>
+        <rasterrenderer opacity="1" band="1" alphaBand="-1" type="singlebandcolordata">
+          <rasterTransparency/>
+          <minMaxOrigin>
+            <limits>None</limits>
+            <extent>WholeRaster</extent>
+            <statAccuracy>Estimated</statAccuracy>
+            <cumulativeCutLower>0.02</cumulativeCutLower>
+            <cumulativeCutUpper>0.98</cumulativeCutUpper>
+            <stdDevFactor>2</stdDevFactor>
+          </minMaxOrigin>
+        </rasterrenderer>
+        <brightnesscontrast contrast="0" brightness="0"/>
+        <huesaturation colorizeGreen="128" saturation="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeOn="0" colorizeRed="255"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer refreshOnNotifyMessage="" minScale="1e+08" autoRefreshTime="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" type="raster" maxScale="0" styleCategories="AllStyleCategories">
+      <extent>
+        <xmin>-1050000</xmin>
+        <ymin>3000000</ymin>
+        <xmax>1150000</xmax>
+        <ymax>5000000</ymax>
+      </extent>
+      <id>EJES2020011616480756015977</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=EJES&amp;styles=&amp;url=http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>EJES VIALES</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="predeterminado">
+        <map-layer-style name="predeterminado"/>
+      </map-layer-style-manager>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property value="Undefined" key="identify/format"/>
+      </customproperties>
+      <pipe>
+        <rasterrenderer opacity="1" band="1" alphaBand="-1" type="singlebandcolordata">
+          <rasterTransparency/>
+          <minMaxOrigin>
+            <limits>None</limits>
+            <extent>WholeRaster</extent>
+            <statAccuracy>Estimated</statAccuracy>
+            <cumulativeCutLower>0.02</cumulativeCutLower>
+            <cumulativeCutUpper>0.98</cumulativeCutUpper>
+            <stdDevFactor>2</stdDevFactor>
+          </minMaxOrigin>
+        </rasterrenderer>
+        <brightnesscontrast contrast="0" brightness="0"/>
+        <huesaturation colorizeGreen="128" saturation="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeOn="0" colorizeRed="255"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer refreshOnNotifyMessage="" minScale="1e+08" autoRefreshTime="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" type="raster" maxScale="-4.65661e-10" styleCategories="AllStyleCategories">
+      <extent>
+        <xmin>-1050000</xmin>
+        <ymin>3000000</ymin>
+        <xmax>1150000</xmax>
+        <ymax>5000000</ymax>
+      </extent>
+      <id>LIMITES2020011616480756019401</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=LIMITES&amp;styles=&amp;url=http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>LIMITES Term.Munic.</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="predeterminado">
+        <map-layer-style name="predeterminado"/>
+      </map-layer-style-manager>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property value="Undefined" key="identify/format"/>
+      </customproperties>
+      <pipe>
+        <rasterrenderer opacity="1" band="1" alphaBand="0" type="singlebandcolordata">
+          <rasterTransparency/>
+          <minMaxOrigin>
+            <limits>None</limits>
+            <extent>WholeRaster</extent>
+            <statAccuracy>Estimated</statAccuracy>
+            <cumulativeCutLower>0.02</cumulativeCutLower>
+            <cumulativeCutUpper>0.98</cumulativeCutUpper>
+            <stdDevFactor>2</stdDevFactor>
+          </minMaxOrigin>
+        </rasterrenderer>
+        <brightnesscontrast contrast="0" brightness="0"/>
+        <huesaturation colorizeGreen="128" saturation="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeOn="0" colorizeRed="255"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer refreshOnNotifyMessage="" minScale="1e+08" autoRefreshTime="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" type="raster" maxScale="0" styleCategories="AllStyleCategories">
+      <extent>
+        <xmin>-1050000</xmin>
+        <ymin>3000000</ymin>
+        <xmax>1150000</xmax>
+        <ymax>5000000</ymax>
+      </extent>
+      <id>TEXTOS_CATASTRO2020011616480756011203</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=TEXTOS&amp;styles=&amp;url=http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>TEXTOS CATASTRO</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="predeterminado">
+        <map-layer-style name="predeterminado"/>
+      </map-layer-style-manager>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property value="Undefined" key="identify/format"/>
+      </customproperties>
+      <pipe>
+        <rasterrenderer opacity="1" band="1" alphaBand="-1" type="singlebandcolordata">
+          <rasterTransparency/>
+          <minMaxOrigin>
+            <limits>None</limits>
+            <extent>WholeRaster</extent>
+            <statAccuracy>Estimated</statAccuracy>
+            <cumulativeCutLower>0.02</cumulativeCutLower>
+            <cumulativeCutUpper>0.98</cumulativeCutUpper>
+            <stdDevFactor>2</stdDevFactor>
+          </minMaxOrigin>
+        </rasterrenderer>
+        <brightnesscontrast contrast="0" brightness="0"/>
+        <huesaturation colorizeGreen="128" saturation="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeOn="0" colorizeRed="255"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer refreshOnNotifyMessage="" minScale="1e+08" autoRefreshTime="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" type="raster" maxScale="0" styleCategories="AllStyleCategories">
+      <extent>
+        <xmin>-1099673.71379388589411974</xmin>
+        <ymin>2986435.24255441408604383</ymin>
+        <xmax>1295248.94578344281762838</xmax>
+        <ymax>4998012.35990088433027267</ymax>
+      </extent>
+      <id>Mapas_raster__IGN_2016201612016201802020011616315736728946</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=mtn_rasterizado&amp;styles=&amp;url=http://www.ign.es/wms-inspire/mapa-raster</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Mapas raster IGN (WMS)</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="predeterminado">
+        <map-layer-style name="predeterminado"/>
+      </map-layer-style-manager>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>0</Searchable>
+      </flags>
+      <customproperties>
+        <property value="Undefined" key="identify/format"/>
+      </customproperties>
+      <pipe>
+        <rasterrenderer opacity="0.733333" band="1" alphaBand="-1" type="singlebandcolordata">
+          <rasterTransparency/>
+          <minMaxOrigin>
+            <limits>None</limits>
+            <extent>WholeRaster</extent>
+            <statAccuracy>Estimated</statAccuracy>
+            <cumulativeCutLower>0.02</cumulativeCutLower>
+            <cumulativeCutUpper>0.98</cumulativeCutUpper>
+            <stdDevFactor>2</stdDevFactor>
+          </minMaxOrigin>
+        </rasterrenderer>
+        <brightnesscontrast contrast="0" brightness="0"/>
+        <huesaturation colorizeGreen="128" saturation="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeOn="0" colorizeRed="255"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer refreshOnNotifyMessage="" minScale="75000" autoRefreshTime="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="1" refreshOnNotifyEnabled="0" type="raster" maxScale="-4.65661e-10" styleCategories="AllStyleCategories">
+      <extent>
+        <xmin>-1099673.71379388589411974</xmin>
+        <ymin>2986435.24255441408604383</ymin>
+        <xmax>1295248.94578344281762838</xmax>
+        <ymax>4998012.35990088433027267</ymax>
+      </extent>
+      <id>Ortoimagen201602016020160201612016120180202001161631573675213</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=OI.OrthoimageCoverage&amp;styles=&amp;url=http://www.ign.es/wms-inspire/pnoa-ma</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>ORTOFOTO PNOA (WMS)</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="predeterminado">
+        <map-layer-style name="predeterminado"/>
+      </map-layer-style-manager>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>0</Searchable>
+      </flags>
+      <customproperties>
+        <property value="Undefined" key="identify/format"/>
+      </customproperties>
+      <pipe>
+        <rasterrenderer opacity="1" band="1" alphaBand="0" type="singlebandcolordata">
+          <rasterTransparency/>
+          <minMaxOrigin>
+            <limits>None</limits>
+            <extent>WholeRaster</extent>
+            <statAccuracy>Estimated</statAccuracy>
+            <cumulativeCutLower>0.02</cumulativeCutLower>
+            <cumulativeCutUpper>0.98</cumulativeCutUpper>
+            <stdDevFactor>2</stdDevFactor>
+          </minMaxOrigin>
+        </rasterrenderer>
+        <brightnesscontrast contrast="0" brightness="0"/>
+        <huesaturation colorizeGreen="128" saturation="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeOn="0" colorizeRed="255"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer refreshOnNotifyMessage="" minScale="1e+08" autoRefreshTime="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="1" refreshOnNotifyEnabled="0" type="raster" maxScale="75001" styleCategories="AllStyleCategories">
+      <extent>
+        <xmin>-2984653.67249999986961484</xmin>
+        <ymin>-10600583</ymin>
+        <xmax>10600655</xmax>
+        <ymax>6986760.02239999920129776</ymax>
+      </extent>
+      <id>Raster_MapaBase_r_ETRS89_30N_MB22020011616315736719398</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/jpeg&amp;layers=Raster_MapaBase_r_ETRS89_30N_MB2&amp;styles=default&amp;tileMatrixSet=default028mm&amp;url=https://geoservicios.castillalamancha.es/arcgis/rest/services/Raster/MapaBase_r_ETRS89_30N_MB2/MapServer/WMTS/1.0.0/WMTSCapabilities.xml</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Relieve de Fondo</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="predeterminado">
+        <map-layer-style name="predeterminado"/>
+      </map-layer-style-manager>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>0</Searchable>
+      </flags>
+      <customproperties>
+        <property value="Undefined" key="identify/format"/>
+      </customproperties>
+      <pipe>
+        <rasterrenderer opacity="1" band="1" alphaBand="0" type="singlebandcolordata">
+          <rasterTransparency/>
+          <minMaxOrigin>
+            <limits>None</limits>
+            <extent>WholeRaster</extent>
+            <statAccuracy>Estimated</statAccuracy>
+            <cumulativeCutLower>0.02</cumulativeCutLower>
+            <cumulativeCutUpper>0.98</cumulativeCutUpper>
+            <stdDevFactor>2</stdDevFactor>
+          </minMaxOrigin>
+        </rasterrenderer>
+        <brightnesscontrast contrast="0" brightness="0"/>
+        <huesaturation colorizeGreen="128" saturation="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeOn="0" colorizeRed="255"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+  </maplayers>
+</qlr>
