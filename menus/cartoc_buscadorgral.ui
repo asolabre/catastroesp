@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>jcml_barDialogBase</class>
+ <widget class="QDialog" name="jcml_barDialogBase">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>586</width>
+    <height>365</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>586</width>
+    <height>365</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>586</width>
+    <height>365</height>
+   </size>
+  </property>
+  <property name="acceptDrops">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>CARTOCIUDAD Buscador de Carreteras</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>80</y>
+     <width>57</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Carretera:</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="goToPk_button">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>100</y>
+     <width>240</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ir a CTRA/PK&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ir a la Carretera y PK&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="text">
+    <string>Ir a CTRA y PK</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="logo">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>268</width>
+     <height>54</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>28</pointsize>
+     <italic>true</italic>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>../../../../../../../aass04/.designer/iconos/ign_cartociudad.jpg</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>65</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>CARRETERAS</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lne_carretera">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>100</y>
+     <width>174</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>201</x>
+     <y>80</y>
+     <width>241</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PK: (pk entero) o secuencia tipo 1-32</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lne_pk">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>100</y>
+     <width>124</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; text-decoration: underline;&quot;&gt;EJEMPLOS DE PK&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;'PKA ENTERO'&lt;/span&gt; -- &lt;span style=&quot; font-weight:600;&quot;&gt;9&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;'SECUENCIA DE PKS'&lt;/span&gt; -- 1 -18, 45-87. 32-15&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; text-decoration: underline;&quot;&gt;EJEMPLOS DE PK&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;'PKA ENTERO'&lt;/span&gt; -- &lt;span style=&quot; font-weight:600;&quot;&gt;9&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;'SECUENCIA DE PKS'&lt;/span&gt; -- 1 -18, 45-87. 32-15&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhPreferNumbers</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>125</y>
+     <width>565</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Dirección por Texto Libre (EJ: Calle San Adolfo 9, Albacete)</string>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lne_Direccion">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>143</y>
+     <width>568</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; text-decoration: underline;&quot;&gt;EJEMPLOS DE DIRECCIÓN&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;'Lezuza'&lt;/span&gt; -- Localizará un Municipio, una Población o una calle con ese nombre&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;'Lezuza 12'&lt;/span&gt; -- Localizará el portal de la Calle (camino, etc) Lezuza nº 23&lt;/p&gt;&lt;p&gt;--- &lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;IMPORTANTE: NO PONER COMA ENTRE CALLE Y NÚMERO&lt;/span&gt; ---&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;'Lezuza 12, Albacete'&lt;/span&gt; --- Limita la búsqueda a una calle de esa localidad&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;'Camino de abajo'&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;'N-430'&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; text-decoration: underline;&quot;&gt;EJEMPLOS DE DIRECCIÓN&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;'Lezuza'&lt;/span&gt; -- Localizará un Municipio, una Población o una calle con ese nombre&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;'Lezuza 12'&lt;/span&gt; -- Localizará el portal de la Calle (camino, etc) Lezuza nº 23 --- &lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;IMPORTANTE: NO PONER COMA ENTRE CALLE Y NÚMERO&lt;/span&gt; ---&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;'Lezuza 12, Albacete'&lt;/span&gt; --- Limita la búsqueda a una calle de esa localidad&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;'N-322 255'&lt;/span&gt; --- Localización de carretera y PK --- &lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;IMPORTANTE: NO PONER COMA ENTRE CTRA Y PK&lt;/span&gt; ---&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;'N-430' &lt;/span&gt;--- Localización de una carretera&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Arial,sans-serif'; font-weight:600;&quot;&gt;'02900A04605024' &lt;/span&gt;&lt;span style=&quot; font-family:'Arial,sans-serif';&quot;&gt;--- Búsqueda de una referncia catastral&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;'Camino de abajo'&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;'León' &lt;/span&gt;--- Permite hacer zoom a toda la provincia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="buscaDireccion_button">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>165</y>
+     <width>240</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>460</width>
+     <height>600</height>
+    </size>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Buscar las coincidencias con la Dirección&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Buscar las coincidencias con la Dirección&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="text">
+    <string>Buscar DIRECCIÓN</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="goToDireccion_button">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>340</y>
+     <width>240</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>460</width>
+     <height>600</height>
+    </size>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ir a POBLACIÓN&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ir a la Dirección Seleccionada&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="text">
+    <string>Ir a DIRECCIÓN SELECCIONADA</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_12">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>185</y>
+     <width>381</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;LISTADO DE DIRECCIONES ENCONTRADAS &lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;(SELECCIONAR UNO)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="lstCANDIDATOS_DIRECC">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>200</y>
+     <width>571</width>
+     <height>134</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_14">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>0</y>
+     <width>281</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; text-decoration: underline;&quot;&gt;BUSCADOR DE CARTOCIUDAD&lt;/span&gt;&lt;br/&gt;Permite la búsqueda de DIRECCIONES, POBLACIONES, CARRETERAS, PUNTOS KILOMÉTRICOS, PORTALES, y PARAJES de toda España empleando el buscador del INSTITUTO GEOGRÁFICO NACIONAL&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignJustify|Qt::AlignTop</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_13">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>340</y>
+     <width>321</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://www.cartociudad.es/portal/web/guest/directorio-de-servicios&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Información sobre servicios web de CARTOCIUDAD&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="openExternalLinks">
+    <bool>true</bool>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse</set>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbxTipoDir">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>165</y>
+     <width>180</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblcbxTipoDir">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>165</y>
+     <width>141</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TIPO DE BUSQUEDA:</string>
+   </property>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>goToPk_button</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

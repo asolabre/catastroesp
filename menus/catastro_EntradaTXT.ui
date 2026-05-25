@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>catastroEntradaTXT</class>
+ <widget class="QDialog" name="catastroEntradaTXT">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>603</width>
+    <height>289</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Entrada de RRCC por Texto</string>
+  </property>
+  <widget class="QTextEdit" name="txeREFSCATASTRAL">
+   <property name="geometry">
+    <rect>
+     <x>13</x>
+     <y>30</y>
+     <width>381</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Entrar un texto que reuna una lista de Referencias catastrales, separadas por coma &lt;span style=&quot; font-weight:600;&quot;&gt;',&lt;/span&gt;', punto y coma &lt;span style=&quot; font-weight:600;&quot;&gt;';'&lt;/span&gt;, punto &lt;span style=&quot; font-weight:600;&quot;&gt;'.'&lt;/span&gt;, barra de separador &lt;span style=&quot; font-weight:600;&quot;&gt;'\'&lt;/span&gt;.&lt;br/&gt;&lt;br/&gt;Los espacios se eliminarán de forma automatica.&lt;/p&gt;&lt;p&gt;Puede tratarse de RRCC de 14 o de 20 caracteres.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;EJEMPLO: &lt;/span&gt;'02056A0 0900526xxxx, 02056A00900 604aaaa, 020 56A00900267; 02056A009002 69: 02056A009006 25. 02056A00 90026, 02056A00909002, 02056A00909031'&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Entrar un texto que reuna una lista de Referencias catastrales, separadas por coma &lt;span style=&quot; font-weight:600;&quot;&gt;',&lt;/span&gt;', punto y coma &lt;span style=&quot; font-weight:600;&quot;&gt;';'&lt;/span&gt;, punto &lt;span style=&quot; font-weight:600;&quot;&gt;'.'&lt;/span&gt;, barra de separador &lt;span style=&quot; font-weight:600;&quot;&gt;'\'&lt;/span&gt;.&lt;br/&gt;&lt;br/&gt;Los espacios se eliminarán de forma automatica.&lt;/p&gt;&lt;p&gt;Puede tratarse de RRCC de 14 o de 20 caracteres.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;EJEMPLO: &lt;/span&gt;'02056A0 0900526xxxx, 02056A00900 604aaaa, 020 56A00900267; 02056A009002 69: 02056A009006 25. 02056A00 90026, 02056A00909002, 02056A00909031'&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>286</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Introduce un Texto con REFERENCIAS CATASTRALES</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listaRCs">
+   <property name="geometry">
+    <rect>
+     <x>399</x>
+     <y>31</y>
+     <width>193</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="mouseTracking">
+    <bool>true</bool>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::StrongFocus</enum>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::DefaultContextMenu</enum>
+   </property>
+   <property name="acceptDrops">
+    <bool>true</bool>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::AllEditTriggers</set>
+   </property>
+   <property name="tabKeyNavigation">
+    <bool>true</bool>
+   </property>
+   <property name="defaultDropAction">
+    <enum>Qt::TargetMoveAction</enum>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::MultiSelection</enum>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectItems</enum>
+   </property>
+   <property name="wordWrap">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_12">
+   <property name="geometry">
+    <rect>
+     <x>399</x>
+     <y>11</y>
+     <width>161</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+     <underline>true</underline>
+    </font>
+   </property>
+   <property name="text">
+    <string>PARCELAS A CARGAR</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCARGAR">
+   <property name="geometry">
+    <rect>
+     <x>409</x>
+     <y>258</y>
+     <width>181</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>CARGAR A LISTADO</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCONVERTIR">
+   <property name="geometry">
+    <rect>
+     <x>219</x>
+     <y>258</y>
+     <width>174</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>CONVERTIR RRCC</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="gbxSEPARADORES">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>172</y>
+     <width>371</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+   <widget class="QCheckBox" name="chbSepCOMA">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>25</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Coma ( , )</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chbSepPUNTOCOMA">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>25</y>
+      <width>121</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Punto y coma ( ; )</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chbSepDOSPUNTOS">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>25</y>
+      <width>131</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Dos puntos ( : )</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chbSepSEPARADOR">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Separador ( / )</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chbSepSEPARADORTRAS">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>40</y>
+      <width>121</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Separador tras ( \ )</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chbSepSALTOLINEA">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>40</y>
+      <width>131</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Salto de línea</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>347</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>(El sistema anula espacios en blanco, tabuladores, o saltos de linea)</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chbSepTextoY">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>55</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Texto 'y'</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>347</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+      <underline>true</underline>
+     </font>
+    </property>
+    <property name="text">
+     <string>SEPARADORES QUE GENERAN NUEVAS RRCC</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>55</y>
+      <width>241</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>(La Y mayúscula puede formar parte de una RC)</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QRadioButton" name="rbtNOTIFICATAS">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>127</y>
+     <width>189</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;FORMATO TIPO NOTIFICACIÓN CATASTRAL&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;02055A0 1700038 0000 MA Polígono 017 Parcela 00038 Paraje MAJADA DE LAS VACAS - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1700043 0000 MY Polígono 017 Parcela 00043 Paraje SALTADOR - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1700065 0000 MS Polígono 017 Parcela 00065 Paraje CAÑADA DE BOGARRA - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1800002 0000 MD Polígono 018 Parcela 00002 Paraje UMBRIA ARROYO BLANCO - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1800265 0000 MS Polígono 018 Parcela 00265 Paraje MOLATA DE LA CASILLA - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1800345 0000 MT Polígono 018 Parcela 00345 Paraje SOLANA DEL MACALON - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1800469 0000 MP Polígono 018 Parcela 00469 Paraje UMBRIA ARROYO BLANCO - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1809007 0000 MA Polígono 018 Parcela 09007 Paraje CTRA DE BOJADILLAS - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1809015 0000 MP Polígono 018 Parcela 09015 Paraje CARRETERA CM-3229 - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1909004 0000 MX Polígono 019 Parcela 09004 Paraje CTRA DE BOJADILLAS - NERPIO ( ALBACETE )&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;FORMATO TIPO NOTIFICACIÓN CATASTRAL&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;02055A0 1700038 0000 MA Polígono 017 Parcela 00038 Paraje MAJADA DE LAS VACAS - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1700043 0000 MY Polígono 017 Parcela 00043 Paraje SALTADOR - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1700065 0000 MS Polígono 017 Parcela 00065 Paraje CAÑADA DE BOGARRA - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1800002 0000 MD Polígono 018 Parcela 00002 Paraje UMBRIA ARROYO BLANCO - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1800265 0000 MS Polígono 018 Parcela 00265 Paraje MOLATA DE LA CASILLA - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1800345 0000 MT Polígono 018 Parcela 00345 Paraje SOLANA DEL MACALON - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1800469 0000 MP Polígono 018 Parcela 00469 Paraje UMBRIA ARROYO BLANCO - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1809007 0000 MA Polígono 018 Parcela 09007 Paraje CTRA DE BOJADILLAS - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1809015 0000 MP Polígono 018 Parcela 09015 Paraje CARRETERA CM-3229 - NERPIO ( ALBACETE )&lt;/p&gt;&lt;p&gt;02055A0 1909004 0000 MX Polígono 019 Parcela 09004 Paraje CTRA DE BOJADILLAS - NERPIO ( ALBACETE )&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="text">
+    <string>Formato Notificación Catastral</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbtSEPARADORES">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>147</y>
+     <width>189</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;FORMATO LINEA DE TEXTO CON SEPARADORES&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;02056A0  0900526xxxx, 02056A00900 604aaaa, 020 56A00900267, 02056A009002 69, 02056A009006 25, 02056A00 90026, 02056A00909002, 02056A00909031&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;02056A0  0900526xxxx, 02056A00900 604aaaa, 020 56A00900267; 02056A009002 69: 02056A009006 25, 02056A00 90026, 02056A00909002, 02056A00909031&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;FORMATO LINEA DE TEXTO CON SEPARADORES&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;02056A0  0900526xxxx, 02056A00900 604aaaa, 020 56A00900267, 02056A009002 69, 02056A009006 25, 02056A00 90026, 02056A00909002, 02056A00909031&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;02056A0  0900526xxxx, 02056A00900 604aaaa, 020 56A00900267; 02056A009002 69: 02056A009006 25, 02056A00 90026, 02056A00909002, 02056A00909031&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="text">
+    <string>Formato Linea con Separadores</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbNoPARCELAS">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>240</y>
+     <width>189</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0 Parcelas Convertidas</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

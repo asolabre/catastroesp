@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>Agustín Solabre</author>
+ <class>herrExpro_generaGMLconst</class>
+ <widget class="QDialog" name="herrExpro_generaGMLconst">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>810</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>810</width>
+    <height>360</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>810</width>
+    <height>1000</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>CATASTRO Generar GML</string>
+  </property>
+  <widget class="QLineEdit" name="lneGMLsalida">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>105</y>
+     <width>430</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>prueba.gml</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTitulo">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>0</y>
+     <width>481</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+     <underline>true</underline>
+    </font>
+   </property>
+   <property name="text">
+    <string>Generar GML de CONSTRUCCIONES para catastro desde capa de Polígonos</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbxCapaentrada">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>471</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="txbAyuda">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>20</y>
+     <width>311</width>
+     <height>311</height>
+    </rect>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; text-decoration: underline;&quot;&gt;Generar GML de CONSTRUCCIONES para catastro desde capa de Poligonos&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600; text-decoration: underline;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600; color:#ff0000;&quot;&gt;LA AYUDA SE METE POR CÓDIGO DESDE EL FICHERO&lt;br /&gt;\HELP\catastro_generaGMLconst_help.html&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Permite generar un fichero GML de CONSTRUCCIONES, para la generación de un ICUC &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;(1&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Se genera en formato INSPIRE de CATASTRO a partir de una capa de Polígonos, completa o solo de sus elementos seleccionados.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;&lt;br /&gt;Cada registro comprende una geometría de una CONSTRUCCIÓN de la parcela, y debe tener 6 &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; text-decoration: underline;&quot;&gt;CAMPOS OBLIGATORIOS&lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt; contennienodo cada uno los siguientes valores:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;- LOCALID:&lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Normalmente la RC de la parcela catastral.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;- NAMESPACE:&lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt; Por defecto, siempre debe ser &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;ES.LOCAL.BU.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;- NOMBRE CONSTRUCCIÓN:&lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt; Nombre identificador de la construcción en el conjunto. Ejemplos: EDIFICIO_1, EDIFICIO_2, NAVE_ESTE, APARCAMIENTO_01, etc.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;- USO: &lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Uso de la construcción:&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;- &lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt; font-weight:600;&quot;&gt;R&lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt; font-weight:704;&quot;&gt;esidencial:&lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt;&quot;&gt; Viviendas, apartamentos.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt; font-weight:704;&quot;&gt;- Almacén-Estacionamiento:&lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt;&quot;&gt; Garajes, trasteros, bodegas.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt; font-weight:704;&quot;&gt;- Comercial:&lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt;&quot;&gt; Locales, tiendas, galerías.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt; font-weight:704;&quot;&gt;- Oficinas:&lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt;&quot;&gt; Espacios destinados a servicios y gestión administrativa.&lt;br /&gt;- &lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt; font-weight:704;&quot;&gt;Industrial:&lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt;&quot;&gt; Naves, fábricas, almacenes industriales.&lt;br /&gt;- &lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt; font-weight:704;&quot;&gt;Ocio y Hostelería:&lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt;&quot;&gt; Hoteles, restaurantes, cines.&lt;br /&gt;- &lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt; font-weight:704;&quot;&gt;Cultural / Deportivo:&lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt;&quot;&gt; Museos, colegios, gimnasios, estadios.&lt;br /&gt;- &lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt; font-weight:704;&quot;&gt;Edificios Singulares:&lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt;&quot;&gt; Instituciones públicas, hospitales, estaciones&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:10pt; font-weight:600;&quot;&gt;- PLANTAS&lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;:&lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt;&quot;&gt; Numero de plantas sobre rasante.&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt; font-weight:600;&quot;&gt;- &lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:10pt; font-weight:600;&quot;&gt;TIPO:&lt;/span&gt;&lt;span style=&quot; font-family:'Google Sans','Arial','sans-serif'; font-size:9pt;&quot;&gt; Tipo de edificio: Building, otherconstructions (&amp;quot;piscina&amp;quot;, &amp;quot;deposito&amp;quot;, &amp;quot;tendedero&amp;quot;, &amp;quot;pista&amp;quot;, &amp;quot;OtherConstruction&amp;quot;, &amp;quot;otherconstruction&amp;quot;, etc)&lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;DATOS DE ENTRADA:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;CAPA DE ENTRADA:&lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt; Capa de POLÍGONOS cargada en la Tabla de Contenido (TOC).&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;SOLO ELEMENTOS SELECCIONADOS:&lt;/span&gt;&lt;span style=&quot; font-size:9pt; text-decoration: underline;&quot;&gt;ACTIVADO&lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;, generará el GML de las parcelas seleccionadas&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;FICHERO GML SALIDA:&lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt; directorio y nombre de fichero de salida GML; se puede componer con el botón de la derecha. El sistema guarda el último directorio y nobre de fichero empleados.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;SELECTORES DE CAMPOS:&lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt; LOCALID, NAMESPACE, NOM_CONST, USO_CONST, NUMPLANTAS, TIPO_CONST&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;DECIMALES:&lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt; Se pueden condicionar los formatos de salida del GML para las COORDENADAS de los nodos. Se recomiendan &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;2 decimales para COORDENADAS&lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;COMPROBACIONES EN LA CREACIÓN DEL GML&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; color:#0000ff;&quot;&gt;El programa analiza las parcelas detectando:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; color:#0000ff;&quot;&gt;* Existencia de Parcelas con el mismo LOCALID (LOCALID duplicado)&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; color:#0000ff;&quot;&gt;* Parcelas con NAMESPACE distinto de '&lt;/span&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;ES.LOCAL.BU&lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#0000ff;&quot;&gt;'&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; color:#0000ff;&quot;&gt;* Parcelas con geometria &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-style:italic; color:#0000ff;&quot;&gt;multipolígono &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#0000ff;&quot;&gt;(no admiidas)&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; color:#0000ff;&quot;&gt;* Eliminación de nodos duplicados consecutivos&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;EJEMPLO: .\TEMPLATES\EJEMPLO CONSTRUCCIONES CON ANILLO OTRASCONST.gml&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; text-decoration: underline;&quot;&gt;CONTROLES:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;Comprobar LOCALID repetidos al inicio:&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt; Previamente a la generación, se pueden intentar detectar &lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;LOCALID repetidos.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;Revisar RRCC identicas a origen:&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Se analizan las parcelas con NAMESPACE &lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;'&lt;/span&gt;&lt;span style=&quot; font-size:9pt; text-decoration: underline;&quot;&gt;ES.SDGC.CP&lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;', analizando si tienen una coincidencia absoluta de geometría con la parcela descargada de catastro.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;(1) &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;ICUC:&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Informe catastral de Ubicación de Construcciones.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;Más INFO:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://www.catastro.hacienda.gob.es/ayuda/vga/ayuda_ICUC.htm&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;Descripción Informe Catastral de Ubicación de Construcciones&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://www.sedecatastro.gob.es/ValidacionesGraficas/SEC_ICUC_Datos.aspx&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;Presentación de GML de CONSTRUCCIONES&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="btnSeleccionfich">
+   <property name="geometry">
+    <rect>
+     <x>445</x>
+     <y>105</y>
+     <width>35</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>...</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chbCARGAGML">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>180</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cargar GML al finalizar</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCANCELA">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>460</y>
+     <width>71</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CANCELA</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnGENERAGML">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>460</y>
+     <width>131</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>GENERA GML</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>85</y>
+     <width>211</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Fichero GML de salida</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chbELEMSELEC">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>171</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Solo elementos seleccionados</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="progressBar">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>470</y>
+     <width>571</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="value">
+    <number>0</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>22</y>
+     <width>111</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Capa de entrada:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_campoNMSPC">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>195</y>
+     <width>170</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CAMPO NAMESPACE</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblINFO">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>455</y>
+     <width>531</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>INFO</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbx_campoLOCALID">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>170</y>
+     <width>170</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_campoLOCALID">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>155</y>
+     <width>170</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CAMPO LOCALID:  Ref. Cat. RC</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbx_campoTipo">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>250</y>
+     <width>170</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_campoTipo">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>235</y>
+     <width>170</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CAMPO TIPO (piscina,deposito...)</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_bw_CONSTRUCCIONES">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>315</y>
+     <width>261</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>VALORES DE LOS REGISTROS</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbx_campoNMSPC">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>210</y>
+     <width>170</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="spbDecCoord">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>190</y>
+     <width>31</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>6</number>
+   </property>
+   <property name="value">
+    <number>2</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblDecCoord">
+   <property name="geometry">
+    <rect>
+     <x>372</x>
+     <y>192</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Decim. coord......</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="gbxCONTROLES">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>274</y>
+     <width>251</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="title">
+    <string>CONTROLES</string>
+   </property>
+   <widget class="QCheckBox" name="cbxCTRL_localid_rep">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>23</y>
+      <width>231</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Comprobar LOCALID repetidos al finalizar</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="btnAsignNomCapa">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>80</y>
+     <width>230</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Asigna Nombre de Capa de entrada a Fichero</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblElemSelec">
+   <property name="geometry">
+    <rect>
+     <x>276</x>
+     <y>20</y>
+     <width>205</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0 Elementos seleccionados </string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_Precision">
+   <property name="geometry">
+    <rect>
+     <x>372</x>
+     <y>174</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Precisión (m.) .....................</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbx_campoNomConst">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>250</y>
+     <width>170</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_campoNomConst">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>235</y>
+     <width>170</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CAMPO NOMBRE CONSTRUCCIÓN:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbx_campoNumPlantas">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>210</y>
+     <width>170</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_campoNumPlantas">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>195</y>
+     <width>170</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CAMPO NÚMERO PLANTAS</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lne_Precision">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>170</y>
+     <width>31</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0.10</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_campoUso">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>155</y>
+     <width>170</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CAMPO USO</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbx_campoUso">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>170</y>
+     <width>170</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tbw_CONSTRUCCIONES">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>335</y>
+     <width>790</width>
+     <height>120</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>Num</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>LOCALID</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>NAMESPACE</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>NOM_CONST</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>USO_CONST</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>NUMPLANTAS</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>TIPOCONST</string>
+    </property>
+   </column>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>cbxCapaentrada</tabstop>
+  <tabstop>chbELEMSELEC</tabstop>
+  <tabstop>btnSeleccionfich</tabstop>
+  <tabstop>lneGMLsalida</tabstop>
+  <tabstop>chbCARGAGML</tabstop>
+  <tabstop>btnGENERAGML</tabstop>
+  <tabstop>btnCANCELA</tabstop>
+  <tabstop>txbAyuda</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

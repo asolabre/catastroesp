@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Parcela_catatral</class>
+ <widget class="QDialog" name="Parcela_catatral">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>550</width>
+    <height>215</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>900</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="mouseTracking">
+   <bool>true</bool>
+  </property>
+  <property name="acceptDrops">
+   <bool>true</bool>
+  </property>
+  <property name="windowTitle">
+   <string>JCCM Identificador de parcela catastral</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>true</bool>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>10</y>
+     <width>81</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblREFCAT">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>10</y>
+     <width>71</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Ref.Cat:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblPROVINCIA">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>100</y>
+     <width>61</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Provincia:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblMUNICIPIO">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>100</y>
+     <width>61</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Municipio:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="valPROVINCIA">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>120</y>
+     <width>161</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="acceptDrops">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="valMUNICIPIO">
+   <property name="geometry">
+    <rect>
+     <x>182</x>
+     <y>120</y>
+     <width>351</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="acceptDrops">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblSITUACION">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>140</y>
+     <width>61</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Situación:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTIPO">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>50</y>
+     <width>24</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Tipo:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="valTIPO">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>50</y>
+     <width>201</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="acceptDrops">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="logo">
+   <property name="geometry">
+    <rect>
+     <x>23</x>
+     <y>10</y>
+     <width>80</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>iconos/jccm.jpg</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+   <property name="buddy">
+    <cstring></cstring>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="valREFCAT">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>10</y>
+     <width>251</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="acceptDrops">
+    <bool>true</bool>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:10pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;XXXXXXXXXXX&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="openExternalLinks">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="valSITUACION">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>155</y>
+     <width>531</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+  </widget>
+  <widget class="QLabel" name="valSUPTOTAL">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>50</y>
+     <width>181</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="acceptDrops">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="grpDETALLES">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>190</y>
+     <width>540</width>
+     <height>302</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>DETALLES PARCELA</string>
+   </property>
+   <widget class="QTextBrowser" name="valSUBPARC">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>35</y>
+      <width>525</width>
+      <height>71</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="valCONSTRU">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>525</width>
+      <height>61</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="valCUENTAS">
+    <property name="geometry">
+     <rect>
+      <x>235</x>
+      <y>20</y>
+      <width>300</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="acceptDrops">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblDATOSURBA">
+    <property name="geometry">
+     <rect>
+      <x>235</x>
+      <y>110</y>
+      <width>300</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+    <property name="indent">
+     <number>1</number>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="valSUPCONS">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>110</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="acceptDrops">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblCONSTRU">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>135</y>
+      <width>101</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Construcciones:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblSUBPAR">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>18</y>
+      <width>81</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Subparcelas:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbllistaRCcolind">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>215</y>
+      <width>158</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Parcelas Próximas:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="listaRCcolind">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>230</y>
+      <width>525</width>
+      <height>61</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="enlaceWEB">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>70</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCListaBienes.aspx?del=2&amp;muni=81&amp;rc1=02081A1&amp;rc2=4109001&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;02081A14109001&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+
+</string>
+   </property>
+   <property name="openExternalLinks">
+    <bool>true</bool>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>70</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Enlace a SEC:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>160</y>
+     <width>331</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; color:#ff0000;&quot;&gt;NO HAY IMAGEN CATASTRAL&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="margin">
+    <number>1</number>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnIMGcatastro">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>70</y>
+     <width>81</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>VER IMAGEN</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnREGPROP">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>95</y>
+     <width>131</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>VER DATOS REG.PROP.</string>
+   </property>
+  </widget>
+  <zorder>grpDETALLES</zorder>
+  <zorder>buttonBox</zorder>
+  <zorder>lblREFCAT</zorder>
+  <zorder>lblPROVINCIA</zorder>
+  <zorder>lblMUNICIPIO</zorder>
+  <zorder>valPROVINCIA</zorder>
+  <zorder>valMUNICIPIO</zorder>
+  <zorder>lblSITUACION</zorder>
+  <zorder>lblTIPO</zorder>
+  <zorder>valTIPO</zorder>
+  <zorder>logo</zorder>
+  <zorder>valREFCAT</zorder>
+  <zorder>valSITUACION</zorder>
+  <zorder>valSUPTOTAL</zorder>
+  <zorder>enlaceWEB</zorder>
+  <zorder>label</zorder>
+  <zorder>label_2</zorder>
+  <zorder>btnIMGcatastro</zorder>
+  <zorder>btnREGPROP</zorder>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>Parcela_catatral</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>Parcela_catatral</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

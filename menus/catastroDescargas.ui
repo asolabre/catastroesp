@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>catastroDescargas</class>
+ <widget class="QDialog" name="catastroDescargas">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>360</width>
+    <height>225</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>360</width>
+    <height>225</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>360</width>
+    <height>225</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Cargar Capas de TTMM de Catastro</string>
+  </property>
+  <widget class="QLabel" name="logo">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>91</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>C:/Users/agusa/.designer/backup/iconos/jccm.gif</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>12</x>
+     <y>11</y>
+     <width>246</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+     <underline>true</underline>
+    </font>
+   </property>
+   <property name="text">
+    <string>Carga CAPAS de TTMM de Catastro</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnACEPTAR">
+   <property name="geometry">
+    <rect>
+     <x>134</x>
+     <y>190</y>
+     <width>102</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>ACEPTAR</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>10</y>
+     <width>260</width>
+     <height>470</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline;&quot;&gt;Carga de CAPAS INICIALES&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;La funcionalidad permite la restitución de todas las capas al estado inicial, haciendo Zoom a Castilla . La Mancha.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Permite con ello restituir el sistema al estado inicial.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Todas las capas cargadas son servicios de mapas de Internet, por lo que no precisa conexión a servidor de datos local.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;El sistema hace zoom a Castilla-La Mancha, situando el SRC en 25830 (UTM30 ETRS89).&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Permite distintas opciones:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;- Eliminar TODAS las capas y grupos del proyecto actual, cargando unos nuevos (no tiene vuelta atrás y borra todas la capas y estilos existentes) El proyecto queda reiniciado, pero solo con capas desde la web.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;- Eliminar solo las CAPAS idénticas que sustituyen a los existentes con el mismo nombre (EN CONSTRUCCIÓN).&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;- Eliminar solo los GRUPOS idénticos que sustituyen a los existentes con el mismo nombre (EN CONSTRUCCIÓN).&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblAvisoCarga">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>367</width>
+     <height>83</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Se van a cargar desde la Sede Electrónica de Catastro 
+ las capas del catastro actual 
+ del T. M.  NNNNNNNNN - (CCCCC) 
+
+-- LA OPERACIÓN TARDARÁ UNOS MINUTOS --</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="ckb_CargaParc">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>12</x>
+     <y>115</y>
+     <width>225</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Carga Parcelas Catastrales</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="ckb_CargaDirec">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>12</x>
+     <y>165</y>
+     <width>225</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Carga Direcciones</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="ckb_CargaEdif">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>12</x>
+     <y>140</y>
+     <width>225</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Carga Edificios</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCANCELAR">
+   <property name="geometry">
+    <rect>
+     <x>251</x>
+     <y>190</y>
+     <width>102</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>CANCELAR</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

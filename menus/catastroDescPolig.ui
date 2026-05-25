@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>Agustín Solabre</author>
+ <class>herrExpro_generaGML</class>
+ <widget class="QDialog" name="herrExpro_generaGML">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>370</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>370</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>810</width>
+    <height>370</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Catastro Descarga de Parcelas por Polígono</string>
+  </property>
+  <widget class="QLabel" name="lblTitulo">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>5</y>
+     <width>571</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+     <underline>true</underline>
+    </font>
+   </property>
+   <property name="text">
+    <string>Descarga Fichero de PARCELAS completas</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbxCapaentrada">
+   <property name="geometry">
+    <rect>
+     <x>14</x>
+     <y>45</y>
+     <width>461</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>14</x>
+     <y>27</y>
+     <width>111</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Capa de entrada:</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chbELEMSELEC">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>68</y>
+     <width>201</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Solo elementos seleccionados</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lneGPKGtable">
+   <property name="geometry">
+    <rect>
+     <x>154</x>
+     <y>135</y>
+     <width>321</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PARCELAS CATASTRALES SELEC</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="btnSeleccionfich">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>107</y>
+     <width>35</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>...</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblGPKGsalida">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>89</y>
+     <width>211</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Fichero GPKG de salida</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lneGPKGsalida">
+   <property name="geometry">
+    <rect>
+     <x>14</x>
+     <y>107</y>
+     <width>421</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>prueba.gpkg</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>135</y>
+     <width>137</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Nombre Capa de Salida</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="txbAyuda">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>5</y>
+     <width>301</width>
+     <height>360</height>
+    </rect>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;Descarga de parcelas por intersección con un Polígono&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt; text-decoration: underline;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Permite la descarga de las parcelas catastrales (Rústica y Urbana) contenidas en un polígono o fichero de polígonos.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Se realiza a partir de una capa de Polígonos, completa o solo de sus elementos seleccionados. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;CAPA DE ENTRADA:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Seleccionar la capa de polígonos que servirá para descargar las parcelas catastrales.&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;SOLO ELEMENTOS SELECCIONADOS:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Se seleccionara con TODOS los polígonos o solamente los polígonos seleccionados.&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;FICHERO GPKG DE SALIDA:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Crear o seleccionar un fichero existente de salida.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;(-- PENDIENTE DE REVISIÓN --)&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;NOMBRE DE CAPA DE SALIDA:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Nombre de la capa y de la tabla dentro del fichero GPKG.&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;DETECCIÓN TTMM AFECTADOS:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;	-Detección automática de TTMM&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;	-Usar TTMM ya cargados&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;La aplicación permite detectar los TTMM afectados automáticamente por la capa de Polígonos (o sus elementos seleccionados).&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;En caso de que previamente se hayan cargado dichos TTMM desde catastro , y estén en la Tabla de Contenido ya cargados, se podrá utilizar la opción 'USAR TTMM YA CARGADOS', lo que agiliza los cálculos.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;CARGAR CAPA AL FINALIZAR:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Activado carga la capa al hacer la selección&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;CARGAR CAPAS COMPLETAS DE TTMM:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Activado carga también el parcelario y capa de polígonos del Término Municipal completo.&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt; font-weight:600; text-decoration: underline;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;PULSANDO EL BOTÓN &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; text-decoration: underline;&quot;&gt;GENERAR&lt;/span&gt;, se inicia el proceso de descarga de las parcelas desde la web.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="lwgLISTA_TM">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>210</y>
+     <width>252</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Terminos Municipales a incluir en la Búsqueda&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Terminos Municipales a incluir en la Búsqueda&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chbCARGAGPKG">
+   <property name="geometry">
+    <rect>
+     <x>8</x>
+     <y>189</y>
+     <width>220</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cargar CAPA al finalizar</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblINFO">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>6</x>
+     <y>315</y>
+     <width>471</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>INFO</string>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chbDESCUENTOS">
+   <property name="geometry">
+    <rect>
+     <x>8</x>
+     <y>229</y>
+     <width>220</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Incorporar DESCUENTOS como parcelas</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnGENERA">
+   <property name="geometry">
+    <rect>
+     <x>286</x>
+     <y>255</y>
+     <width>191</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>GENERAR</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>190</y>
+     <width>217</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string> Términos Muncipales incluídos:</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chbCALCInt">
+   <property name="geometry">
+    <rect>
+     <x>8</x>
+     <y>250</y>
+     <width>220</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Calcular intersecciones de parcelas</string>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCANCELA">
+   <property name="geometry">
+    <rect>
+     <x>286</x>
+     <y>285</y>
+     <width>191</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CANCELA</string>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="progressBar">
+   <property name="geometry">
+    <rect>
+     <x>6</x>
+     <y>335</y>
+     <width>471</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="value">
+    <number>0</number>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chbCargaTTMM">
+   <property name="geometry">
+    <rect>
+     <x>8</x>
+     <y>209</y>
+     <width>220</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cargar CAPAS completas de TTMM</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chbCARGAdesdeTTMM">
+   <property name="geometry">
+    <rect>
+     <x>8</x>
+     <y>170</y>
+     <width>217</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cargar Parc. fichero de TTMM (ATOM)</string>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbtDetecTTMM">
+   <property name="geometry">
+    <rect>
+     <x>236</x>
+     <y>160</y>
+     <width>173</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;INTERPOLADO - interpola el KM entre dos placas continuas&lt;/p&gt;&lt;p&gt;DIST.A PLACA- Mide la distancia a la placa de PK&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="text">
+    <string>Detección Automática de TTMM</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbtCargadosTTMM">
+   <property name="geometry">
+    <rect>
+     <x>236</x>
+     <y>175</y>
+     <width>173</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;INTERPOLADO - interpola el KM entre dos placas continuas&lt;/p&gt;&lt;p&gt;DIST.A PLACA- Mide la distancia a la placa de PK&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="text">
+    <string>Usar TTMM ya cargados</string>
+   </property>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>cbxCapaentrada</tabstop>
+  <tabstop>chbELEMSELEC</tabstop>
+  <tabstop>btnSeleccionfich</tabstop>
+  <tabstop>lneGPKGsalida</tabstop>
+  <tabstop>chbCARGAGPKG</tabstop>
+  <tabstop>btnGENERA</tabstop>
+  <tabstop>btnCANCELA</tabstop>
+  <tabstop>txbAyuda</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

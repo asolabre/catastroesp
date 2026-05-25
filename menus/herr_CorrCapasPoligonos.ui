@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>Agustín Solabre</author>
+ <class>catastro_revisaPolig</class>
+ <widget class="QDialog" name="catastro_revisaPolig">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>730</width>
+    <height>458</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>700</width>
+    <height>360</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>810</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Corregir Polígonos</string>
+  </property>
+  <widget class="QSplitter" name="splCompleto">
+   <property name="geometry">
+    <rect>
+     <x>12</x>
+     <y>5</y>
+     <width>712</width>
+     <height>446</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <widget class="QWidget" name="layoutWidget">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMaximumSize</enum>
+     </property>
+     <item>
+      <widget class="QLabel" name="lblTitulo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>Corrector de Polígonos</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lblCapaENTRADA">
+       <property name="text">
+        <string>Capa de entrada:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cbxCapaentrada">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>375</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="chbELEMSELEC">
+       <property name="text">
+        <string>Solo elementos seleccionados</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lblFichSALIDA">
+       <property name="text">
+        <string>Fichero corregido  de salida</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSplitter" name="splitter">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <widget class="QLineEdit" name="lneGPKGsalida">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>350</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>c:\temp\prueba.gpkg</string>
+        </property>
+       </widget>
+       <widget class="QToolButton" name="btnSeleccionfich">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="chbCARGAGML">
+       <property name="text">
+        <string>Cargar capa al finalizar</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>CORRECCIONES POSIBLES</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSplitter" name="splitter_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <widget class="QWidget" name="layoutWidget">
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QCheckBox" name="chbCorregirGeom">
+           <property name="text">
+            <string>Corregir geometrías (GENERAL)</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chbConvMultiMono">
+           <property name="text">
+            <string>Convertir Multipartes a monopartes</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chbElimGeomRep">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>Eliminar geomerías repetidas</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chbElimSup0">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>Eliminar partes con superficie 0</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chbElimMiniIslas">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>Eliminar mini islas</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chbElimVertRepet">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>Eliminar vértices repetidos</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chbElimVertColin">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>Eliminar vértices colineales</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chbElimSegmComun">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>Eliminar segmentos comunes</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chbDepurarAutoint">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Depurar autointersección</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chbOrdenarDextro">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>Ordenar dextrógiro</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chbCreaCAMPOS">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>Crear campos AREA PARTE y No.VERTICES</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lblINFO">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>INFO</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QProgressBar" name="progressBar">
+       <property name="value">
+        <number>0</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QSplitter" name="splitter_4">
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>239</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+    <widget class="QTextBrowser" name="txbAyuda">
+     <property name="html">
+      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;Corrector de Polígonos&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt; text-decoration: underline;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Permite arreglar poligonos corrigiendo errores habituales de los poligonos para su gestion como parcelas catastrales.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;DATOS DE ENTRADA:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;CAPA DE ENTRADA:&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt; C&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;apa de POLÍGONOS cargada en la Tabla de Contenido (TOC).&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;   SOLO ELEMENTOS SELECCIONADOS:&lt;/span&gt; &lt;span style=&quot; text-decoration: underline;&quot;&gt;ACTIVADO&lt;/span&gt;,  se analizan y corrigen solo los poligonos seleccionados&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;FICHERO SALIDA:&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;directorio y nombre de fichero de salida GPKG; se puede componer con el botón de la derecha.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;COMPROBACIONES POSIBLES&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; color:#0000ff;&quot;&gt;La funcionalidad analiza los poligonos:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; color:#0000ff;&quot;&gt;* Convertir Multipartes a Monopartes&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; color:#0000ff;&quot;&gt;* Eliminar partes con superficie 0&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; color:#0000ff;&quot;&gt;* Eliminar vertices repetidos&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; color:#0000ff;&quot;&gt;* Eliminar vertices colineales&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; color:#0000ff;&quot;&gt;* Depurar mini islas&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; color:#0000ff;&quot;&gt;* Depurar segmentos comunes&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; color:#0000ff;&quot;&gt;* Depurar autointersección&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; color:#0000ff;&quot;&gt;* Ordena dextrógiro&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt; color:#0000ff;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+    <widget class="QSplitter" name="splitter_3">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QPushButton" name="btnCorregirCAPA">
+      <property name="text">
+       <string>CORREGIR CAPA</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnCANCELA">
+      <property name="text">
+       <string>CANCELA</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>cbxCapaentrada</tabstop>
+  <tabstop>chbELEMSELEC</tabstop>
+  <tabstop>btnSeleccionfich</tabstop>
+  <tabstop>lneGPKGsalida</tabstop>
+  <tabstop>chbCARGAGML</tabstop>
+  <tabstop>btnCorregirCAPA</tabstop>
+  <tabstop>btnCANCELA</tabstop>
+  <tabstop>txbAyuda</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
