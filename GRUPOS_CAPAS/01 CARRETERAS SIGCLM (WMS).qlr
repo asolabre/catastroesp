@@ -1,0 +1,1181 @@
+<!DOCTYPE qgis-layer-definition>
+<qlr>
+  <layer-tree-group expanded="1" checked="Qt::Checked" name="">
+    <customproperties/>
+    <layer-tree-group expanded="1" checked="Qt::Checked" name="Carreteras CLM (WMS)">
+      <customproperties/>
+      <layer-tree-group expanded="0" checked="Qt::Checked" name="Carreteras ROT">
+        <customproperties/>
+        <layer-tree-group expanded="1" checked="Qt::Checked" name="Red Regional ROT">
+          <customproperties/>
+          <layer-tree-layer expanded="1" checked="Qt::Checked" id="Autovía_autonómica_ETIQ20161019105738303" name="Autovía autonómica ETIQ">
+            <customproperties/>
+          </layer-tree-layer>
+          <layer-tree-layer expanded="1" checked="Qt::Checked" id="Red_Local__ETIQ20161019105750042" name="Red Local  ETIQ">
+            <customproperties/>
+          </layer-tree-layer>
+          <layer-tree-layer expanded="1" checked="Qt::Checked" id="Red_Comarcal__ETIQ20161019105747934" name="Red Comarcal  ETIQ">
+            <customproperties/>
+          </layer-tree-layer>
+          <layer-tree-layer expanded="1" checked="Qt::Checked" id="Red_Básica__ETIQ20161019105745452" name="Red Básica  ETIQ">
+            <customproperties/>
+          </layer-tree-layer>
+          <layer-tree-layer expanded="1" checked="Qt::Checked" id="Otras_Administraciones_ETIQ20161019105806706" name="Otras Administraciones ETIQ">
+            <customproperties/>
+          </layer-tree-layer>
+        </layer-tree-group>
+        <layer-tree-group expanded="1" checked="Qt::Checked" name="Red Estatal ROT">
+          <customproperties/>
+          <layer-tree-layer expanded="1" checked="Qt::Checked" id="Carreteras_del_Estado_ETIQ20161019105802380" name="Carreteras del Estado ETIQ">
+            <customproperties/>
+          </layer-tree-layer>
+          <layer-tree-layer expanded="1" checked="Qt::Checked" id="Autopistas_y_Autovías_estatales__ETIQ20161019105756141" name="Autopistas y Autovías estatales  ETIQ">
+            <customproperties/>
+          </layer-tree-layer>
+        </layer-tree-group>
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="Red_Diputación__ETIQ20161019105804301" name="Red Diputación  ETIQ">
+          <customproperties/>
+        </layer-tree-layer>
+      </layer-tree-group>
+      <layer-tree-group expanded="0" checked="Qt::Checked" name="PKs">
+        <customproperties/>
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="PK20161019110509047" name="PK">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="PK_1020161019110611499" name="PK 10">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="PK_ORTOFOTO20161019110614527" name="PK ORTOFOTO">
+          <customproperties/>
+        </layer-tree-layer>
+      </layer-tree-group>
+      <layer-tree-group expanded="1" checked="Qt::Checked" name="Red Regional Carreteras">
+        <customproperties/>
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="Red_Estatal_AUTOPISTAS20161019104633559" name="Autovías Autonómicas">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="Red_Estatal_CONVENCIONAL20161019104639306" name="Red Regional Básicas">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="Red_Estatal_Enlaces20161019104655015" name="Red Regional Comarcal">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="Red_Regional_Autovía_Autonómica20161019104132006" name="Red Regional Local">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="Red_Regional_Básicas20161019104128934" name="Red Regional Local (Ramal)">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="Red_Regional_Comarcal20161019104126092" name="Red Regional Local (Travesía)">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="Red_Regional_Local20161019104118228" name="Red Regional Acuerdos otras CCAA">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer expanded="0" checked="Qt::Checked" id="Red_Regional_Local__Ramal_20161019104110284" name="Red Regional Enlaces">
+          <customproperties/>
+        </layer-tree-layer>
+      </layer-tree-group>
+      <layer-tree-group expanded="0" checked="Qt::Checked" name="Red Estatal Carreteras">
+        <customproperties/>
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="Red_Regional_Enlaces20161019104056879" name="Red Estatal AUTOVIAS AUTOPISTAS">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="Red_Acuerdos_otras_CCAA20161019104116042" name="Red Estatal CONVENCIONAL">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="Red_Diputación20161019104040965" name="Red Estatal Enlaces">
+          <customproperties/>
+        </layer-tree-layer>
+      </layer-tree-group>
+      <layer-tree-layer expanded="1" checked="Qt::Checked" id="Red_Regional_Local__Travesía_20161019104106647" name="Ctras Diputación">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer expanded="1" checked="Qt::Checked" id="Otras20161019104031848" name="Otras Carreteras">
+        <customproperties/>
+      </layer-tree-layer>
+    </layer-tree-group>
+  </layer-tree-group>
+  <maplayers>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Autovía_autonómica_ETIQ20161019105738303</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=22&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Autovía autonómica ETIQ</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Red_Local__ETIQ20161019105750042</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=19&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Red Local  ETIQ</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Red_Comarcal__ETIQ20161019105747934</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=20&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Red Comarcal  ETIQ</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Red_Básica__ETIQ20161019105745452</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=21&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Red Básica  ETIQ</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Otras_Administraciones_ETIQ20161019105806706</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=15&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Otras Administraciones ETIQ</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Carreteras_del_Estado_ETIQ20161019105802380</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=17&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Carreteras del Estado ETIQ</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Autopistas_y_Autovías_estatales__ETIQ20161019105756141</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=18&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Autopistas y Autovías estatales  ETIQ</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Red_Diputación__ETIQ20161019105804301</id>
+      <datasource>contextualWMSLegend=0&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=16&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Red Diputación  ETIQ</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>PK20161019110509047</id>
+      <datasource>contextualWMSLegend=1&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=26&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>PK</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>PK_1020161019110611499</id>
+      <datasource>contextualWMSLegend=1&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=25&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>PK 10</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>PK_ORTOFOTO20161019110614527</id>
+      <datasource>contextualWMSLegend=1&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=24&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>PK ORTOFOTO</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Red_Estatal_AUTOPISTAS20161019104633559</id>
+      <datasource>contextualWMSLegend=1&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=13&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Autovías Autonómicas</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Red_Estatal_CONVENCIONAL20161019104639306</id>
+      <datasource>contextualWMSLegend=1&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=12&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Red Regional Básicas</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Red_Estatal_Enlaces20161019104655015</id>
+      <datasource>contextualWMSLegend=1&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=11&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Red Regional Comarcal</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Red_Regional_Autovía_Autonómica20161019104132006</id>
+      <datasource>contextualWMSLegend=1&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=10&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Red Regional Local</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Red_Regional_Básicas20161019104128934</id>
+      <datasource>contextualWMSLegend=1&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=9&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Red Regional Local (Ramal)</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Red_Regional_Comarcal20161019104126092</id>
+      <datasource>contextualWMSLegend=1&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=8&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Red Regional Local (Travesía)</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Red_Regional_Local20161019104118228</id>
+      <datasource>contextualWMSLegend=1&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=7&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Red Regional Acuerdos otras CCAA</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Red_Regional_Local__Ramal_20161019104110284</id>
+      <datasource>contextualWMSLegend=1&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=6&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Red Regional Enlaces</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Red_Regional_Enlaces20161019104056879</id>
+      <datasource>contextualWMSLegend=1&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=4&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Red Estatal AUTOVIAS AUTOPISTAS</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Red_Acuerdos_otras_CCAA20161019104116042</id>
+      <datasource>contextualWMSLegend=1&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=3&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Red Estatal CONVENCIONAL</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Red_Diputación20161019104040965</id>
+      <datasource>contextualWMSLegend=1&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=2&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Red Estatal Enlaces</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Red_Regional_Local__Travesía_20161019104106647</id>
+      <datasource>contextualWMSLegend=1&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=5&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Ctras Diputación</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-5120900</xmin>
+        <ymin>-9998100</ymin>
+        <xmax>681291.95429999998304993</xmax>
+        <ymax>4575132.52469999995082617</ymax>
+      </extent>
+      <id>Otras20161019104031848</id>
+      <datasource>contextualWMSLegend=1&amp;crs=EPSG:25830&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=1&amp;styles=&amp;url=https://geoservicios.castillalamancha.es/arcgis/services/Vector/SIG_CARRETERAS_CLM/MapServer/WMSServer?</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Otras Carreteras</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2103</srsid>
+          <srid>25830</srid>
+          <authid>EPSG:25830</authid>
+          <description>ETRS89 / UTM zone 30N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Html"/>
+      </customproperties>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+  </maplayers>
+</qlr>
