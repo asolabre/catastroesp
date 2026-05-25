@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+body {
+    font-family: 'MS Shell Dlg 2', Arial, sans-serif;
+    font-size: 11pt;
+    margin: 10px;
+}
+h1 {
+    font-size: 14pt;
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+}
+h2 {
+    font-size: 12pt;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-top: 15px;
+}
+.logo {
+    text-align: center;
+    margin: 10px 0;
+}
+.campo {
+    font-weight: bold;
+}
+.uso {
+    font-weight: bold;
+    color: #2c3e50;
+}
+.aviso {
+    color: #0000ff;
+}
+.enlace {
+    color: #0000ff;
+    text-decoration: underline;
+}
+</style>
+</head>
+<body>
+
+<div class="logo">
+    <img src="../iconos/cat_gmlConst.jpg" width="70"><h1>Generar GML de CONSTRUCCIONES para catastro desde capa de Polígonos</h1>
+</div>
+
+<p>Permite generar un fichero GML de CONSTRUCCIONES, para la generación de un <strong>ICUC</strong> <sup>(1)</sup>.</p>
+
+<p>Se genera en formato INSPIRE de CATASTRO a partir de una capa de Polígonos, completa o solo de sus elementos seleccionados.</p>
+
+<p>Se parte de una capa de polígonos cargada en la vista. Cada registro debe tener una geometría de una CONSTRUCCIÓN de la parcela, y debe contar con <strong><u>6 CAMPOS OBLIGATORIOS</u></strong> conteniendo cada uno los siguientes valores:</p>
+
+<p><strong>- LOCALID:</strong> Normalmente la RC de la parcela catastral.</p>
+<p><strong>- NAMESPACE:</strong> Por defecto, siempre debe ser <strong>ES.LOCAL.BU</strong>.</p>
+<p><strong>- NOMBRE CONSTRUCCIÓN:</strong> Nombre identificador de la construcción en el conjunto. Ejemplos: EDIFICIO_1, EDIFICIO_2, NAVE_ESTE, APARCAMIENTO_01, etc.</p>
+
+<p><strong>- USO:</strong> Uso de la construcción:</p>
+<ul>
+    <li><strong>Residencial:</strong> Viviendas, apartamentos.</li>
+    <li><strong>Almacén-Estacionamiento:</strong> Garajes, trasteros, bodegas.</li>
+    <li><strong>Comercial:</strong> Locales, tiendas, galerías.</li>
+    <li><strong>Oficinas:</strong> Espacios destinados a servicios y gestión administrativa.</li>
+    <li><strong>Industrial:</strong> Naves, fábricas, almacenes industriales.</li>
+    <li><strong>Ocio y Hostelería:</strong> Hoteles, restaurantes, cines.</li>
+    <li><strong>Cultural / Deportivo:</strong> Museos, colegios, gimnasios, estadios.</li>
+    <li><strong>Edificios Singulares:</strong> Instituciones públicas, hospitales, estaciones.</li>
+</ul>
+
+<p><strong>- PLANTAS:</strong> Número de plantas sobre rasante.</p>
+<p><strong>- TIPO:</strong> Tipo de edificio: Building, otherconstructions ("piscina", "deposito", "tendedero", "pista", "OtherConstruction", "otherconstruction", etc).</p>
+
+<h2>DATOS DE ENTRADA</h2>
+
+<p><strong>CAPA DE ENTRADA:</strong> Capa de POLÍGONOS cargada en la Tabla de Contenido (TOC).</p>
+<p><strong>SOLO ELEMENTOS SELECCIONADOS:</strong> <u>ACTIVADO</u>, generará el GML de las parcelas seleccionadas.</p>
+
+<h2>FICHERO GML SALIDA</h2>
+<p>Directorio y nombre de fichero de salida GML; se puede componer con el botón de la derecha. El sistema guarda el último directorio y nombre de fichero empleados.</p>
+
+<h2>SELECTORES DE CAMPOS</h2>
+<p>LOCALID, NAMESPACE, NOM_CONST, USO_CONST, NUMPLANTAS, TIPO_CONST</p>
+<p>Se debe elegir en cada selector los campos de la capa que contiene cada uno de los datos especificados arriba.</p>
+
+<h2>DECIMALES</h2>
+<p>Se pueden condicionar el número de decimales de los formatos de salida del GML para las COORDENADAS de los nodos. Se recomiendan <strong>2 decimales para COORDENADAS</strong>.</p>
+
+<h2 class="aviso">COMPROBACIONES EN LA CREACIÓN DEL GML</h2>
+<p class="aviso">El programa analiza las parcelas detectando:</p>
+<ul class="aviso">
+    <li>Existencia de Parcelas con el mismo LOCALID resultante (LOCALID duplicado)</li>
+    <li>Parcelas con NAMESPACE distinto de '<u>ES.LOCAL.BU</u>'</li>
+    <li>Parcelas con geometría <em>multipolígono</em> (no admitidas)</li>
+    <li>Eliminación de nodos duplicados consecutivos</li>
+</ul>
+
+<p>Al pulsar <strong>GENERA GML</strong>, se genera el fichero con el directorio y nombre elegidos</p>
+
+<p>EJEMPLO DE SALIDA: .\TEMPLATES\EJEMPLO CONSTRUCCIONES CON ANILLO OTRASCONST.gml</p>
+
+<h2>CONTROLES</h2>
+<p><strong>Comprobar LOCALID resultantes repetidos al finalizar:</strong> Previamente a la generación, se pueden intentar detectar LOCALID repetidos.</p>
+<p><strong>Revisar RRCC identicas a origen:</strong> Se analizan las parcelas con NAMESPACE '<u>ES.SDGC.CP</u>', analizando si tienen una coincidencia absoluta de geometría con la parcela descargada de catastro.</p>
+
+<p><strong>(1) ICUC:</strong> Informe catastral de Ubicación de Construcciones.</p>
+
+<p><strong>Más INFO:</strong></p>
+<p><a class="enlace" href="https://www.catastro.hacienda.gob.es/ayuda/vga/ayuda_ICUC.htm">Descripción Informe Catastral de Ubicación de Construcciones</a></p>
+<p><a class="enlace" href="https://www.sedecatastro.gob.es/ValidacionesGraficas/SEC_ICUC_Datos.aspx">Presentación de GML de CONSTRUCCIONES</a></p>
+
+</body>
+</html>
