@@ -1,0 +1,105 @@
+# -*- coding: utf-8 -*-
+# This file contains metadata for your plugin.
+
+# This file should be included when you package your plugin.# Mandatory items:
+
+[general]
+name=Catastro de España
+qgisMinimumVersion=3.4.11
+qgisMaximumVersion=3.40
+description=Herramientas de carga, información, gestión y edición del Catastro de España
+Tools for loading, information, management and editing of the Spanish Cadastre
+
+version=1.10
+author=Agustín Solabre Suárez
+email=agusass@hotmail.es
+telephone=S/D
+organizacion=S/D
+
+about=      - Busqueda por RC, individual y masiva, por PROC/MUNI/POL/PAR,
+        por listas en texto libre con separadores.
+      - Identificador y carga de parcela en pantalla.
+      - Carga del catastro completo por municipio pinchado.
+      - Carga de catastro historico (desde 2002)
+      - Carga masiva desde los registros de una capa con un campo RC.
+      - Carga de parcelas catastrales solapadas con un polígono
+      - Borra de la vista parcelas cargadas por cursor
+      - Asigna atributos de parcela de una capa a parcela pinchada en capa activa
+      - Herramienta para adaptar parcelas a una superficie (PRUEBA)
+      - Generar GML de PARCELAS desde un Fichero de polígonos
+      - Generar GML de CONSTRUCCIONES desde un Fichero de polígonos
+      - Carga resultado Consulta catastral alfanumérica Masiva
+      - Depuración topológica de poligonos
+      - Listado de coordenadas de un polígono
+      ...
+      - Otras herramientas
+      
+      - Search by RC, individual and bulk, by PROC/MUNI/POL/PAR, by free text lists with separators
+      - Parcel identifier and loading on screen
+      - Upload the complete cadastre by municipality (clicked)
+      - Historical cadastral data upload (since 2002)
+      - Bulk load from the records of a layer with an RC field
+      - Load of cadastral parcels overlapping with a polygon
+      - Deletes plots loaded by cursor from view
+      - Assigns plot attributes of a layer to plot clicked on active layer
+      - Generate GML files of PARCELS or BUILDINGS from a polygon file
+      - Upload results of bulk alphanumeric cadastral query
+      - Topological refinement of polygons
+      - List of coordinates of a polygon
+
+tracker=http://bugs
+repository=http://repo
+# End of mandatory metadata
+
+# Recommended items:
+
+hasProcessingProvider=no
+
+# Tags are comma separated with spaces allowed
+tags=gml, catastro, finder, cartociudad,
+
+# Uncomment the following line and add your changelog:
+changelog=
+    CAMBIOS ENTRE VERSIONES
+    -----------------------
+    1.10
+        * Lanzamiento de primera edición abierta, sin depurar solapes con jccm_bar (25/05/26)
+        * Recoge todos los cambios antigua versión de 2025  (2026/05/17)
+        * Optimización de ficheros. .Py, .UY, e iconos no usados
+        * Se incorpora herramienta para generar un GML de CONSTRUCCIONES -ICUC- (22/5/26)
+        * Se incluye un sistema de ayuda por herramienta en \help\ (23/5/26)
+        * Reorganización de iconos (23/5/26)
+    1.01
+        * Primera versión estable (2025/02/20)
+    0.10
+        * Inicio de la migración a plugin independiente 
+        * Reordenación de iconos a direcciones absolutas al nombre de plugin (2025/02/10)
+
+nextchangelog=
+    TAREAS PENDIENTES
+    -----------------
+
+
+homepage=https://github.com/asolabre/catastroesp/
+tracker=https://github.com/asolabre/catastroesp/blob/main/README.md
+repository=https://github.com/asolabre/catastroesp
+
+category=Plugins
+icon=catastroesp.jpg
+# experimental flag
+experimental=False
+
+# deprecated flag (applies to the whole plugin, not just a single version)
+deprecated=False
+
+# Since QGIS 3.8, a comma separated list of plugins to be installed
+# (or upgraded) can be specified.
+# Check the documentation for more information.
+# plugin_dependencies=
+
+Category of the plugin: Raster, Vector, Database or Web
+# category= Vector
+
+# If the plugin can run on QGIS Server.
+server=False
+

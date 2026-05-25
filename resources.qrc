@@ -1,0 +1,28 @@
+<RCC>
+  <qresource prefix="/plugins/catastroesp" >
+    <file>iconos/C_icon.jpg</file>
+    <file>iconos/Z_icon.jpg</file>
+    <file>iconos/about.jpg</file>
+    <file>iconos/cartociudad_IGN.jpg</file>
+    <file>iconos/cartociudad_buscar.jpg</file>
+    <file>iconos/cartociudad_logo.jpg</file>
+    <file>iconos/cat_asignaatrib.jpg</file>
+    <file>iconos/cat_borraParc.jpg</file>
+    <file>iconos/cat_borrarcapas.jpg</file>
+    <file>iconos/cat_buscador.jpg</file>
+    <file>iconos/cat_capas_gis.jpg</file>
+    <file>iconos/cat_cargamasiva.jpg</file>
+    <file>iconos/cat_configuracion.jpg</file>
+    <file>iconos/cat_gml.jpg</file>
+    <file>iconos/cat_gmlConst.jpg</file>
+    <file>iconos/cat_historico.jpg</file>
+    <file>iconos/cat_identificador.jpg</file>
+    <file>iconos/cat_listPoligon.jpg</file>
+    <file>iconos/cat_municipios.jpg</file>
+    <file>iconos/cat_poligon.jpg</file>
+    <file>iconos/cat_rectang.jpg</file>
+    <file>iconos/cat_xml.jpg</file>
+    <file>iconos/catastroesp.jpg</file>
+    <file>iconos/logo_general.jpg</file>
+  </qresource>
+</RCC>
