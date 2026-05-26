@@ -1,73 +1,37 @@
-# catastroesp
-<div>Tools for loading, information, management and editing of the Spanish Cadastre
-    <ul style="margin:0;">
-    <li>Search by RC, individual and bulk, by PROC/MUNI/POL/PAR, by free text lists with separators</li>
-    <li>Parcel identifier and loading on screen</li>
-    <li>Upload the complete cadastre by municipality (clicked)</li>
-    <li>Historical cadastral data upload (since 2002)</li>
-    <li>Bulk load from the records of a layer with an RC field</li>
-    <li>Load of cadastral parcels overlapping with a polygon</li>
-    <li>Deletes plots loaded by cursor from view</li>
-    <li>Assigns plot attributes of a layer to plot clicked on active layer</li>
-    <li>Generate GML files of PARCELS or BUILDINGS from a polygon file</li>
-    <li>Upload results of bulk alphanumeric cadastral query</li>
-    <li>Topological refinement of polygons</li>
-    <li>List of coordinates of a polygon</li></ul>
-    </div>
-
-<div>Herramienta para carga y gestión de parcelas catastrales, basada en los servicios de la Dirección General de Catastro
-    <ul style="margin:0;">
-    <li>Busqueda por RC, individual y masiva, por PROC/MUNI/POL/PAR, por listas en texto libre con separadores.</li>
-    <li>Identificador y carga de parcela en pantalla.</li>
-    <li>Carga del catastro completo por municipio pinchado.</li>
-    <li>Carga de catastro historico (desde 2002)</li>
-    <li>Carga masiva desde los registros de una capa con un campo RC.</li>
-    <li>Carga de parcelas catastrales solapadas con un polígono</li>
-    <li>Borra de la vista parcelas cargadas por cursor</li>
-    <li>Asigna atributos de parcela de una capa a parcela pinchada en capa activa</li>
-    <li>Herramienta para adaptar parcelas a una superficie (PRUEBA)</li>
-    <li>Generar GML de parcelas desde un Fichero de polígonos</li>
-    <li>Generar GML de CONSTRUCCIONES desde un Fichero de polígonos</li>
-    <li>Carga resultado Consulta catastral Masiva</li>
-    <li>Depuración topológica de poligonos</li>
-    <li>Listado de coordenadas de un polígonoListado de coordenadas de un polígono</li>
-    <li>...</li>
-    <li>Otras herramientas</li></ul>
-    </div>
-
-# catastroesp
-<div>Tools for loading, information, management and editing of the Spanish Cadastre
-    <ul style="margin:0;">
-    <li>Search by RC, individual and bulk, by PROC/MUNI/POL/PAR, by free text lists with separators</li>
-    <li>Parcel identifier and loading on screen</li>
-    <li>Upload the complete cadastre by municipality (clicked)</li>
-    <li>Historical cadastral data upload (since 2002)</li>
-    <li>Bulk load from the records of a layer with an RC field</li>
-    <li>Load of cadastral parcels overlapping with a polygon</li>
-    <li>Deletes plots loaded by cursor from view</li>
-    <li>Assigns plot attributes of a layer to plot clicked on active layer</li>
-    <li>Generate GML files of PARCELS or BUILDINGS from a polygon file</li>
-    <li>Upload results of bulk alphanumeric cadastral query</li>
-    <li>Topological refinement of polygons</li>
-    <li>List of coordinates of a polygon</li></ul>
-    </div>
-
-<div>Herramienta para carga y gestión de parcelas catastrales, basada en los servicios de la Dirección General de Catastro
-    <ul style="margin:0;">
-    <li>Busqueda por RC, individual y masiva, por PROC/MUNI/POL/PAR, por listas en texto libre con separadores.</li>
-    <li>Identificador y carga de parcela en pantalla.</li>
-    <li>Carga del catastro completo por municipio pinchado.</li>
-    <li>Carga de catastro historico (desde 2002)</li>
-    <li>Carga masiva desde los registros de una capa con un campo RC.</li>
-    <li>Carga de parcelas catastrales solapadas con un polígono</li>
-    <li>Borra de la vista parcelas cargadas por cursor</li>
-    <li>Asigna atributos de parcela de una capa a parcela pinchada en capa activa</li>
-    <li>Herramienta para adaptar parcelas a una superficie (PRUEBA)</li>
-    <li>Generar GML de parcelas desde un Fichero de polígonos</li>
-    <li>Generar GML de CONSTRUCCIONES desde un Fichero de polígonos</li>
-    <li>Carga resultado Consulta catastral Masiva</li>
-    <li>Depuración topológica de poligonos</li>
-    <li>Listado de coordenadas de un polígonoListado de coordenadas de un polígono</li>
-    <li>...</li>
-    <li>Otras herramientas</li></ul>
-    </div>
+# catastroesp 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /></head>
+<body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:10px; margin-bottom:10px; margin-left:10px; margin-right:10px; -qt-block-indent:0; text-indent:0px;"><img src="logo_catastro.jpg" width="100" /></p>
+<h1 align="center" style=" margin-top:18px; margin-bottom:12px; margin-left:10px; margin-right:10px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'MS Shell Dlg 2','Arial','sans-serif'; font-size:14pt; font-weight:600; text-decoration: underline;">CATASTRO DE ESPAÑA</span><span style=" font-family:'MS Shell Dlg 2','Arial','sans-serif'; font-size:11pt; font-weight:600;"> </span></h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;"><span style=" font-family:'MS Shell Dlg 2','Arial','sans-serif'; font-size:12pt; font-weight:792;">Herramientas para carga y gestión de parcelas catastrales, basada en los servicios de la Dirección General de Catastro</span><span style=" font-size:8.25pt;"> </span></p>
+<ul style="margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;"><li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Busqueda por RC, individual y masiva, por PROC/MUNI/POL/PAR, por listas en texto libre con separadores. </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Identificador y carga de parcela en pantalla. </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Carga del catastro completo por municipio pinchado. </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Carga de catastro historico (desde 2002) </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Carga masiva desde los registros de una capa con un campo RC. </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Carga de parcelas catastrales solapadas con un polígono </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Borra de la vista parcelas cargadas por cursor </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Asigna atributos de parcela de una capa a parcela pinchada en capa activa </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Herramienta para adaptar parcelas a una superficie (PRUEBA) </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Generar GML de parcelas desde un Fichero de polígonos </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Generar GML de CONSTRUCCIONES desde un Fichero de polígonos </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Carga resultado Consulta catastral Masiva </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Depuración topológica de poligonos </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Listado de coordenadas de un polígonoListado de coordenadas de un polígono </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">... </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Otras herramientas </li></ul>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px; font-size:8.25pt;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;"><span style=" font-size:8.25pt;">Tools for loading, information, management and editing of the Spanish Cadastre </span></p>
+<ul style="margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;"><li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Search by RC, individual and bulk, by PROC/MUNI/POL/PAR, by free text lists with separators </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Parcel identifier and loading on screen </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Upload the complete cadastre by municipality (clicked) </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Historical cadastral data upload (since 2002) </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Bulk load from the records of a layer with an RC field </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Load of cadastral parcels overlapping with a polygon </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Deletes plots loaded by cursor from view </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Assigns plot attributes of a layer to plot clicked on active layer </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Generate GML files of PARCELS or BUILDINGS from a polygon file </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Upload results of bulk alphanumeric cadastral query </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Topological refinement of polygons </li>
+<li style=" font-size:8.25pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">List of coordinates of a polygon </li></ul></body></html>
