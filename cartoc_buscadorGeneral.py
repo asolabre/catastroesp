@@ -2,9 +2,7 @@
 """
 /***************************************************************************
 Name:           cartoc_buscadorGeneral.py
-
                                  A QGIS plugin
-                                 
 Plugin:         catastroesp - Catastro de España / jccm_bar3
 Purpose:        Buscador de fenómenos por medio de las herramientas de CARTOCIUDAD
         --------------------------------------------------------------------
@@ -53,6 +51,7 @@ from osgeo import ogr, osr
 import json
 import urllib
 import requests
+from requests.exceptions import Timeout, ConnectionError, RequestException
 
 from .settings import Settings           # CLASE DE CONFIGURACIÓN DE VARIABLES GLOBALES
 from .functions3 import Functions        # CLASE DE CONFIGURACIÓN DE FUNCIONES GENERALES
@@ -65,6 +64,9 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 # VARIABLES
 # Flag de error a reconocer por todas las rutinas que buscan conexión
 errorConexion = False
+
+# Constante para el timeout de las peticiones HTTP (segundos)
+TIMEOUT_SEGUNDOS = 5
 
 class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
     def __init__(self, iface, parent=None):
@@ -116,10 +118,10 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
         'refcatastral'      : 'POLYGON'    # 'refcatastral'                                      # POLYGON
         }
 
-        
+
         # Se definen los campos del futuro GPKG de Cartociudad
         self.defineCamposCARTOC()
-        
+
         # Se definen las URLs de la API de Cartociudad
         self.defineUrlsCARTOC()
 
@@ -128,12 +130,12 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
         # DIRECCIONES API CARTOCIUDAD
         # url = 'http://www.cartociudad.es/geocoder/api/geocoder/findJsonp?type=carretera&tip_via=&id=600000000042&portal=272
         self.urlPORTALPK = 'http://www.cartociudad.es/geocoder/api/geocoder/findJsonp?'
-        
+
         ## ACCESO A CARTOCIUDAD POR DIRECCIÓN EN TEXTO LIBRE --- candidatesJsonp --- ##
         # url = 'http://www.cartociudad.es/geocoder/api/geocoder/candidatesJsonp?q=a-2%20272&limit=10'
         self.urlCANDIDATES = 'http://www.cartociudad.es/geocoder/api/geocoder/candidatesJsonp?'
-        
-        
+
+
     def defineCamposCARTOC(self):
         self.camposCartociudad = [
             {'campo':'id',                    'tipo':'string', 'comment': 'Identificador de la referencia'},
@@ -250,7 +252,7 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
             else:
                 self.fun.showMessageERR(lstCANDIDATOS_DIRECC)
 
-            
+
         QApplication.restoreOverrideCursor()
 
 
@@ -262,9 +264,9 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
 
         if not self.urlPORTALPK:
             self.defineUrlsCARTOC()
-            
+
         url = self.urlPORTALPK
-            
+
         consulta = ctra + " " + pk
 
         values = {'q' : consulta,
@@ -275,13 +277,29 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
             str_values[k] = unicode(v).encode('utf-8')
         data = urllib.parse.urlencode(str_values)
         # print (url+data)
-        dataf = requests.get(url+data).text          # Request data from link as 'str'
-        # print (dataf)
+
+        try:
+            # Se añade timeout de 5 segundos
+            dataf = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS).text
+        except Timeout:
+            # print('Timeout: CTRA:{} PK:{} - La petición excedió el tiempo de espera'.format(ctra, pk))
+            return 'Error'
+        except ConnectionError:
+            # print('Error de conexión: CTRA:{} PK:{}'.format(ctra, pk))
+            return 'Error'
+        except RequestException as e:
+            # print('Error en la petición: CTRA:{} PK:{} - {}'.format(ctra, pk, str(e)))
+            return 'Error'
 
         # Se extrae del resultado JSONP la parte entre paréntesis
         startidx = dataf.find('(')
         endidx = dataf.rfind(')')
-        response = json.loads(dataf[startidx + 1:endidx])
+        try:
+            response = json.loads(dataf[startidx + 1:endidx])
+        except json.JSONDecodeError:
+            # print('Error al decodificar JSON: CTRA:{} PK:{}'.format(ctra, pk))
+            return 'Error'
+
         # print (response)
         if response:
             address = response['address']
@@ -309,15 +327,15 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
         ## ACCESO A CARTOCIUDAD POR DIRECCIÓN EN TEXTO LIBRE --- candidatesJsonp --- ##
         # url = 'http://www.cartociudad.es/geocoder/api/geocoder/candidatesJsonp?q=a-2%20272&limit=10'
         # url = 'http://www.cartociudad.es/geocoder/api/geocoder/candidatesJsonp?'
-        
+
         if not self.urlCANDIDATES:
             self.defineUrlsCARTOC()
-        
+
         url = self.urlCANDIDATES
 
         if not self.camposCartociudad:
             self.defineCamposCARTOC()
-        
+
         values = {'q' : direccion,
                   'limit': 20}
 
@@ -326,13 +344,28 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
             str_values[k] = unicode(v).encode('utf-8')
         data = urllib.parse.urlencode(str_values)
         # print (url+data)
-        dataf = requests.get(url+data).text          # Request data from link as 'str'
-        # print (dataf)
+
+        try:
+            # Se añade timeout de 5 segundos
+            dataf = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS).text
+        except Timeout:
+            text = 'Timeout: Direccion: {} - La petición excedió el tiempo de espera'.format(direccion)
+            return 'error', text
+        except ConnectionError:
+            text = 'Error de conexión: Direccion: {}'.format(direccion)
+            return 'error', text
+        except RequestException as e:
+            text = 'Error en la petición: Direccion: {} - {}'.format(direccion, str(e))
+            return 'error', text
 
         # Se extrae del resultado JSONP la parte entre paréntesis
         startidx = dataf.find('(')
         endidx = dataf.rfind(')')
-        response = json.loads(dataf[startidx + 1:endidx])
+        try:
+            response = json.loads(dataf[startidx + 1:endidx])
+        except json.JSONDecodeError:
+            text = 'Error al decodificar JSON: Direccion: {}'.format(direccion)
+            return 'error', text
 
         # Convertir todas las cadenas en 'response' a UTF-8
         # response = self.convert_to_utf8(json.loads(dataf[startidx + 1:endidx]))
@@ -356,10 +389,10 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
                 # print('Direccion: '+direccTXT)
                 listDIRECCION.append(direccionDICT)
                 lstCANDIDATOS_DIRECC.append(direccTXT)
-                
+
             # print('listDIRECCION: ', listDIRECCION, 'lstCANDIDATOS_DIRECC: ', lstCANDIDATOS_DIRECC)
             return listDIRECCION, lstCANDIDATOS_DIRECC
-            
+
         else:
             text =  'Direccion: {}  -NO SE ENCUENTRA DIRECCION-'.format(direccion)
             return 'error', text
@@ -416,7 +449,7 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
 
         # Crear la capa si no existe
         # if not os.path.exists(gpkg_path) and not QgsProject.instance().mapLayersByName(layer_name):
-        if not os.path.exists(gpkg_path) or not QgsProject.instance().mapLayersByName(layer_name):        
+        if not os.path.exists(gpkg_path) or not QgsProject.instance().mapLayersByName(layer_name):
             # Se crea la capa
             vlayer = self.creaCapaCartociudad(self.iface, layer_name, geom_wkb, estiloCAPA, gpkg_path)
 
@@ -425,8 +458,13 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
             vlayer = QgsProject.instance().mapLayersByName(layer_name)[0]
 
         geomDIRECCION, atributosDICT = self.IrURLDireccionCARTOCIUDAD(address, id, tipo, portalNumber)
+        if geomDIRECCION == 'Error':
+            self.fun.showMessageERR('Error en la conexión con el servicio de Cartociudad. No se pudo obtener la geometría.')
+            QApplication.restoreOverrideCursor()
+            return
+
         self.zoomCreaGeometry(self.iface, address, geomDIRECCION, atributosDICT, vlayer, Nomark='SI', zoomGeom = True, cargaTodo = True)
-         
+
         QApplication.restoreOverrideCursor()
 
         return
@@ -435,10 +473,10 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
 
         if not self.camposCartociudad:
             self.defineCamposCARTOC()
-            
+
         if not self.urlPORTALPK:
             self.defineUrlsCARTOC()
-            
+
         url = self.urlPORTALPK
 
         # Comprobamos si existe la capa y el 'id' seleccionado
@@ -456,18 +494,32 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
             str_values[k] = unicode(v).encode('utf-8')
         data = urllib.parse.urlencode(str_values)
         # print (url+data)
-        dataf = requests.get(url+data).text          # Request data from link as 'str'
-        # print (dataf)
+
+        try:
+            # Se añade timeout de 5 segundos
+            dataf = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS).text
+        except Timeout:
+            QApplication.restoreOverrideCursor()
+            self.fun.showMessage(u"Timeout: La petición excedió el tiempo de espera (IRaDireccionCARTOCIUDAD)")
+            return 'Error', {}
+        except ConnectionError:
+            QApplication.restoreOverrideCursor()
+            self.fun.showMessage(u"Error de conexión con el servidor de Cartociudad (IRaDireccionCARTOCIUDAD)")
+            return 'Error', {}
+        except RequestException as e:
+            QApplication.restoreOverrideCursor()
+            self.fun.showMessage(u"Error en la petición: {}".format(str(e)))
+            return 'Error', {}
 
         # Se extrae del resultado JSONP la parte entre paréntesis
         startidx = dataf.find('(')
         endidx = dataf.rfind(')')
         try:
             response = json.loads(dataf[startidx + 1:endidx])
-        except:
+        except json.JSONDecodeError:
             QApplication.restoreOverrideCursor()
-            self.fun.showMessage(u"Error de respuesta de internet (IRaDireccionCARTOCIUDAD LIN:291)")
-            return 'Error: No hay respuesta'
+            self.fun.showMessage(u"Error de respuesta de internet (IRaDireccionCARTOCIUDAD)")
+            return 'Error', {}
 
         # Convertir todas las cadenas en 'response' a UTF-8
         # print (response)
@@ -478,9 +530,9 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
                 # Se asignan todos los keys de response, que existan en camposCartociudad
                 if response.get(campo['campo']):
                     atributosDICT[campo['campo']] = response[campo['campo']]
-            
+
         else:
-            return
+            return 'Error', {}
 
         geomDIRECCION = QgsGeometry.fromWkt(atributosDICT['geom'])
         sourceCrs = QgsCoordinateReferenceSystem(4258)
@@ -496,7 +548,7 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
         layer_uri = f'{gpkg_path}|layername={layer_name}'
         ### TODO :METER EN GEOPACKAGE
         vlayer = QgsVectorLayer(f'{geom_wkb}?crs=EPSG:{self.srcVal}&encoding=UTF-8', layer_name, 'memory')
-        
+
         if not self.camposCartociudad:
             self.defineCamposCARTOC()
 
@@ -505,7 +557,7 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
             vlayer.triggerRepaint()
 
         # Añadir campos a lista
-        provider = vlayer.dataProvider()        
+        provider = vlayer.dataProvider()
         dataCamposCARCIU = []
         # Se añaden campos desde la lista camposCartociudad
         for campo in self.camposCartociudad:
@@ -520,7 +572,7 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
 
         # Añadir campos a provider
         provider.addAttributes(dataCamposCARCIU)
-        
+
         # Actualizar la capa con los cambios
         vlayer.updateFields()
 
@@ -556,8 +608,8 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
                             # feat[attr] = atributosDICT[attr]
                         else:
                             feat[attr] = atributosDICT[attr]
-                            
-                            
+
+
             provider.addFeature(feat)
             vlayer.updateExtents()
 
@@ -565,9 +617,9 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
         if not QgsProject.instance().mapLayersByName(vlayer.name()) and Nomark != 'NO':
             # Se crea la capa
             # vlayer = self.creaCapaCartociudad(self.iface, layer_name, geom_wkb, estiloCAPA, gpkg_path)
-           
+
             QgsProject.instance().addMapLayer(vlayer)
-            
+
             # Ponemos la capa arriba
             root = QgsProject.instance().layerTreeRoot()
             myvl = root.findLayer(vlayer.id())
@@ -597,7 +649,7 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
 
     '''
     ## EJEMPLOS SALIDAS CARTOCIUDAD
-    
+
     ## TIPO POLÍGONO
     response=
     {
@@ -649,4 +701,3 @@ class cartoc_buscadorGeneral(QDialog, FORM_CLASS):
     'refCatastral': None,
     'countryCode': '011'}
     '''
-

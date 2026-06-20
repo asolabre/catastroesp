@@ -126,6 +126,11 @@ class catastroBuscador(QDialog, FORM_CLASS):
 
             self.lblFichDest.hide()
 
+            # TODO. Se ocultan las referencias al Registro de la propiedad
+            self.lblidufirREGISTRO.hide()
+            self.idufirREGISTRO.hide()
+            self.btnBUSCRegistro.hide()
+
             QApplication.restoreOverrideCursor()
 
             # Cargar configuración personalizada si existe
@@ -149,13 +154,6 @@ class catastroBuscador(QDialog, FORM_CLASS):
             self.fun.showMessage(f"Error durante la inicialización: {str(e)}")
             self.error_occurred = True  # Activar bandera de error
             return  # Salir del constructor
-
-    # def show(self):
-        # '''Sobrescribir el método show para evitar que el diálogo se muestre si hay un error.'''
-        # if not self.error_occurred:
-            # super().show()  # Mostrar el diálogo solo si no hay errores
-        # else:
-            # self.close()  # Cerrar el diálogo si hay un error
 
     def exec_(self):
         '''Sobrescribir el método exec_ para evitar que el diálogo se muestre si hay un error.'''
@@ -307,7 +305,6 @@ class catastroBuscador(QDialog, FORM_CLASS):
         textMsg = ''
         textMsgINI = 'CARGANDO PARCELAS CATASTRALES...'+'\n'
         self.txeAVISOS.setText(textMsgINI)
-        # print 'layer= ',layer.name(), ' campo_REFCAT= ',campo_REFCAT, ' numfeat= ', numfeat
         for feature in features:
             QApplication.processEvents()
             rc = feature[campo_REFCAT]
@@ -319,7 +316,6 @@ class catastroBuscador(QDialog, FORM_CLASS):
                 rc = rc[0:14].upper()
                 if len(self.listaRCs.findItems(rc, Qt.MatchExactly)) == 0:
                     # Esto comprueba la existencia de la referencia catastral
-                    # point_response = self.fun.getPointFromRC(self.iface,rc)
                     point_response = self.fun.getPointFromRC(self.iface,rc, mess = 'NO')
                     if point_response is not None and point_response[0] == 'Error':
                         textMsg = rc+ ' '+ point_response[1]
@@ -328,7 +324,6 @@ class catastroBuscador(QDialog, FORM_CLASS):
                         textMsg = rc+ ' ERROR DE RESPUESTA'
                         self.txeAVISOS.append(textMsg)
                     elif point_response is not None:
-                            # textMsg = rc.encode("utf-8")+ ' OK'
                             textMsg = rc + u' OK'
                             listaParcelas.append(rc)
                             self.listaRCs.addItem(rc)
@@ -338,7 +333,6 @@ class catastroBuscador(QDialog, FORM_CLASS):
                             textMsg = '%s/%s - '%(str(cuentaParcelas),str(numfeat)) + textMsg
                             self.txeAVISOS.append(textMsg)
                 else:
-                    # textMsg = rc.encode("utf-8")+ ' REPETIDA'
                     textMsg = rc + ' REPETIDA'
                     self.txeAVISOS.append(textMsg)
 
@@ -378,7 +372,6 @@ class catastroBuscador(QDialog, FORM_CLASS):
                         # print (textMsg)
                         self.txeAVISOS.append(textMsg)
                     elif point_response is not None:
-                        # textMsg = rc.encode("utf-8")+ ' OK'
                         textMsg = rc + u' OK'
                         # print (textMsg)
                         listaParcelas.append(rc)
@@ -386,7 +379,6 @@ class catastroBuscador(QDialog, FORM_CLASS):
                         cuentaParcelas += 1
                         self.txeAVISOS.append(textMsg)
                 else:
-                    # textMsg = rc.encode("utf-8")+ ' REPETIDA'
                     textMsg = rc + ' REPETIDA'
                     # print (textMsg)
                     self.txeAVISOS.append(textMsg)

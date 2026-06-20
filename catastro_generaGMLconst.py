@@ -45,7 +45,7 @@ from PyQt5.QtGui import QIcon
 
 from PyQt5 import uic
 from PyQt5.QtCore import QSettings, Qt, QRect, QUrl
-from qgis.core import (Qgis, QgsMessageLog, QgsVectorLayer, QgsMapLayer, QgsApplication, QgsGeometry, QgsFeature, 
+from qgis.core import (Qgis, QgsMessageLog, QgsVectorLayer, QgsMapLayer, QgsApplication, QgsGeometry, QgsFeature,
                 QgsCoordinateReferenceSystem, QgsProject, QgsLayerTreeLayer, QgsWkbTypes, QgsExpression, QgsFeatureRequest)
 from qgis.gui import QgsDialog, QgsMapTool
 import qgis.utils
@@ -58,6 +58,7 @@ import re
 import configparser
 import urllib
 import requests
+from requests.exceptions import Timeout, ConnectionError, RequestException
 
 import json
 from time import sleep, gmtime, localtime, strftime, time
@@ -75,110 +76,118 @@ from .functions3 import Functions        # CLASE DE CONFIGURACIÓN DE FUNCIONES 
 from .settings import Settings           # CLASE DE CONFIGURACIÓN DE VARIABLES GLOBALES
 
 
-
-### IMPORTADO parcialmente de dxfparcela2gmlcatastro.py ###
-
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), './menus/catastro_generaGMLconst.ui'))
 
+# Constante para el timeout de las peticiones HTTP (segundos)
+TIMEOUT_SEGUNDOS = 5
+
 class catastro_generaGMLconst(QDialog, FORM_CLASS):
+    
     def __init__(self, iface, parent=None):
-    # Clase para el submenu catastro_generaGMLconst.ui
+        """Constructor de la clase catastro_generaGMLconst"""
+        # Clase para el submenu catastro_generaGMLconst.ui
 
-        """Constructor."""
-        # super(herrExpro_generaGML, self).__init__(parent)
-        super(catastro_generaGMLconst, self).__init__(parent)
-        # Se establece el menu de usuario desde el diseñador
-        #   Después de ejecutar 'setupUI', puedes acceder a cualquier objeto del diseño haciendo
-        #   self.<objectname>, y puedes usar slots de autoconexión - ver
-        #    http://qt-project.org/doc/qt-4.8/designer-using-a-ui-file.html
-        #    #widgets-and-dialogs-with-auto-connect
-        self.setupUi(self)
-
-        self.iface = iface
-        self.fun = Functions()
-        self.qs = QSettings()
-        self.conf = configuration()
-
-        # Obtenemos SRC de la vista del proyecto
-        srs =  self.iface.mapCanvas().mapSettings().destinationCrs().authid()
-        self.srcVal= srs.lower().replace('epsg:','')
+        # Cambiar a cursor de espera al inicio de la inicialización
+        QApplication.setOverrideCursor(Qt.WaitCursor)
         
-        self.nombre_plugin = os.path.basename(os.path.dirname(__file__))
-        self.version_plugin = self.get_plugin_version()
+        try:
+            super(catastro_generaGMLconst, self).__init__(parent)
+            # Se establece el menu de usuario desde el diseñador
+            self.setupUi(self)
 
-        self.setWindowIcon(QIcon(f':/plugins/{self.nombre_plugin}/iconos/cat_gmlConst.jpg'))
-        
-        # Cargar ayuda desde archivo HTML externo
-        plugin_dir = os.path.dirname(os.path.abspath(__file__))
-        help_file = os.path.join(plugin_dir, "help", "catastro_generaGMLconst_help.html")
+            self.iface = iface
+            self.fun = Functions()
+            self.qs = QSettings()
+            self.conf = configuration()
 
-        if os.path.exists(help_file):
-            self.txbAyuda.setSource(QUrl.fromLocalFile(help_file))
-        else:
-            self.txbAyuda.setHtml(f"<p style='color:red'>Ayuda no disponible: {help_file}</p>")
-      
-        # Obtener las capas de la TOC
-        lista_CAPAS = self.getCAPAS()
-        # ACTUALIZA CAMPOS SI CAMBIAS LA TABLA SELECCIONADA
-        self.cbxCapaentrada.currentIndexChanged.connect(self.actualizarCampos)
+            # Obtenemos SRC de la vista del proyecto
+            srs = self.iface.mapCanvas().mapSettings().destinationCrs().authid()
+            self.srcVal = srs.lower().replace('epsg:','')
 
-        # Comprueba si hay elementos seleccionados
-        self.cbxCapaentrada.currentIndexChanged.connect(self.actualizarEstadoCargaGML)
+            self.nombre_plugin = os.path.basename(os.path.dirname(__file__))
+            self.version_plugin = self.get_plugin_version()
 
-        self.cbxCapaentrada.clear()
-        self.cbxCapaentrada.addItems(lista_CAPAS)
+            self.setWindowIcon(QIcon(f':/plugins/{self.nombre_plugin}/iconos/cat_gmlConst.jpg'))
 
-        # Comprobamos si la última capa está en lista_CAPAS y se pone como current en el combo
-        lastCapaParaGMLconst = self.qs.value(f"{self.nombre_plugin}/last/lastCapaParaGMLconst")
-        if lastCapaParaGMLconst in lista_CAPAS:
-            self.cbxCapaentrada.setCurrentIndex(lista_CAPAS.index(lastCapaParaGMLconst))
+            # Cargar ayuda desde archivo HTML externo
+            plugin_dir = os.path.dirname(os.path.abspath(__file__))
+            help_file = os.path.join(plugin_dir, "help", "catastro_generaGMLconst_help.html")
 
-        # Comprobamos si la capa activa está en lista_CAPAS y se pone como current en el combo
-        self.cbxCapaentrada.setCurrentIndex(1)
-        if iface.activeLayer():
-            if iface.activeLayer().name() in lista_CAPAS:
-                self.cbxCapaentrada.setCurrentText(iface.activeLayer().name())
-        self.cbxCapaentrada.setEditable(True)
+            if os.path.exists(help_file):
+                self.txbAyuda.setSource(QUrl.fromLocalFile(help_file))
+            else:
+                self.txbAyuda.setHtml(f"<p style='color:red'>Ayuda no disponible: {help_file}</p>")
 
-        self.actualizarEstadoCargaGML()
+            # Obtener las capas de la TOC (operación que puede ser lenta)
+            lista_CAPAS = self.getCAPAS()
+            
+            # ACTUALIZA CAMPOS SI CAMBIAS LA TABLA SELECCIONADA
+            self.cbxCapaentrada.currentIndexChanged.connect(self.actualizarCampos)
 
-        self.lastDirGMLconst = self.qs.value(f"{self.nombre_plugin}/last/lastDirGMLconst")
-        if self.lastDirGMLconst is None:
-            self.lastDirGMLconst = 'C:/temp/fichero.gml'
-        self.srcExtORI = '.gml'
-        self.lneGMLsalida.setText(self.lastDirGMLconst)
+            # Comprueba si hay elementos seleccionados
+            self.cbxCapaentrada.currentIndexChanged.connect(self.actualizarEstadoCargaGML)
 
-        self.btnGENERAGML.clicked.connect(self.generaGML)
-        self.btnCANCELA.clicked.connect(self.cancela)
-        self.progressBar.setMinimum(0)
-        self.progressBar.setMaximum(100)
-        self.btnSeleccionfich.clicked.connect(self.gml_salida_file_click)
-        self.btnAsignNomCapa.setEnabled(True)
-        self.btnAsignNomCapa.clicked.connect(self.AsignNomCapa)
+            self.cbxCapaentrada.clear()
+            self.cbxCapaentrada.addItems(lista_CAPAS)
 
-        #   TABLA DE DATOS DE CONSTRUCCIONES
-        self.cbxCTRL_localid_rep.setChecked(False)
-        # self.lbl_bw_CONSTRUCCIONES.setEnabled(False)
-        # self.tbw_CONSTRUCCIONES.setEnabled(False)
-        self.tbw_CONSTRUCCIONES.setColumnWidth(0, 50)    # 0 'ID'
-        self.tbw_CONSTRUCCIONES.setColumnWidth(1, 100)   # 1 'LOCALID'
-        self.tbw_CONSTRUCCIONES.setColumnWidth(2, 100)   # 2 'NAMESPACE'
-        self.tbw_CONSTRUCCIONES.setColumnWidth(3, 180)   # 3 'NOM_CONST'
-        self.tbw_CONSTRUCCIONES.setColumnWidth(4, 140)   # 4 'USO_CONST'
-        self.tbw_CONSTRUCCIONES.setColumnWidth(5, 70)    # 5 'NUMPLANTAS'
-        self.tbw_CONSTRUCCIONES.setColumnWidth(6, 140)   # 6 'TIPOCONST'
+            # Comprobamos si la última capa está en lista_CAPAS y se pone como current en el combo
+            lastCapaParaGMLconst = self.qs.value(f"{self.nombre_plugin}/last/lastCapaParaGMLconst")
+            if lastCapaParaGMLconst in lista_CAPAS:
+                self.cbxCapaentrada.setCurrentIndex(lista_CAPAS.index(lastCapaParaGMLconst))
 
-        # Conectar eventos para actualizar la tabla
-        self.cbx_campoLOCALID.currentIndexChanged.connect(self.cargarDatosEnTabla)
-        self.cbx_campoNMSPC.currentIndexChanged.connect(self.cargarDatosEnTabla)
-        self.cbx_campoNomConst.currentIndexChanged.connect(self.cargarDatosEnTabla)
-        self.cbx_campoUso.currentIndexChanged.connect(self.cargarDatosEnTabla)
-        self.cbx_campoNumPlantas.currentIndexChanged.connect(self.cargarDatosEnTabla)
-        self.cbx_campoTipo.currentIndexChanged.connect(self.cargarDatosEnTabla)
-        self.chbELEMSELEC.stateChanged.connect(self.cargarDatosEnTabla)
+            # Comprobamos si la capa activa está en lista_CAPAS y se pone como current en el combo
+            self.cbxCapaentrada.setCurrentIndex(1)
+            if iface.activeLayer():
+                if iface.activeLayer().name() in lista_CAPAS:
+                    self.cbxCapaentrada.setCurrentText(iface.activeLayer().name())
+            self.cbxCapaentrada.setEditable(True)
 
+            self.actualizarEstadoCargaGML()
+
+            self.lastDirGMLconst = self.qs.value(f"{self.nombre_plugin}/last/lastDirGMLconst")
+            if self.lastDirGMLconst is None:
+                self.lastDirGMLconst = 'C:/temp/fichero.gml'
+            self.srcExtORI = '.gml'
+            self.lneGMLsalida.setText(self.lastDirGMLconst)
+
+            self.btnGENERAGML.clicked.connect(self.generaGML)
+            self.btnCANCELA.clicked.connect(self.cancela)
+            self.progressBar.setMinimum(0)
+            self.progressBar.setMaximum(100)
+            self.btnSeleccionfich.clicked.connect(self.gml_salida_file_click)
+            self.btnAsignNomCapa.setEnabled(True)
+            self.btnAsignNomCapa.clicked.connect(self.AsignNomCapa)
+
+            #   TABLA DE DATOS DE CONSTRUCCIONES
+            self.cbxCTRL_localid_rep.setChecked(False)
+            self.tbw_CONSTRUCCIONES.setColumnWidth(0, 50)    # 0 'ID'
+            self.tbw_CONSTRUCCIONES.setColumnWidth(1, 100)   # 1 'LOCALID'
+            self.tbw_CONSTRUCCIONES.setColumnWidth(2, 100)   # 2 'NAMESPACE'
+            self.tbw_CONSTRUCCIONES.setColumnWidth(3, 180)   # 3 'NOM_CONST'
+            self.tbw_CONSTRUCCIONES.setColumnWidth(4, 140)   # 4 'USO_CONST'
+            self.tbw_CONSTRUCCIONES.setColumnWidth(5, 70)    # 5 'NUMPLANTAS'
+            self.tbw_CONSTRUCCIONES.setColumnWidth(6, 140)   # 6 'TIPOCONST'
+
+            # Conectar eventos para actualizar la tabla
+            self.cbx_campoLOCALID.currentIndexChanged.connect(self.cargarDatosEnTabla)
+            self.cbx_campoNMSPC.currentIndexChanged.connect(self.cargarDatosEnTabla)
+            self.cbx_campoNomConst.currentIndexChanged.connect(self.cargarDatosEnTabla)
+            self.cbx_campoUso.currentIndexChanged.connect(self.cargarDatosEnTabla)
+            self.cbx_campoNumPlantas.currentIndexChanged.connect(self.cargarDatosEnTabla)
+            self.cbx_campoTipo.currentIndexChanged.connect(self.cargarDatosEnTabla)
+            self.chbELEMSELEC.stateChanged.connect(self.cargarDatosEnTabla)
+            
+            # Cargar datos iniciales en la tabla
+            self.cargarDatosEnTabla()
+            
+        finally:
+            # Restaurar cursor normal cuando termine la inicialización
+            QApplication.restoreOverrideCursor()
+    
+    
     def getCAPAS(self):
+        """Obtiene las capas de la vista"""
         capas = []
         for layer in QgsProject.instance().mapLayers().values():
             if layer.type() == QgsMapLayer.VectorLayer:
@@ -194,44 +203,45 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
         return capas
 
     def actualizarCampos(self):
+        """Actualiza los valores de todos los campos"""
         layername = self.cbxCapaentrada.currentText()
         if layername == "":
             self.fun.showMessage("Debes cargar una capa SHP de POLÍGONOS en la tabla de contenidos")
             return None
-        
+
         selected_table = self.fun.getLayerByName(layername)
         fields = selected_table.fields()
         text_fields = []
         numeric_fields = []  # Inicializar como lista vacía
-        
+
         for field in fields:
             if field.typeName().lower() in ["string", "text", "esrifieldtypestring"]:
                 text_fields.append(field.name())
             # También añadir campos numéricos para plantas (pueden ser enteros)
             if field.typeName().lower() in ["integer", "integer64", "int", "long", "longlong", "double", "real"]:
                 numeric_fields.append(field.name())
-        
+
         # Colocamos los nombres de campos en los combos
         self.cbx_campoLOCALID.clear()
         self.cbx_campoLOCALID.addItems(text_fields)
-        
+
         self.cbx_campoNMSPC.clear()
         self.cbx_campoNMSPC.addItems(text_fields)
-        
+
         self.cbx_campoNomConst.clear()
         self.cbx_campoNomConst.addItems(text_fields)
-        
+
         self.cbx_campoUso.clear()
         self.cbx_campoUso.addItems(text_fields)
-        
+
         # Para PLANTAS: combinar text_fields + numeric_fields
         self.cbx_campoNumPlantas.clear()
         all_plantas_fields = text_fields + numeric_fields
         self.cbx_campoNumPlantas.addItems(all_plantas_fields)
-        
+
         self.cbx_campoTipo.clear()
         self.cbx_campoTipo.addItems(text_fields)
-        
+
         # Buscamos si existen los campos tipo en la capa (NOMBRES RECOMENDADOS)
         campoLOCALIDtipo = 'LOCALID'
         campoNMSPCtipo   = 'NAMESPACE'
@@ -239,60 +249,61 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
         campoUso         = 'USO_CONST'
         campoNumPlantas  = 'NUMPLANTAS'
         campoTipo        = 'TIPOCONST'
-        
+
         # LOCALID
         if campoLOCALIDtipo in text_fields or campoLOCALIDtipo.lower() in text_fields:
             try:
                 self.cbx_campoLOCALID.setCurrentIndex(text_fields.index(campoLOCALIDtipo))
             except:
                 self.cbx_campoLOCALID.setCurrentIndex(text_fields.index(campoLOCALIDtipo.lower()))
-        
+
         # NAMESPACE
         if campoNMSPCtipo in text_fields or campoNMSPCtipo.lower() in text_fields:
             try:
                 self.cbx_campoNMSPC.setCurrentIndex(text_fields.index(campoNMSPCtipo))
             except:
                 self.cbx_campoNMSPC.setCurrentIndex(text_fields.index(campoNMSPCtipo.lower()))
-        
+
         # NOMBRE CONSTRUCCIÓN
         if campoNomConst in text_fields or campoNomConst.lower() in text_fields:
             try:
                 self.cbx_campoNomConst.setCurrentIndex(text_fields.index(campoNomConst))
             except:
                 self.cbx_campoNomConst.setCurrentIndex(text_fields.index(campoNomConst.lower()))
-        
+
         # USO
         if campoUso in text_fields or campoUso.lower() in text_fields:
             try:
                 self.cbx_campoUso.setCurrentIndex(text_fields.index(campoUso))
             except:
                 self.cbx_campoUso.setCurrentIndex(text_fields.index(campoUso.lower()))
-        
+
         # NÚMERO PLANTAS (buscar en la lista combinada)
         if campoNumPlantas in all_plantas_fields or campoNumPlantas.lower() in all_plantas_fields:
             try:
                 self.cbx_campoNumPlantas.setCurrentIndex(all_plantas_fields.index(campoNumPlantas))
             except:
                 self.cbx_campoNumPlantas.setCurrentIndex(all_plantas_fields.index(campoNumPlantas.lower()))
-        
+
         # TIPO (para OtherConstruction)
         if campoTipo in text_fields or campoTipo.lower() in text_fields:
             try:
                 self.cbx_campoTipo.setCurrentIndex(text_fields.index(campoTipo))
             except:
                 self.cbx_campoTipo.setCurrentIndex(text_fields.index(campoTipo.lower()))
-        
+
         # MODIFICAR NOMBRE DE FICHERO con el nombre de la capa
         srcDir, srcFilExtName = os.path.split(self.lneGMLsalida.text())
         srcFilName, srcExt = os.path.splitext(srcFilExtName)
         if srcFilName.lower() == "prueba" or srcFilName == "":
             resultFiledir = os.path.join(srcDir, layername + srcExt)
             self.lneGMLsalida.setText(resultFiledir)
-        
+
         # CARGAR DATOS EN LA TABLA después de actualizar campos
         self.cargarDatosEnTabla()
 
     def actualizarEstadoCargaGML(self):
+        """Actualiza el estado de la carga del GML"""
         layer_name = self.cbxCapaentrada.currentText()
         layer = self.fun.getLayerByName(layer_name)
 
@@ -309,6 +320,7 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
             self.chbELEMSELEC.setEnabled(True)
 
     def AsignNomCapa(self):
+        """Asigna el nombre de la capa"""
         layer_name = self.cbxCapaentrada.currentText().strip()
 
         # Limpiamos el nombre de caracteres extraños (acentos, barras, etc.)
@@ -336,9 +348,10 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
         self.lneGMLsalida.setText(nueva_ruta)
 
     def generaGML(self):
+        """Metodo principal para generar el archivo GML de construcciones."""
         # Iniciar temporizador
         tiempo_inicio = time()
-        
+
         gml_salida_file = self.lneGMLsalida.text()
         QApplication.setOverrideCursor(Qt.WaitCursor)
 
@@ -397,77 +410,15 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
         # Calcular tiempo transcurrido
         tiempo_fin = time()
         tiempo_transcurrido = tiempo_fin - tiempo_inicio
-        
+
         # Mostrar mensaje en lblINFO
         self.lblINFO.setText(f'INFO: -- TERMINADO -- en {tiempo_transcurrido:.1f} seg.')
         self.lblINFO.repaint()  # Forzar actualización visual
 
         QApplication.restoreOverrideCursor()
 
-    # def generaGML(self):
-        # gml_salida_file= self.lneGMLsalida.text()
-        # QApplication.setOverrideCursor(Qt.WaitCursor)
-
-        # # Comprobamos si el fichero existe
-        # result = os.path.exists(gml_salida_file)
-        # if result == True:
-            # QApplication.restoreOverrideCursor()
-            # text = u'El fichero %s ya EXISTE - \n\n     ¿QUIERE SOBREESCRIBIRLO?'%(gml_salida_file)
-            # result = self.fun.showMessWarnYESNO(text, '', 'Catastro Genera GML')
-
-            # if result != 1024:       # Se ha pulsado CANCELAR
-                # QApplication.restoreOverrideCursor()
-                # return ('ERROR')
-            # else:
-                # QApplication.setOverrideCursor(Qt.WaitCursor)
-
-        # # Verificar repeticiones si el control está activado
-        # if self.cbxCTRL_localid_rep.isChecked():
-            # QApplication.setOverrideCursor(Qt.WaitCursor)
-            # self.lblINFO.setText("Comprobando repeticiones de LocalID...")
-            # self.lblINFO.repaint()
-
-            # hay_repetidos = self.compruebaIdlocalRepet()
-
-            # QApplication.restoreOverrideCursor()
-
-            # if hay_repetidos:
-                # return 'ERROR'
-
-            # QApplication.setOverrideCursor(Qt.WaitCursor)
-            # self.lblINFO.setText("")
-
-
-        # # Creación Fichero y Capa de log
-        # QgsMessageLog.logMessage( "Creando archivo de log GML","Catastro")
-        # log_csv = self.conf.lrs["default_log_folder"] + "Log_gml.csv"
-
-        # target  = codecs.open(log_csv, 'w+',encoding='utf-8')
-
-        # encabezado = u'"RC_PARCELA"; "NAMESPACE"; "ERROR_DETECTADO"'
-        # target.write(encabezado)
-        # target.write("\n")
-        # target.close()
-
-        # self.qs.setValue(f"{self.nombre_plugin}/last/lastCapaParaGMLconst", self.cbxCapaentrada.currentText())
-        # self.qs.setValue(f"{self.nombre_plugin}/last/lastDirGMLconst", self.lneGMLsalida.text())
-
-        # gmlDir, gmlFilExtName = os.path.split(gml_salida_file)
-        # gmlFilName, gmlExt = os.path.splitext(gmlFilExtName)
-        # nomCAPA = str(gmlFilName)
-
-        # layer_origen = QgsProject.instance().mapLayersByName(self.cbxCapaentrada.currentText())
-        # # src='25830'
-
-        # # Pasamos datos a la creación del GML
-        # # self.crea_gml(layer_origen, nomCAPA, gml_salida_file, str(self.srcVal), log_csv)
-        # self.crea_gml_construcciones(layer_origen, nomCAPA, gml_salida_file, str(self.srcVal), log_csv)
-
-        # QApplication.restoreOverrideCursor()
-
-
     def crea_gml_construcciones(self, layer_origen, nomCAPA, gml_salida_file, src, log_csv):
-        """Genera GML de construcciones a partir de una capa de polígonos"""
+        """Genera GML de construcciones a partir de una capa de poligonos"""
 
         # Importar la plantilla de construcciones
         from .catastroPlantillaGMLconst import catGMLconstv4 as catGML
@@ -483,7 +434,6 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
         campo_plantas = self.cbx_campoNumPlantas.currentText()
 
         # Campo opcional para indicar si es OtherConstruction (piscina, etc.)
-        # Podrías añadir un checkbox o un campo "tipo_construccion" en la UI
         campo_tipo = getattr(self, 'cbx_campoTipo', None)
         if campo_tipo:
             campo_tipo = campo_tipo.currentText()
@@ -583,7 +533,7 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
                 QgsProject.instance().addMapLayer(layer_gml)
 
     def escribir_geometria_construccion(self, feature, namespace, localid, nombre_const, src, DecCoord, filegml):
-        """Escribe la geometría de una construcción soportando MULTIPOLYGON y anillos interiores"""
+        """Escribe la geometria de una construccion soportando MULTIPOLYGON y anillos interiores"""
 
         geom = feature.geometry()
         wkb_type = geom.wkbType()
@@ -624,7 +574,7 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
             filegml.write(self.catGML.PLANTILLA_GEOMETRY_FIN)
 
     def filtrar_nodos_duplicados(self, ring, DecCoord):
-        """Filtra nodos duplicados consecutivos en un anillo, pero mantiene el cierre del polígono"""
+        """Filtra nodos duplicados consecutivos en un anillo, pero mantiene el cierre del poligono"""
         puntos_filtrados = []
         tolerancia = 10 ** (-DecCoord - 1)
 
@@ -653,7 +603,7 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
         return puntos_filtrados
 
     def geom_to_poslist(self, geom, DecCoord):
-        """Convierte una geometría a string posList (para OtherConstruction)"""
+        """Convierte una geometria a string posList (para OtherConstruction)"""
         if geom.isMultipart():
             polygon = geom.asMultiPolygon()[0][0]  # Primer anillo del primer polígono
         else:
@@ -671,17 +621,14 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
         return poslist.strip()
 
     def descargaGmlParcCat(self, url, rc, crs):
-        """
-        Descarga el GML de una parcela catastral y extrae área y geometría
+        """Descarga el GML de una parcela catastral y extrae area y geometria"""
+        # Args:
+            # url: URL base del servicio WFS
+            # rc: Referencia catastral (14 dígitos)
+            # crs: Sistema de referencia (ej: 'EPSG:25830')
 
-        Args:
-            url: URL base del servicio WFS
-            rc: Referencia catastral (14 dígitos)
-            crs: Sistema de referencia (ej: 'EPSG:25830')
-
-        Returns:
-            tuple: (response, areaParcela, geomParcela) o (False, None, None) en caso de error
-        """
+        # Returns:
+            # tuple: (response, areaParcela, geomParcela) o (False, None, None) en caso de error
 
         srsname = crs.replace( 'EPSG:', 'EPSG::')
         # print ('crs.lower(): ', crs.lower())
@@ -702,12 +649,26 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
         # Codificar parámetros
         str_values = {}
         for k, v in params.items():
-            str_values[k] = unicode(v).encode('utf-8')
+            # str_values[k] = unicode(v).encode('utf-8')
+            str_values[k] = str(v).encode('utf-8')
         data = urllib.parse.urlencode(str_values)
         sourceCAPA = url + data
 
-        # Realizar la petición HTTP
-        response = requests.get(sourceCAPA)
+        # Realizar la petición HTTP con timeout
+        try:
+            response = requests.get(sourceCAPA, timeout=TIMEOUT_SEGUNDOS)
+        except Timeout:
+            QApplication.restoreOverrideCursor()
+            QgsMessageLog.logMessage(f"Timeout al descargar GML para RC: {rc}", "Catastro")
+            return 'ERROR', 'ERROR', 'ERROR'
+        except ConnectionError:
+            QApplication.restoreOverrideCursor()
+            QgsMessageLog.logMessage(f"Error de conexión al descargar GML para RC: {rc}", "Catastro")
+            return 'ERROR', 'ERROR', 'ERROR'
+        except RequestException as e:
+            QApplication.restoreOverrideCursor()
+            QgsMessageLog.logMessage(f"Error en petición para RC {rc}: {str(e)}", "Catastro")
+            return 'ERROR', 'ERROR', 'ERROR'
 
         destDir = r"c:/Temp/"
         nombreGML = destDir + 'GMLprov.gml'
@@ -741,11 +702,12 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
         return response, areagml, geomParcela
 
     def cancela(self):
+        """Cancelar"""
         self.close()
         pass
 
     def get_plugin_version(self):
-        """Obtiene la versión del plugin desde metadata.txt"""
+        """Obtiene la version del plugin desde metadata.txt"""
         fileMetadata = os.path.join(os.path.dirname(__file__), 'metadata.txt')
         if os.path.exists(fileMetadata):
             cfg = configparser.ConfigParser()
@@ -757,6 +719,7 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
         return "1.0"
 
     def gml_salida_file_click(self):
+        """Cuadro de dialogo de selector de fichero"""
         gml_salida_file= self.lneGMLsalida.text()
         ext = "*.gml"
         filename, tipofile = QFileDialog.getSaveFileName(self, "Fichero GML de salida", gml_salida_file, ext)
@@ -770,13 +733,10 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
             os.makedirs(os.path.dirname(filename))
 
     def compruebaRCorigen(self, rc, featGeom, precis=1):
-        """
-        Comprueba si la geometría de featGeom es idéntica a la descargada de Catastro
-        para una RC dada.
-            - rc, REF. CATASTRAL a descargar y comparar
-            - featGeom, geometría a incluír en el GML con dicha RC y namespace = 'ES.SDGC.CP'
-            - precis. precisión decimal de compraración, por defecto  1 deciaml
-        """
+        """Comprueba si la geometria de featGeom es identica a la descargada de Catastro para una RC dada"""
+            # - rc, REF. CATASTRAL a descargar y comparar
+            # - featGeom, geometría a incluír en el GML con dicha RC y namespace = 'ES.SDGC.CP'
+            # - precis. precisión decimal de compraración, por defecto  1 deciaml
         crs = 'EPSG:25830'
         url = self.conf.catastro_tool["url_catastro_DescGML"]
 
@@ -784,6 +744,11 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
         areaGML = featGeom.area()
 
         response, areaParcela, geomParcela = self.descargaGmlParcCat(url, rc, crs)
+        
+        # Verificar si hubo error en la descarga
+        if response == 'ERROR' or areaParcela == 'ERROR' or geomParcela == 'ERROR':
+            print(f'Error al descargar la parcela {rc}')
+            return 'DISTINTA'
 
         # Filtro rápido por superficie
         print ('rc:', rc, 'areaGML: ', areaGML, 'areaParcela: ', areaParcela)
@@ -827,7 +792,7 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
 
 
     def showDialog(self, listaerrorGML, layer, nomCAPA, gml_salida_file, textINFO, tittle="GML CATASTRO"):
-        # Se crea un cuadro de diálogo con una serie de rótulos y una tablewidget de tre columnas y N líneas
+        """Se crea un cuadro de dialogo con una serie de rotulos y una tablewidget de tres columnas y N líneas"""
         main_window = self.iface.mainWindow()
         dialog = QgsDialog(main_window,
                            fl=Qt.WindowFlags(),
@@ -876,10 +841,10 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
         tableWidget.setObjectName("tableWidget")
         tableWidget.setColumnCount(3)
         tableWidget.setRowCount(len(listaerrorGML))
-        tableWidget.setColumnWidth( 0, 140)
-        tableWidget.setColumnWidth( 1, 100)
-        tableWidget.setColumnWidth( 2, 240)
-        tableWidget.setHorizontalHeaderLabels (['RC PARCELA      ', 'NAMESPACE    ', 'ERROR DETECTADO    '])
+        tableWidget.setColumnWidth(0, 140)
+        tableWidget.setColumnWidth(1, 100)
+        tableWidget.setColumnWidth(2, 240)
+        tableWidget.setHorizontalHeaderLabels(['RC PARCELA      ', 'NAMESPACE    ', 'ERROR DETECTADO    '])
         j=0
         for data in listaerrorGML:
             # dataDescomp = data.split(',')
@@ -893,12 +858,11 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
 
 
     def compruebaIdlocalRepet(self):
-        """
-        Comprueba si hay valores repetidos en el campo seleccionado como localid.
-        Retorna:
-            - False: No hay valores repetidos
-            - True: Hay valores repetidos, y se muestra diálogo con los errores
-        """
+        """Comprueba si hay valores repetidos en el campo seleccionado como localid."""
+        # Retorna:
+            # - False: No hay valores repetidos
+            # - True: Hay valores repetidos, y se muestra diálogo con los errores
+        
         # Obtener la capa seleccionada
         layer_name = self.cbxCapaentrada.currentText()
         if not layer_name:
@@ -1003,7 +967,7 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
 
 
     def compruebaRC_gml(self, layer, campoLocalid, valCampoLocalid, valCampoNamespace):
-        # Comprobar localid repetidos
+        """Comprobar localid repetidos"""
         # Comprobar si namespace = ES.SDGC.CP  que localid es RC válida
         # Comprobar si namespace = ES.LOCAL.CP que localid no es RC válida
 
@@ -1059,6 +1023,7 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
 
 
     def describe_polygon(self, feature_polygon, localidf, nmspclocalid, src, filegml):
+        """Descriptor del poligono"""
         geometry_multipolygon = QgsGeometry.fromMultiPolygonXY([feature_polygon.geometry().asPolygon()])
         feature_multipolygon = QgsFeature()
         feature_multipolygon.setGeometry(geometry_multipolygon)
@@ -1067,7 +1032,8 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
 
 
     def describe_multipolygon(self, feature_multipolygon, localidf, nmspclocalid, src, filegml):
-        ## PERMITE ELIMINACIÓN DE NODOS REPETIDOS
+        """Descriptor del multipoligono"""
+        # PERMITE ELIMINACIÓN DE NODOS REPETIDOS
         perimetro = feature_multipolygon.geometry()
         # Obtener el número de decimales deseado
         DecCoord = self.spbDecCoord.value()
@@ -1159,17 +1125,17 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
 
     def cargarDatosEnTabla(self):
         """Carga los datos de las construcciones en la tabla tbw_CONSTRUCCIONES"""
-        
+
         layername = self.cbxCapaentrada.currentText()
         if layername == "":
             self.tbw_CONSTRUCCIONES.setRowCount(0)
             return
-        
+
         layer = self.fun.getLayerByName(layername)
         if not layer:
             self.tbw_CONSTRUCCIONES.setRowCount(0)
             return
-        
+
         # Obtener los campos seleccionados
         campo_localid = self.cbx_campoLOCALID.currentText()
         campo_namespace = self.cbx_campoNMSPC.currentText()
@@ -1177,20 +1143,20 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
         campo_uso = self.cbx_campoUso.currentText()
         campo_plantas = self.cbx_campoNumPlantas.currentText()
         campo_tipo = self.cbx_campoTipo.currentText()
-        
+
         # Verificar si debemos usar solo elementos seleccionados
         if self.chbELEMSELEC.isChecked() and layer.selectedFeatureCount() > 0:
             features = layer.selectedFeatures()
         else:
             features = layer.getFeatures()
-        
+
         # Configurar la tabla
         self.tbw_CONSTRUCCIONES.setRowCount(0)
         self.tbw_CONSTRUCCIONES.setColumnCount(7)
         self.tbw_CONSTRUCCIONES.setHorizontalHeaderLabels([
             'Nº', 'LOCALID', 'NAMESPACE', 'NOM_CONST', 'USO_CONST', 'NUMPLANTAS', 'TIPOCONST'
         ])
-        
+
         # Ajustar anchos de columna
         self.tbw_CONSTRUCCIONES.setColumnWidth(0, 40)   # Nº
         self.tbw_CONSTRUCCIONES.setColumnWidth(1, 140)  # LOCALID
@@ -1199,7 +1165,7 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
         self.tbw_CONSTRUCCIONES.setColumnWidth(4, 140)  # USO_CONST
         self.tbw_CONSTRUCCIONES.setColumnWidth(5, 80)   # NUMPLANTAS
         self.tbw_CONSTRUCCIONES.setColumnWidth(6, 120)  # TIPOCONST
-        
+
         row = 0
         for feature in features:
             # Obtener valores
@@ -1209,10 +1175,10 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
             uso = str(feature[campo_uso]) if campo_uso and feature[campo_uso] else ""
             plantas = str(feature[campo_plantas]) if campo_plantas and feature[campo_plantas] is not None else ""
             tipo = str(feature[campo_tipo]) if campo_tipo and feature[campo_tipo] else ""
-            
+
             # Añadir fila
             self.tbw_CONSTRUCCIONES.insertRow(row)
-            
+
             self.tbw_CONSTRUCCIONES.setItem(row, 0, QTableWidgetItem(str(row + 1)))
             self.tbw_CONSTRUCCIONES.setItem(row, 1, QTableWidgetItem(localid))
             self.tbw_CONSTRUCCIONES.setItem(row, 2, QTableWidgetItem(namespace))
@@ -1220,10 +1186,8 @@ class catastro_generaGMLconst(QDialog, FORM_CLASS):
             self.tbw_CONSTRUCCIONES.setItem(row, 4, QTableWidgetItem(uso))
             self.tbw_CONSTRUCCIONES.setItem(row, 5, QTableWidgetItem(plantas))
             self.tbw_CONSTRUCCIONES.setItem(row, 6, QTableWidgetItem(tipo))
-            
+
             row += 1
-        
+
         # Ajustar número total de elementos seleccionados
         self.lblElemSelec.setText(f'{layer.selectedFeatureCount()}/{layer.featureCount()} Elementos seleccionados ')
-        
-        

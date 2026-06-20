@@ -2,9 +2,7 @@
 """
 /***************************************************************************
 Name:           about_dialog.py
-
                                  A QGIS plugin
-                                 
 Plugin:     catastroesp - Catastro de España
 Purpose:    Herramienta de información sobre el plugin
         --------------------------------------------------------------------
@@ -75,7 +73,7 @@ ayudaASISTW7='file:///'+unidadSIG+'/cartografia/datos_Q/AYUDA/Asistencia%20remot
 ayudaASISTWXP='file:///'+unidadSIG+'/cartografia/datos_Q/AYUDA/Asistencia%20remota%20solicitada%20por%20usuario%20final%20en%20Windows%20XP.pdf'
 dirREPO='---PENDIENTE---'
 
-ficheroAyuda = 'index.html'
+
 
 # print 'ayudaCOMPLE --- ', ayudaCOMPLE
 # print 'ayudaSIG ------ ', ayudaSIG
@@ -91,12 +89,12 @@ class AboutDialog(QDialog, FORM_CLASS):
         self.setupUi(self)
 
         self.nombre_plugin = os.path.basename(os.path.dirname(__file__))
-        
+
         self.iconoMENU='iconos/catastroesp.jpg'
         self.setWindowIcon(QIcon(f':/plugins/{self.nombre_plugin}/catastroesp.jpg'))
         self.lblLogo.setPixmap(QPixmap(os.path.join(CURR_PATH, self.iconoMENU)))
-        self.lblLogo.setFixedSize(60, 60) 
-        
+        self.lblLogo.setFixedSize(60, 60)
+
         self.pluginDir = os.path.dirname(__file__)
 
         self.tabWidget.setCurrentIndex(9) ### esto va al tab INFO
@@ -104,17 +102,27 @@ class AboutDialog(QDialog, FORM_CLASS):
 
         txtVersion  = u'QGIS '+versionQGS + '\n'
         txtVersion += self.tr('Version Plugin: %s Fecha: %s') % (version, fecha)
-        
+
         self.lblVersion.setText(txtVersion)
 
         self.qtbInfo.setHtml(self.get_about_text())
         self.qtbAyuda.setOpenExternalLinks(True)
-        self.qtbAyuda.setSource(QUrl(self.getHelpUrl()))
+        # self.qtbAyuda.setSource(QUrl(self.getHelpUrl()))
+        self.qtbAyuda.setSource(QUrl(self.getHelpUrl('qtbAyuda')))
+        self.qtbRecursos.setSource(QUrl(self.getHelpUrl('qtbRecursos')))
         self.tbhistorial.setPlainText(changelog)
 
-    def getHelpUrl(self):
-        helpFile = u'file:///{}/help/{}'.format(
-            self.pluginDir, ficheroAyuda)
+    def getHelpUrl(self, nomwidget):
+        if nomwidget == 'qtbAyuda':
+            ficheroAyuda = 'index.html'
+            helpFile = u'file:///{}/help/{}'.format(
+                self.pluginDir, ficheroAyuda)
+            print (helpFile)
+        elif nomwidget == 'qtbRecursos':
+            ficheroAyuda = 'recursos_cartograficos.html'
+            helpFile = u'file:///{}/help/{}'.format(
+                self.pluginDir, ficheroAyuda)
+            print (helpFile)
         return helpFile
 
     def get_about_text(self):

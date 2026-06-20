@@ -231,7 +231,9 @@ class catastroToolINF(QgsMapTool):
         # http://ovc.catastro.meh.es/OVCServWeb/OVCWcfLibres/OVCFotoFachada.svc/RecuperarFotoFachadaGet?ReferenciaCatastral=02055A02100200.jpeg
         self.dlg.btnIMGcatastro.clicked.connect(lambda: self.setIMGcatastro())
 
-        self.dlg.btnREGPROP.setEnabled(True)
+        ## TODO. ANULAMOS ACCESOS RP
+        # self.dlg.btnREGPROP.setEnabled(True)
+        self.dlg.btnREGPROP.hide()
         self.dlg.btnREGPROP.clicked.connect(lambda: self.fun.BUSCRegistroCOMP( 'rfc', self.dlg.valREFCAT.toPlainText()))
         # Hace zoom a la parcela REGISTRAL en la web https://geoportal.registradores.org
         # https://geoportal.registradores.org/idtramite/ID02005200002291
@@ -537,7 +539,9 @@ class catastroToolINF01(QgsMapTool):    ### TODO  ### REVISANDO NUEVO SISTEMA DE
         # http://ovc.catastro.meh.es/OVCServWeb/OVCWcfLibres/OVCFotoFachada.svc/RecuperarFotoFachadaGet?ReferenciaCatastral=02055A02100200.jpeg
         self.dlg.btnIMGcatastro.clicked.connect(lambda: self.setIMGcatastro())
 
-        self.dlg.btnREGPROP.setEnabled(True)
+        #### TODO. ESTUDIAR VÍNCULOS A PÁGINAS DE REGISTRADORES   #### 
+        # self.dlg.btnREGPROP.setEnabled(True)
+        self.dlg.btnREGPROP.hide()
         self.dlg.btnREGPROP.clicked.connect(lambda: self.fun.BUSCRegistroCOMP( 'rfc', self.dlg.valREFCAT.toPlainText()))
         # Hace zoom a la parcela REGISTRAL en la web https://geoportal.registradores.org
         # https://geoportal.registradores.org/idtramite/ID02005200002291
@@ -660,29 +664,6 @@ class catastroToolINF01(QgsMapTool):    ### TODO  ### REVISANDO NUEVO SISTEMA DE
         # nm = ''                 #19- Nombre de Municipio
         # PARAJE = 's/d'          #21- NOMBRE PARAJE
         direccion = ldt         #21- Dato Dirección en catastro
-        # codine = str(cp)+str(cm)
-
-        # # tipoPAR = 'N'         #0 - TIPO DE PARCELA (Urbana, Rústica)
-        # codnomPRO = ''          #1 - Código y nombre de provincia
-        # codnomMUN = ''          #2 - Código y nombre de municipio
-        # message = ''            #3 - Contador de BI, CONS y SUBP
-        # listaSUBP = ''          #4 - Listado del contenido de los datos de supparcelas
-        # listaCONSTRU = ''       #5 - Listado del contenido de los datos de construcciones
-        # supTOTAL = 0            #6 - Superficie de la parcela
-        # supCONSTR = 0           #7 - Superficie construida
-        # DATOSURBA = ''          #8- Datos generales parcela urbana
-        # cp = 0                  #9- Código de la provincia
-        # cm = ''                 #10- Código del Municipio
-        # cmc = 0                 #11- Código del Municipio
-        # REFCAT = RC14       #12- REFCAT completa (20 dígitos)
-        # cn = 'N'                #13- Tipo parcela R, U, D, X
-        # cv =  ''                #16- Codigo de la via
-        # pnp = 0                 #17- Numero de la via
-        # np = ''                 #18- Nombre de Provincia
-        # nm = ''                 #19- Nombre de Municipio
-        # CAT_NMSPC = 'ES.SDGC.CP'#20- nmspc del GML ES.SDGC.CP,  ES.LOCAL.CP
-        # PARAJE = 's/d'          #21- NOMBRE PARAJE
-        # direccion = ldt         #21- Dato Dirección en catastro
         # codine = str(cp)+str(cm)
 
         # Se ejecuta la consulta a catastro datos dada una RC14
@@ -889,13 +870,16 @@ class catastroCargaPARC(QgsMapTool):
         self.dlg.btnIMGcatastro.setEnabled(False)
         # http://ovc.catastro.meh.es/OVCServWeb/OVCWcfLibres/OVCFotoFachada.svc/RecuperarFotoFachadaGet?ReferenciaCatastral=02055A02100200.jpeg
         self.dlg.btnIMGcatastro.clicked.connect(lambda: self.setIMGcatastro())
-
-        self.dlg.btnREGPROP.setEnabled(True)
+        
+        #### TODO. ESTUDIAR VÍNCULOS A PÁGINAS DE REGISTRADORES   #### 
+        # self.dlg.btnREGPROP.setEnabled(True)
+        self.dlg.btnREGPROP.hide()
         self.dlg.btnREGPROP.clicked.connect(lambda: self.fun.BUSCRegistroCOMP( 'rfc', self.dlg.valREFCAT.toPlainText()))
         # Hace zoom a la parcela REGISTRAL en la web https://geoportal.registradores.org
-        # https://geoportal.registradores.org/idtramite/ID02005200002291
-        # https://geoportal.registradores.org/idufir/02005000756030
-        # https://geoportal.registradores.org/rfc/7269302WH8876N
+        # https://geoportal.registradores.org/idtramite/ID02005200002291    # Búsqueda por IDtramite
+        # https://geoportal.registradores.org/idufir/02005000756030         # Búsqueda por IDUFIR
+        # https://geoportal.registradores.org/rfc/7269302WH8876N            # Búsqueda por RC
+        #### TODO. ESTUDIAR VÍNCULOS A PÁGINAS DE REGISTRADORES   #### 
 
     def canvasPressEvent(self, event):
         pass

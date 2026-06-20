@@ -7,16 +7,16 @@
 name=Catastro de España
 qgisMinimumVersion=3.4.11
 qgisMaximumVersion=3.40
-description=Herramientas de carga, información, gestión y edición de Catastro
-version=1.10
+description=Herramientas de carga, información, gestión y edición de Catastro \ Tools for loading, information, management and editing of the Spanish Cadastre
+version=1.12.1
 author=Agustín Solabre Suárez
 email=agusass@hotmail.es
 telephone=S/D
 organizacion=S/D
 
 about=  <div>Herramienta para carga y gestión de parcelas catastrales, basada en los servicios de la Dirección General de Catastro
-    <ul style="margin:0;">
-    <li>Busqueda por RC, individual y masiva, por PROC/MUNI/POL/PAR, por listas en texto libre con separadores.</li>
+    <ul style="margin:1;">
+    <li>Busqueda por RC, individual y masiva, por PROV/MUNI/POL/PAR, por listas en texto libre con separadores.</li>
     <li>Identificador y carga de parcela en pantalla.</li>
     <li>Carga del catastro completo por municipio pinchado.</li>
     <li>Carga de catastro historico (desde 2002)</li>
@@ -50,6 +50,19 @@ tags=gml, catastro, finder, cartociudad,
 changelog=
     CAMBIOS ENTRE VERSIONES
     -----------------------------------
+    1.12.1
+        * Se eliminan los scripts en beta CorrectorDeCapasDePoligonos.py y HERRCAT_DETECTA_SOLAPES_HUECOS.py (20/6/26)
+        * Se eliminan espacios y lineas innecesarias comentadas
+        * Se eliminan todos los urllib.request.urlopen
+    1.11
+        * Eliminando sobras de código (provider, regprop) (26/5/26)
+        * Se corrigen las capas, manteniendo internas las de catastro (12/6/26)
+        * Se depura la herramienta de ayuda
+        * Se depuran errores sugeridos por QGIS.ORG (20/6/26)
+            - Eliminado del compilado el resources_compile.bat
+            - Resueltos los 'requests.get' con un timeout y analiis por try/except
+                -- cartoc_buscadorGeneral.py, catastro_generaGML.py, catastro_generaGMLconst.py
+                -- functions3.py
     1.10
         * Lanzamiento de primera edición abierta, sin depurar solapes con jccm_bar (25/05/26)
         * Recoge todos los cambios antigua versión de 2025  (2026/05/17)
@@ -60,7 +73,7 @@ changelog=
     1.01
         * Primera versión estable (2025/02/20)
     0.10
-        * Inicio de la migración a plugin independiente 
+        * Inicio de la migración a plugin independiente
         * Reordenación de iconos a direcciones absolutas al nombre de plugin (2025/02/10)
 
 homepage=https://github.com/asolabre/catastroesp/
@@ -71,11 +84,6 @@ experimental=Truw
 
 # deprecated flag (applies to the whole plugin, not just a single version)
 deprecated=False
-
-# Since QGIS 3.8, a comma separated list of plugins to be installed
-# (or upgraded) can be specified.
-# Check the documentation for more information.
-# plugin_dependencies=
 
 Category of the plugin: Raster, Vector, Database or Web
 # category= Vector

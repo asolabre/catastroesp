@@ -2,7 +2,6 @@
 """
 /***************************************************************************
 Name:           catastroesp.py
-
                                  A QGIS plugin
 Plugin:     catastroesp - Catastro de España
 Purpose:    Gestion de HERRAMIENTAS DEL CATASTRO DE ESPAÑA
@@ -105,9 +104,6 @@ class catastroesp:
         uniProj = self.Sett.initVAR()
         global tipoUser
 
-        # Inicializamos el proveedor de algoritmos
-        self.provider = None                    # Esta variable almacenará el proveedor
-
         # Comprobamos el rol del usuario
         userSIG, tipoUser = self.Sett.entrarUser()
 
@@ -172,13 +168,10 @@ class catastroesp:
         ############################################################################
         ##     Creación de herramientas y entradas de menú  en el QGIS GUI        ##
         ############################################################################
-        
-        ## Se puede ocultar un icono en beta mediante esta expresión en 
+
+        ## Se puede ocultar un icono en beta mediante esta expresión en
         #   self.add_actionMenu, o self.add_action
         #            visible_flag=tipoUser == 'ADMINISTRADOR',
-
-        # Crea y registra el proveedor cuando el plugin se inicializa
-        QgsApplication.processingRegistry().addProvider(self.provider)
 
         #-------------------------------------------
         # 04 - 05 HERRAMIENTAS CATASTRALES SUELTAS
@@ -308,7 +301,7 @@ class catastroesp:
             callback=lambda: self.catastro_generaGMLconst('CAT'),
             parent=self.toolButtonCat,
             submenu=self.SUBMENU_CATASTRO)
-            
+
         # 03.7 CARGA CONSULTA MASIVA
         self.actionCat7 = self.add_actionMenu(
             QIcon(f':/plugins/{self.nombre_plugin}/iconos/cat_xml.jpg'),
@@ -560,16 +553,6 @@ class catastroesp:
                 # Ignorar errores si el objeto ya ha sido eliminado
                 pass
 
-        # Eliminar el proveedor de procesamiento si existe
-        if hasattr(self, 'provider') and self.provider is not None:
-            try:
-                QgsApplication.processingRegistry().removeProvider(self.provider)
-            except RuntimeError:
-                # Ignorar errores si el objeto ya ha sido eliminado
-                pass
-            finally:
-                self.provider = None  # Asegurarse de que el objeto se marque como eliminado
-
 
     def tr(self, message):
         """GET THE TRANSLATION FOR A STRING USING QT TRANSLATION API.
@@ -649,7 +632,7 @@ class catastroesp:
         tool = catastroBorraParc(self.iface.mapCanvas(),self.iface,self.actionCat5)
         self.iface.mapCanvas().setMapTool(tool)
         pass
-        
+
     def catastroASIGNA_RC(self):
         # 03.51 Asigna atributos de parcela catastral a parcela pinchada
         QApplication.restoreOverrideCursor() # Restituye el cursor
@@ -657,7 +640,7 @@ class catastroesp:
         self.iface.messageBar().pushMessage(self.tr(u'Asigna atributos de parcela catastral a parcela pinchada'), self.tr(u'Pulsa en cualquier parcela de capa de poligonos'), level=Qgis.Info, duration=5)
         tool = catastroASIGNA_RC(self.iface.mapCanvas(),self.iface,self.actionCat51)
         self.iface.mapCanvas().setMapTool(tool)
-        
+
     def herrPoligIgualaAtributos(self):
         # 03.52 Asigna atributos de parcela de una capa a parcela pinchada en capa activa
         QApplication.restoreOverrideCursor() # Restituye el cursor

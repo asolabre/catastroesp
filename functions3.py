@@ -2,7 +2,6 @@
 """
 /***************************************************************************
 Name:           functions3.py
-
                                  A QGIS plugin
 Plugin:     jccm_bar3 / catastroesp
 Purpose:    Funciones generales
@@ -64,9 +63,13 @@ import linecache
 import json
 
 # Importaciones de módulos relacionados con URLs
-import urllib
+import urllib.parse
 import urllib.request
+from urllib.error import URLError, HTTPError
+
+# Importaciones de requests
 import requests
+from requests.exceptions import Timeout, ConnectionError, RequestException
 
 import webbrowser
 
@@ -99,6 +102,7 @@ current_configuration = configuration()
 
 # VARIABLES
 crsVal = current_configuration.general["EPSG"]
+TIMEOUT_SEGUNDOS = 5
 
 # CLASES PROGRAMADAS
 class Functions:
@@ -464,7 +468,7 @@ class Functions:
         m.setPenWidth(3)
         return m
 
-        
+
     def zoomToOgrGeometriesLin(self, iface, geometries):
         # # zoomToOgrGeometriesLin(self,iface,geometries)
         # #   Hace zoom a un grupo de geometrias
@@ -504,7 +508,7 @@ class Functions:
         iface.mapCanvas().zoomToFeatureExtent(rectangle)
         iface.mapCanvas().refresh()
 
-        
+
     def zoomToGeometry(self,iface,geometry, Nomark = 'SI'):
         # zoomToGeometry(self,iface,geometry)
         #   Hace zoom a una geometria
@@ -630,14 +634,56 @@ class Functions:
         for k, v in values.items():
             str_values[k] = unicode(v).encode('utf-8')
         data = urllib.parse.urlencode(str_values)
+
         try:
-            response = json.load(urllib.request.urlopen(url+data))
-        except:
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+        except requests.exceptions.Timeout:
+            QApplication.restoreOverrideCursor()
+            txt = u"Timeout: El servidor de carreteras no responde\n"
+            self.showMessageERR(txt, text2="", tittle=self.nombre_plugin + " - Timeout")
+            return
+        except requests.exceptions.ConnectionError:
             QApplication.restoreOverrideCursor()
             txt = u"Error de conexión a internet (SERVIDOR CARRETERAS)\n"
-            txt+= self.PrintException()
-            self.showMessageERR(txt,text2="",tittle=self.nombre_plugin+" - Error de conexión a internet",)
+            txt += self.PrintException()
+            self.showMessageERR(txt, text2="", tittle=self.nombre_plugin + " - Error de conexión")
             return
+        except requests.exceptions.RequestException as e:
+            QApplication.restoreOverrideCursor()
+            txt = u"Error en la petición HTTP: {}\n".format(str(e))
+            txt += self.PrintException()
+            self.showMessageERR(txt, text2="", tittle=self.nombre_plugin + " - Error HTTP")
+            return
+        except json.JSONDecodeError as e:
+            QApplication.restoreOverrideCursor()
+            txt = u"Error al parsear la respuesta JSON: {}\n".format(str(e))
+            self.showMessageERR(txt, text2="", tittle=self.nombre_plugin + " - Error JSON")
+            return
+
+        # try:
+            # response = json.load(urllib.request.urlopen(url+data, timeout=TIMEOUT_SEGUNDOS))
+        # except urllib.error.URLError as e:
+            # QApplication.restoreOverrideCursor()
+            # txt = u"Error de conexión a internet (SERVIDOR CARRETERAS)\n"
+            # txt += self.PrintException()
+            # self.showMessageERR(txt, text2="", tittle=self.nombre_plugin+" - Error de conexión a internet")
+            # return
+        # except TimeoutError:
+            # QApplication.restoreOverrideCursor()
+            # txt = u"Timeout: El servidor de carreteras no responde\n"
+            # self.showMessageERR(txt, text2="", tittle=self.nombre_plugin+" - Timeout")
+            # return
+
+        # try:
+            # response = json.load(urllib.request.urlopen(url+data))
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # txt = u"Error de conexión a internet (SERVIDOR CARRETERAS)\n"
+            # txt+= self.PrintException()
+            # self.showMessageERR(txt,text2="",tittle=self.nombre_plugin+" - Error de conexión a internet",)
+            # return
 
         features =  response["features"]    # Los distintos features encontrados en la búsqueda
 
@@ -733,16 +779,35 @@ class Functions:
 
 
         data = urllib.parse.urlencode(values)
+
         try:
-            response = json.load(urllib.request.urlopen(url+data))
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
             features =  response["features"]
-        except:
+        except urllib.error.URLError as e:
             QApplication.restoreOverrideCursor()
             txt = u"Error de conexión a internet (SERVIDOR CARRETERAS)\n"
-            txt+= self.PrintException()
-            txt+= u"\n\nPROBAMOS A OBTENER DATOS DESDE EL SERVIDOR LOCAL DE SU CONFIGURACIÓN"
+            txt += self.PrintException()
+            txt += u"\n\nPROBAMOS A OBTENER DATOS DESDE EL SERVIDOR LOCAL DE SU CONFIGURACIÓN"
             self.showMessageERR(txt)
             return 'Error: No hay elementos'
+        except TimeoutError:
+            QApplication.restoreOverrideCursor()
+            self.showMessageERR(u"Timeout: El servidor de carreteras no responde")
+            return 'Error: Timeout'
+
+        # try:
+            # response = json.load(urllib.request.urlopen(url+data))
+            # features =  response["features"]
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # txt = u"Error de conexión a internet (SERVIDOR CARRETERAS)\n"
+            # txt+= self.PrintException()
+            # txt+= u"\n\nPROBAMOS A OBTENER DATOS DESDE EL SERVIDOR LOCAL DE SU CONFIGURACIÓN"
+            # self.showMessageERR(txt)
+            # return 'Error: No hay elementos'
+
         nfeat = 1
         pkencontrado = 0
         acim = 360
@@ -1244,12 +1309,26 @@ class Functions:
 
         data = urllib.parse.urlencode(values)
         try:
-            response = json.load(urllib.request.urlopen(url+data))
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
             features =  response["features"]
-        except:
+        except urllib.error.URLError as e:
             QApplication.restoreOverrideCursor()
-            self.showMessage(u"Error de conexión a internet  (SERVIDOR CARRETERAS) fun.CtraPktoCoorsAcim LIN:559")
+            self.showMessage(u"Error de conexión a internet (SERVIDOR CARRETERAS) fun.CtraPktoCoorsAcim LIN:559")
             return 'Error: No hay elementos'
+        except TimeoutError:
+            QApplication.restoreOverrideCursor()
+            self.showMessage(u"Timeout: El servidor de carreteras no responde")
+            return 'Error: Timeout'
+
+        # try:
+            # response = json.load(urllib.request.urlopen(url+data))
+            # features =  response["features"]
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # self.showMessage(u"Error de conexión a internet  (SERVIDOR CARRETERAS) fun.CtraPktoCoorsAcim LIN:559")
+            # return 'Error: No hay elementos'
         nfeat = 1
         pkencontrado = 0
         acim = 360
@@ -1758,14 +1837,29 @@ class Functions:
             str_values[k] = unicode(v).encode('utf-8')
         data = urllib.parse.urlencode(str_values)
         try:
-            response = json.load(urllib.request.urlopen(url+data))
-        except:
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+        except urllib.error.URLError as e:
             QApplication.restoreOverrideCursor()
             txt = u"Error de conexión a internet\n"
-            txt+= self.PrintException()
+            txt += self.PrintException()
             txt += u"\n\nPROBAMOS A OBTENER DATOS DESDE EL SERVIDOR LOCAL DE SU CONFIGURACIÓN"
             self.showMessageERR(txt)
             return
+        except TimeoutError:
+            QApplication.restoreOverrideCursor()
+            self.showMessageERR(u"Timeout: El servidor de carreteras no responde")
+            return
+        # try:
+            # response = json.load(urllib.request.urlopen(url+data))
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # txt = u"Error de conexión a internet\n"
+            # txt+= self.PrintException()
+            # txt += u"\n\nPROBAMOS A OBTENER DATOS DESDE EL SERVIDOR LOCAL DE SU CONFIGURACIÓN"
+            # self.showMessageERR(txt)
+            # return
 
         print (url+data)
         # print (response)
@@ -2346,15 +2440,31 @@ class Functions:
             str_values[k] = unicode(v).encode('utf-8')
         data = urllib.parse.urlencode(str_values)
         # print ('fun.poligToPKINIPKFIN: ',url+data)
+
         try:
-            response = json.load(urllib.request.urlopen(url+data))
-        except:
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+        except urllib.error.URLError as e:
             QApplication.restoreOverrideCursor()
-            # print (url+data)
             txt = u"Error de conexión a internet\n"
-            txt+= self.PrintException()
+            txt += self.PrintException()
             self.showMessageERR(txt)
             return None, None, None, None, None, None
+        except TimeoutError:
+            QApplication.restoreOverrideCursor()
+            self.showMessageERR(u"Timeout: El servidor de carreteras no responde")
+            return None, None, None, None, None, None
+        # try:
+            # response = json.load(urllib.request.urlopen(url+data))
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # # print (url+data)
+            # txt = u"Error de conexión a internet\n"
+            # txt+= self.PrintException()
+            # self.showMessageERR(txt)
+            # return None, None, None, None, None, None
+
         try:
             features =  response["features"]    # Los distintos features encontrados en la búsqueda
         except:
@@ -2565,8 +2675,9 @@ class Functions:
         data = urllib.parse.urlencode(params)
         # print (url+data)
         try:
-            response = json.load(urllib.request.urlopen(url+data))
-            # print (response)
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
             features =  response["features"]
         except:
             QApplication.restoreOverrideCursor()
@@ -2609,16 +2720,31 @@ class Functions:
         data = urllib.parse.urlencode(str_values)
         # print (url+data)
         try:
-            response = json.load(urllib.request.urlopen(url+data))
-            # print (response)
-            features =  response["features"]
-            # print (features)
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+            features = response["features"]
             return features
-        except:
+        except urllib.error.URLError as e:
             QApplication.restoreOverrideCursor()
             result = self.PrintException()
-            self.showMessageERR(result,text2="",tittle=self.nombre_plugin+" - Error de código",)
+            self.showMessageERR(result, text2="", tittle=self.nombre_plugin+" - Error de código")
             return []
+        except TimeoutError:
+            QApplication.restoreOverrideCursor()
+            self.showMessageERR("Timeout: El servidor de carreteras no responde", tittle=self.nombre_plugin+" - Timeout")
+            return []
+        # try:
+            # response = json.load(urllib.request.urlopen(url+data))
+            # # print (response)
+            # features =  response["features"]
+            # # print (features)
+            # return features
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # result = self.PrintException()
+            # self.showMessageERR(result,text2="",tittle=self.nombre_plugin+" - Error de código",)
+            # return []
 
     def getFeaturesBTAcalibradaCount(self,values):
         url = self.conf.general["rest_carreteras"]
@@ -2627,16 +2753,30 @@ class Functions:
         for k, v in values.items():
             str_values[k] = unicode(v).encode('utf-8')
         data = urllib.parse.urlencode(str_values)
-        req = urllib.request.Request(url, data)
+        # req = urllib.request.Request(url, data)
 
         try:
-            response = json.load(urllib.request.urlopen(url+data))
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
             return response
-        except:
+        except urllib.error.URLError as e:
             QApplication.restoreOverrideCursor()
             result = self.PrintException()
-            self.showMessageERR(result,text2="",tittle=self.nombre_plugin+" - Error de código",)
+            self.showMessageERR(result, text2="", tittle=self.nombre_plugin+" - Error de código")
             return []
+        except TimeoutError:
+            QApplication.restoreOverrideCursor()
+            self.showMessageERR("Timeout: El servidor de carreteras no responde", tittle=self.nombre_plugin+" - Timeout")
+            return []
+        # try:
+            # response = json.load(urllib.request.urlopen(url+data))
+            # return response
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # result = self.PrintException()
+            # self.showMessageERR(result,text2="",tittle=self.nombre_plugin+" - Error de código",)
+            # return []
 
     def getFeaturesCarretera(self,road_name):
 
@@ -2664,16 +2804,31 @@ class Functions:
         data = urllib.parse.urlencode(values)
         # print ('getFeaturesCarretera = ',data)
         try:
-            response = json.load(urllib.request.urlopen(url+data))
-            features =  response["features"]
-            # print (features)
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+            features = response["features"]
             return features
-        # except Exception, e:
-        except:
+        except urllib.error.URLError as e:
             QApplication.restoreOverrideCursor()
             result = self.PrintException()
-            self.showMessageERR(result,text2="",tittle=self.nombre_plugin+" - Error de código",)
+            self.showMessageERR(result, text2="", tittle=self.nombre_plugin+" - Error de código")
             return []
+        except TimeoutError:
+            QApplication.restoreOverrideCursor()
+            self.showMessageERR("Timeout: El servidor de carreteras no responde", tittle=self.nombre_plugin+" - Timeout")
+            return []
+        # try:
+            # response = json.load(urllib.request.urlopen(url+data))
+            # features =  response["features"]
+            # # print (features)
+            # return features
+        # # except Exception, e:
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # result = self.PrintException()
+            # self.showMessageERR(result,text2="",tittle=self.nombre_plugin+" - Error de código",)
+            # return []
 
     def getFeaturesCarretera_GPKG(self, road_name, ruta_geopackage, nombre_capa_ctras):
         ###################################################################################
@@ -3787,14 +3942,27 @@ class Functions:
             ###  LINEA DE DATOS DE TEST DE ERROR  ###
             # data = 'geometry=kk%7B%27rings%27%3A+%5B%5B%5B624929.74%2C+4341991.661%5D%2C+%5B625269.156%2C+4342027.181%5D%2C+%5B625249.422%2C+4341851.553%5D%2C+%5B625073.794%2C+4341776.566%5D%2C+%5B624911.98%2C+4341845.633%5D%2C+%5B624910.006%2C+4341849.58%5D%2C+%5B624929.74%2C+4341991.661%5D%5D%5D%7D&geometryType=esriGeometryPolygon&inSR=25830&spatialRel=esriSpatialRelIntersects&outFields=%2A&returnGeometry=false&f=pjson'
             try:
-                response = json.load(urllib.request.urlopen(url+data))
-                # print (response)
-            except:
+                response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+                response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+                response = response.json()  # Esto ya es el JSON parseado
+            except urllib.error.URLError as e:
                 error = True
                 textErr = "Problemas de conexión con \n" + url
                 result = self.PrintException()
-                # print (result)
                 return "error", textErr
+            except TimeoutError:
+                error = True
+                textErr = "Timeout: El servidor de municipios no responde"
+                return "error", textErr
+            # try:
+                # response = json.load(urllib.request.urlopen(url+data))
+                # # print (response)
+            # except:
+                # error = True
+                # textErr = "Problemas de conexión con \n" + url
+                # result = self.PrintException()
+                # # print (result)
+                # return "error", textErr
 
             # if "error" in response:
             if "error" in response:
@@ -3873,13 +4041,27 @@ class Functions:
 
         data = urllib.parse.urlencode(params)
         try:
-            response = json.load(urllib.request.urlopen(url+data))
-            # print (response)
-        except:
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+        except urllib.error.URLError as e:
             QApplication.restoreOverrideCursor()
             result = self.PrintException()
-            print (result)
+            print(result)
             return 's/d', 's/d', 's/d', 's/d', 's/d', 's/d', FUENTE
+        except TimeoutError:
+            QApplication.restoreOverrideCursor()
+            print("Timeout: El servidor de municipios no responde")
+            return 's/d', 's/d', 's/d', 's/d', 's/d', 's/d', 'no data', FUENTE
+
+        # try:
+            # response = json.load(urllib.request.urlopen(url+data))
+            # # print (response)
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # result = self.PrintException()
+            # print (result)
+            # return 's/d', 's/d', 's/d', 's/d', 's/d', 's/d', FUENTE
 
         try:
             features =  response["features"]
@@ -4027,38 +4209,92 @@ class Functions:
         url = f"https://www.cartociudad.es/geocoder/api/geocoder/reverseGeocode?lon={lon}&lat={lat}"
 
         try:
-            # Hacer la petición a la API
-            with urllib.request.urlopen(url) as response:
-                data = json.loads(response.read().decode())
+            # Hacer la petición a la API con requests
+            response = requests.get(url, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción para códigos HTTP 4xx/5xx
 
-                # Extraer los datos que nos interesan
-                ProvNombre = data.get('province', 'No encontrado')
-                Provcodine = data.get('provinceCode', 'No encontrado')
-                MuniNombre = data.get('muni', 'No encontrado')
-                Municodine = data.get('muniCode', 'No encontrado')
+            # Parsear el JSON
+            data = response.json()
 
-                Municipio = f'{MuniNombre} ({Municodine})'
-                Provincia = f'{ProvNombre} ({Provcodine})'
+            # Extraer los datos que nos interesan
+            ProvNombre = data.get('province', 'No encontrado')
+            Provcodine = data.get('provinceCode', 'No encontrado')
+            MuniNombre = data.get('muni', 'No encontrado')
+            Municodine = data.get('muniCode', 'No encontrado')
 
+            Municipio = f'{MuniNombre} ({Municodine})'
+            Provincia = f'{ProvNombre} ({Provcodine})'
 
-                # Mostrar resultados
-                # result = f"Provincia: {ProvNombre}
-                # Código de provincia: {Provcodine}
-                # Municipio: {MuniNombre}
-                # Código de municipio: {Municodine}
-                # Coordenadas (lon, lat): {lon:.6f}, {lat:.6f}"
-                # result = f"Provincia: {ProvNombre}\nCódigo de provincia: {Provcodine}\nMunicipio: {MuniNombre}\nCódigo de municipio: {Municodine}\nCoordenadas (lon, lat): {lon:.6f}, {lat:.6f}"
+            # # Mostrar resultados (comentado como en tu código original)
+            # result = f"Provincia: {ProvNombre}\nCódigo de provincia: {Provcodine}\nMunicipio: {MuniNombre}\nCódigo de municipio: {Municodine}\nCoordenadas (lon, lat): {lon:.6f}, {lat:.6f}"
+            # QMessageBox.information(None, "Resultados", result)
+            # print(result)
 
-                # QMessageBox.information(None, "Resultados", result)
-                print (result)
+            return Municipio, Provincia, MuniNombre, Municodine, ProvNombre, Provcodine, data, FUENTE
 
-                return Municipio, Provincia, MuniNombre, Municodine, ProvNombre, Provcodine, data, FUENTE
+        except requests.exceptions.Timeout:
+            print("Timeout: El servidor de Cartociudad no responde")
+            return 's/d', 's/d', 's/d', 's/d', 's/d', 's/d', 'no data', FUENTE
 
+        except requests.exceptions.ConnectionError as e:
+            print(f"Error de conexión: No se pudo obtener la información: {str(e)}")
+            return 's/d', 's/d', 's/d', 's/d', 's/d', 's/d', 'no data', FUENTE
+
+        except requests.exceptions.HTTPError as e:
+            print(f"Error HTTP {response.status_code}: {str(e)}")
+            return 's/d', 's/d', 's/d', 's/d', 's/d', 's/d', 'no data', FUENTE
+
+        except requests.exceptions.RequestException as e:
+            print(f"No se pudo obtener la información: {str(e)}")
+            return 's/d', 's/d', 's/d', 's/d', 's/d', 's/d', 'no data', FUENTE
 
         except Exception as e:
-            # QMessageBox.critical(None, "Error", f"No se pudo obtener la información: {str(e)}")
-            print (f"No se pudo obtener la información: {str(e)}")
+            # Captura cualquier otro error inesperado
+            print(f"No se pudo obtener la información: {str(e)}")
             return 's/d', 's/d', 's/d', 's/d', 's/d', 's/d', 'no data', FUENTE
+
+        # try:
+            # with urllib.request.urlopen(url, timeout=TIMEOUT_SEGUNDOS) as response:
+                # data = json.loads(response.read().decode())
+
+                # # Extraer los datos que nos interesan
+                # ProvNombre = data.get('province', 'No encontrado')
+                # Provcodine = data.get('provinceCode', 'No encontrado')
+                # MuniNombre = data.get('muni', 'No encontrado')
+                # Municodine = data.get('muniCode', 'No encontrado')
+
+                # Municipio = f'{MuniNombre} ({Municodine})'
+                # Provincia = f'{ProvNombre} ({Provcodine})'
+
+                # # # Mostrar resultados
+                # # result = f"Provincia: {ProvNombre}
+                # # Código de provincia: {Provcodine}
+                # # Municipio: {MuniNombre}
+                # # Código de municipio: {Municodine}
+                # # Coordenadas (lon, lat): {lon:.6f}, {lat:.6f}"
+                # # result = f"Provincia: {ProvNombre}\nCódigo de provincia: {Provcodine}\nMunicipio: {MuniNombre}\nCódigo de municipio: {Municodine}\nCoordenadas (lon, lat): {lon:.6f}, {lat:.6f}"
+
+                # # QMessageBox.information(None, "Resultados", result)
+                # # print (result)
+
+                # return Municipio, Provincia, MuniNombre, Municodine, ProvNombre, Provcodine, data, FUENTE
+
+        # except urllib.error.URLError as e:
+            # print(f"No se pudo obtener la información: {str(e)}")
+            # return 's/d', 's/d', 's/d', 's/d', 's/d', 's/d', 'no data', FUENTE
+        # except TimeoutError:
+            # print("Timeout: El servidor de Cartociudad no responde")
+            # return 's/d', 's/d', 's/d', 's/d', 's/d', 's/d', 'no data', FUENTE
+        # # try:
+            # # # Hacer la petición a la API
+            # # with urllib.request.urlopen(url) as response:
+                # # data = json.loads(response.read().decode())
+
+
+        # except Exception as e:
+            # # QMessageBox.critical(None, "Error", f"No se pudo obtener la información: {str(e)}")
+            # print (f"No se pudo obtener la información: {str(e)}")
+            # return 's/d', 's/d', 's/d', 's/d', 's/d', 's/d', 'no data', FUENTE
 
     def getIGNunidAdminMuniProv(self, point, iface, pintar='NO'):
         FUENTE = 'Serv. wms: IGN Unidades administrativas'
@@ -4206,15 +4442,31 @@ class Functions:
 
         data = urllib.parse.urlencode(params)
         # print (url+data)
+
         try:
-            req = urllib.request.urlopen(url+data)
-        except:
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+        except urllib.error.URLError as e:
             QApplication.restoreOverrideCursor()
             result = self.PrintException()
-            print (result, self.nombre_plugin+" - Error de consulta web COTA EN IGN")
+            print(result, self.nombre_plugin+" - Error de consulta web COTA EN IGN")
             return ('Error', 'Error de consulta web COTA EN IGN')
+        except TimeoutError:
+            QApplication.restoreOverrideCursor()
+            print("Timeout: El servidor WMS no responde")
+            return ('Error', 'Timeout: El servidor WMS no responde')
+        # try:
+            # req = urllib.request.urlopen(url+data)
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # result = self.PrintException()
+            # print (result, self.nombre_plugin+" - Error de consulta web COTA EN IGN")
+            # return ('Error', 'Error de consulta web COTA EN IGN')
 
-        xml_txt =  req.read()
+        xml_txt =  response.read()
+        # xml_txt =  req.read()
+
         # print (xml_txt)
 
         return url+data, xml_txt
@@ -4430,14 +4682,28 @@ class Functions:
             str_values[k] = unicode(v).encode('utf-8')
         data = urllib.parse.urlencode(str_values)
         print ('consultaCatastroXYtoRC - ', url+data)
+        # try:
+            # req = urllib.request.urlopen(url+data, timeout=TIMEOUT_SEGUNDOS)
         try:
-            req = urllib.request.urlopen(url+data)
-        except:
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+        except urllib.error.URLError as e:
             QApplication.restoreOverrideCursor()
             self.showMessage(u"Error de conexión a internet (fun.consultaCatastroXYtoRC)")
             return ("ERROR")
+        except TimeoutError:
+            QApplication.restoreOverrideCursor()
+            self.showMessage(u"Timeout: El servidor de Catastro no responde")
+            return ("ERROR")
+        # try:
+            # req = urllib.request.urlopen(url+data)
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # self.showMessage(u"Error de conexión a internet (fun.consultaCatastroXYtoRC)")
+            # return ("ERROR")
 
-        xml_txt =  req.read()
+        xml_txt =  response.read()
         xml = ET.fromstring(xml_txt)
         xml_dom = parseString(xml_txt)
         # print xml_txt
@@ -4502,16 +4768,31 @@ class Functions:
             str_values[k] = unicode(v).encode('utf-8')
         data = urllib.parse.urlencode(str_values)
         print ('consultaCatastroXYtoRC - ', url+data)
+
         try:
-            req = urllib.request.urlopen(url+data)
-        except:
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+        except urllib.error.URLError as e:
             QApplication.restoreOverrideCursor()
             message = u"Error de conexión a internet (fun.consultaCatastroXYtoRC)"
             self.showMessage(message)
-            # return ("ERROR")
-            return (u'ERROR',message)
+            return (u'ERROR', message)
+        except TimeoutError:
+            QApplication.restoreOverrideCursor()
+            message = u"Timeout: El servidor de Catastro no responde"
+            self.showMessage(message)
+            return (u'ERROR', message)
+        # try:
+            # req = urllib.request.urlopen(url+data)
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # message = u"Error de conexión a internet (fun.consultaCatastroXYtoRC)"
+            # self.showMessage(message)
+            # # return ("ERROR")
+            # return (u'ERROR',message)
 
-        xml_txt =  req.read()
+        xml_txt =  response.read()
         xml = ET.fromstring(xml_txt)
         xml_dom = parseString(xml_txt)
         # print (xml_txt)
@@ -4673,21 +4954,35 @@ class Functions:
             str_values[k] = unicode(v).encode('utf-8')
         data = urllib.parse.urlencode(str_values)
         print ('consultaCatastroDATPARCELA - '+url+data)
+        # try:
+            # req = urllib.request.urlopen(url+data, timeout=TIMEOUT_SEGUNDOS)
         try:
-            # response = json.load(urllib.request.urlopen(url+data)
-            # req = json.load(urllib.request.urlopen(url+data))
-            req = urllib.request.urlopen(url+data)
-        except:
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+        except urllib.error.URLError as e:
             QApplication.restoreOverrideCursor()
             self.showMessage(u"Error de conexión a internet (fun.consultaCatastroDATPARCELA)")
             return ("ERROR")
+        except TimeoutError:
+            QApplication.restoreOverrideCursor()
+            self.showMessage(u"Timeout: El servidor de Catastro no responde")
+            return ("ERROR")
+        # try:
+            # # response = json.load(urllib.request.urlopen(url+data)
+            # # req = json.load(urllib.request.urlopen(url+data))
+            # req = urllib.request.urlopen(url+data)
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # self.showMessage(u"Error de conexión a internet (fun.consultaCatastroDATPARCELA)")
+            # return ("ERROR")
 
-        if req==None:
+        if response==None:
             err = u'ERROR de Respuesta de catastro -Consulta_DNPRC-'
             #self.showMessage(err)
             return err
 
-        xml_txt =  req.read()
+        xml_txt =  response.read()
         xml = ET.fromstring(xml_txt)
         xml_dom = parseString(xml_txt)
         # print (xml_txt)
@@ -4969,21 +5264,35 @@ class Functions:
             str_values[k] = unicode(v).encode('utf-8')
         data = urllib.parse.urlencode(str_values)
         print ('consultaCatastroDATPARCELA - '+url+data)
+        # try:
+            # req = urllib.request.urlopen(url+data, timeout=TIMEOUT_SEGUNDOS)
         try:
-            # response = json.load(urllib.request.urlopen(url+data)
-            # req = json.load(urllib.request.urlopen(url+data))
-            req = urllib.request.urlopen(url+data)
-        except:
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+        except urllib.error.URLError as e:
             QApplication.restoreOverrideCursor()
             self.showMessage(u"Error de conexión a internet (fun.consultaCatastroDATPARCELA)")
             return ("ERROR")
+        except TimeoutError:
+            QApplication.restoreOverrideCursor()
+            self.showMessage(u"Timeout: El servidor de Catastro no responde")
+            return ("ERROR")
+        # try:
+            # # response = json.load(urllib.request.urlopen(url+data)
+            # # req = json.load(urllib.request.urlopen(url+data))
+            # req = urllib.request.urlopen(url+data)
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # self.showMessage(u"Error de conexión a internet (fun.consultaCatastroDATPARCELA)")
+            # return ("ERROR")
 
-        if req==None:
+        if response==None:
             err = u'ERROR de Respuesta de catastro -Consulta_DNPRC-'
             #self.showMessage(err)
             return err
 
-        xml_txt =  req.read()
+        xml_txt =  response.read()
         xml = ET.fromstring(xml_txt)
         xml_dom = parseString(xml_txt)
         print ('xml_txt:\n', xml_txt)
@@ -5278,12 +5587,17 @@ class Functions:
         for k, v in params.items():
             str_values[k] = unicode(v).encode('utf-8')
         data = urllib.parse.urlencode(str_values)
-        sourceCAPA = url + data
+        sourceCAPA = url+data
         nombreFichGML = destDir + 'GMLprov.gml'
-        print (url + data)
+        print (url+data)
 
+        # try:
+            # response = urllib.request.urlopen(url+data, timeout=TIMEOUT_SEGUNDOS)
         try:
-            response = urllib.request.urlopen(url+data)
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+            # response = urllib.request.urlopen(url+data)
         except:
             message = "ERROR: Problema de conexión"
             QApplication.restoreOverrideCursor()
@@ -5612,7 +5926,7 @@ class Functions:
         QgsProject.instance().layerTreeRoot().findLayer(vl.id()).setItemVisibilityChecked(True)
 
         url = self.conf.catastro_tool["url_catastro_DescGML"]
-        
+
         response = self.descargaGmlParcCat(url, rc, srsname)
 
         nombreGML = destDir + 'GMLprov.gml'
@@ -5742,237 +6056,36 @@ class Functions:
         for k, v in params.items():
             str_values[k] = unicode(v).encode('utf-8')
         data = urllib.parse.urlencode(str_values)
-        sourceCAPA = url + data
-        print (url + data)
+        sourceCAPA = url+data
+        print (url+data)
 
         try:
-            response = requests.get(sourceCAPA)
+            response = requests.get(sourceCAPA, timeout=TIMEOUT_SEGUNDOS)
             return response
-        except:
-            message = "ERROR: Problema de conexión"
+        except requests.exceptions.Timeout:
+            message = "ERROR: Timeout - La petición excedió el tiempo de espera"
             QApplication.restoreOverrideCursor()
+            self.showMessageERR(message)
             return False
-        pass
-        
-    '''
-    def cargarCapaParcelaCatastralANT(self,rc,nombrecapa,atributos, tipo,crs):
-        # cargarCapaParcelaCatastral(self,rc,nombrecapa,atributos, tipo,crs)
-        #   Permite cargar desde internet el GMl de una parcela y la mete en un grupo
-        #   ENTRADA:
-        #       rc - Referencia catastral de la parcela
-        #       nombrecapa - Nombre de la capa en la que se añadira la parcela
-        #       atributos =
-        #            RC14,PCAT1,PCAT2,EJERCICIO,NUM_EXP,CONTROL,COORY,VIA,
-        #            NUMERO,NUMERODUP,NUMSYMBOL,AREA,FECHAALTA,FECHABAJA,MAPA,DELEGACIO,
-        #            MUNICIPIO,MASA,HOJA,TIPO,PARCELA,COORX,NOM_MUNI,CAT_NMSPC, PARAJE
-        #       tipo='gml', tipo='shp'
-        #       crs= EPSG:25830
-        #   SALIDA:
-        #       layer - layer de la parcela cargada
-        #
-        #CREADA ASS
-
-        # VARIABLES
-        nom_layer = nombrecapa
-        estiloCAPA = os.path.join(os.path.dirname(__file__), self.conf.catastro_tool["dir_estilos_catastro"] + u'/PARCELAS_SELECCION.qml')
-        srsname = crs.replace( 'EPSG:', 'EPSG::')
-        # print ('crs.lower(): ', crs.lower())
-        crs= 'crs='+ crs.lower()
-        # print ('crs= ', crs)
-        epsg = int(crs.replace('crs=epsg:', ''))
-        tipo_layer= 'MultiPolygon'
-        dest = 'memory'
-        destDir = r"c:/Temp/"
-        if not os.path.exists(destDir):
-            os.makedirs(destDir)
-
-        # CREACIÓN DE CAPA DE PARCELAS
-        # Comprobamos si existe la capa de parcelas
-        layerEXIST = QgsProject.instance().mapLayersByName(nom_layer)
-        if not layerEXIST or layerEXIST[0].featureCount() == 0:
-            if layerEXIST and layerEXIST[0].featureCount() == 0:
-                vl = layerEXIST[0]
-                QgsProject.instance().removeMapLayer( vl.id() )
-
-            # CREACIÓN DE LA CAPA
-            if dest == 'memory':
-                vl = QgsVectorLayer(tipo_layer+'?'+crs, nom_layer, dest)
-            else:
-                if not os.path.isfile(dest):
-                    print (u'NO EXISTE %s - HAY QUE CREARLO'%(dest))
-                    # return
-                vl = QgsVectorLayer(dest+'|'+tipo_layer+'?'+crs, nom_layer, "ogr")
-
-                error = QgsVectorFileWriter.writeAsVectorFormat(vl, dest, nom_layer, None, "ESRI Shapefile")
-                if error == QgsVectorFileWriter.NoError:
-                    print("EXITO!")
-                    pass
-                vl.setCrs(QgsCoordinateReferenceSystem(epsg, QgsCoordinateReferenceSystem.EpsgCrsId))
-
-            pr = vl.dataProvider()
-            vl.startEditing()
-
-            # AÑADIMOS LOS CAMPOS
-            camposCatastro = self.defineCamposCatastro()    # Los campos catastrales se añaden de una forma común
-            pr.addAttributes(camposCatastro)
-
-            vl.updateFields()
-
-            # Añade la capa a la TOC
-            QgsProject.instance().addMapLayer(vl)
-
-            # Establecemos el estilo de la capa
-            vl.loadNamedStyle(estiloCAPA)
-
-            # Commit changes y vuelve a editar
-            vl.commitChanges()
-            vl.startEditing()
-        else:
-            vl = layerEXIST[0]
-            vl.startEditing()
-
-        # Hacemos la capa visible
-        QgsProject.instance().layerTreeRoot().findLayer(vl.id()).setItemVisibilityChecked(True)
-
-        # Obtención del GML de la parcela (EJEMPLO)
-        #   http://ovc.catastro.meh.es/INSPIRE/wfsCP.aspx?
-        #     service=wfs&
-        #     version=2&
-        #     request=getfeature&
-        #     STOREDQUERIE_ID=GetParcel&
-        #     refcat=3662001TF3136S&
-        #     srsname=EPSG::25830
-
-        # url = u'http://ovc.catastro.meh.es/INSPIRE/wfsCP.aspx?'
-        #####
-        #####     http://ovc.catastro.meh.es/INSPIRE/wfsCP.aspx?
-        ###         service=wfs&
-        ###         version=2&
-        ###         request=getfeature&
-        ###         typenames=cp:CadastralParcel&
-        ###         STOREDQUERIE_ID=GetNeighbourParcel&
-        ###         srsname=EPSG:25830&
-        ###         REFCAT=02055A01900035
-        #####
-        url = self.conf.catastro_tool["url_catastro_DescGML"]
-
-        params = {
-            'service': 'wfs',
-            'version': 2,
-            'request': 'getfeature',
-            'STOREDQUERIE_ID': 'GetParcel',
-            'refcat': rc,
-            'srsname': srsname
-            }
-        # print ('rc= ',rc)
-        # print ('srsname= ',srsname)
-        str_values = {}
-        for k, v in params.items():
-            str_values[k] = unicode(v).encode('utf-8')
-        data = urllib.parse.urlencode(str_values)
-        sourceCAPA = url + data
-        print (url + data)
-        nombreGML = destDir + 'GMLprov.gml'
-
-        try:
-            response = requests.get(sourceCAPA)
-        except:
+        except requests.exceptions.ConnectionError:
             message = "ERROR: Problema de conexión"
             QApplication.restoreOverrideCursor()
-            # return (u'ERROR ')
-            return (u'ERROR')
-
-        with open(nombreGML, 'wb') as file:
-            file.write(response.content)
-        layer = QgsVectorLayer(nombreGML, rc, 'ogr')
-        layer.setCrs(QgsCoordinateReferenceSystem(epsg, QgsCoordinateReferenceSystem.EpsgCrsId))
-
-        # Obtención de valores del GML, area, geometría, centroide
-        feats = layer.getFeatures()
-
-        # Contar el número de características manualmente
-        feature_count = sum(1 for _ in feats)
-        print ('NUM_FEATURES=',feature_count)
-
-        # Verificar si el número de características es 0
-        if feature_count == 0:
+            self.showMessageERR(message)
+            return False
+        except requests.exceptions.RequestException as e:
+            message = f"ERROR: Problema en la petición - {str(e)}"
             QApplication.restoreOverrideCursor()
-            print ('Error de selección de parcelas')
-            # return (u'ERROR ')
-            return (u'ERROR')
+            self.showMessageERR(message)
+            return False
+        # try:
+            # response = requests.get(sourceCAPA)
+            # return response
+        # except:
+            # message = "ERROR: Problema de conexión"
+            # QApplication.restoreOverrideCursor()
+            # return False
 
-        # Se vuelve a generar feats con valores del GML, area, geometría, centroide
-        feats = layer.getFeatures()
-        areagml = 0
-        for feat in feats:
-            # areagml = feat['areaValue']     # AREA SACADA DEL GML
-            # areagml += feat['areaValue']     # AREA SACADA DEL GML
-            beginLifespanVersion = feat['beginLifespanVersion']     # beginLifespanVersion SACADO DEL GML
-            # print ('Parcela %s - Area '%rc, areagml )
-            # print ('areagml= ',areagml)
-            parcGML = feat.geometry()
-            # print (parcGML.type())
-            areagml += parcGML.area()
-            bbox = feat.geometry().boundingBox()
-            centroid = feat.geometry().boundingBox().center()   # El centroide es el del boundingBox
-            xgeom = centroid[0]
-            ygeom = centroid[1]
-            atributos['AREA'] = areagml
-            atributos['FECHAALTA'] = beginLifespanVersion
-            atributos['COORX'] = xgeom
-            atributos['COORY'] = ygeom
 
-            # Comprobamos si la parcela ya existe
-            consulta = u'"RC14" = \''+atributos['RC14']+'\''
-            expr = QgsExpression( consulta )
-            it = vl.getFeatures( QgsFeatureRequest( expr ) )
-            ids = [j.id() for j in it]
-            # print consulta
-            # print ('ENCONTRADOS '+ str(len(ids))+' CON RC= '+rc)
-            if len(ids) == 0:
-                # print ('añadimos la parcela '+rc[:14])
-                # print 'NO EXISTE LA PARCELA '+rc
-
-                # Añadimos la Geometría y Atributos al ELEMENTO de la capa PARCELAS
-                feat1 = QgsFeature()
-                feat1.setGeometry(parcGML)
-                countAT = 0
-
-                # Se añaden los atributos que al nuevo elemento
-                fields = vl.fields()
-                feat1.setFields(fields)
-                for attr in atributos:
-                    field_index = fields.indexFromName(attr)
-                    if field_index != -1:
-                        # if attr in fields:
-                        feat1[attr] = atributos[attr]
-
-                # Se añade el elemento en la capa
-                vl.addFeature(feat1)
-
-        # Se actualizan los cambios en la capa
-        vl.commitChanges()
-        vl.updateExtents()
-
-        # Ponemos la capa arriba (1)
-        root = QgsProject.instance().layerTreeRoot()
-        myvl = root.findLayer(vl.id())
-        parent = myvl.parent()
-        myvlclone = myvl.clone()
-        root.insertChildNode(0, myvlclone)
-        try:
-            parent.removeChildNode(myvl)
-        except:
-            print ('parent - ', parent.name(), type(parent), '   IMPOSIBLE BORRAR')
-
-        # myvl.setName('BORRAR')
-        # QgsProject.instance().removeMapLayers([myvl.id()])
-        # QgsProject.instance().removeMapLayers([myvl])
-
-        areagml = round(areagml,2)
-        return vl, areagml, parcGML, bbox
-    '''
-    
 
     def consultaCatastroCodProvtoProvincia(self,codigo_provincia):
         # consultaCatastroCodProvtoProvincia(self,codigo_provincia)
@@ -5982,15 +6095,19 @@ class Functions:
         url = self.conf.catastro_tool["url_catastro_Provincia"]
 
         print ('consultaCatastroCodProvtoProvincia -'+ url)
+        # try:
+            # req = urllib.request.urlopen(url, timeout=TIMEOUT_SEGUNDOS)
         try:
-            req = urllib.request.urlopen(url)
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+            # req = urllib.request.urlopen(url)
         except:
             QApplication.restoreOverrideCursor()
             self.showMessage(u"Error de conexión a internet (fun.consultaCatastroCodProvtoProvincia lin:1762)")
             return ("ERROR")
-        xml_txt =  req.read()
+        xml_txt =  response.read()
         xml = ET.fromstring(xml_txt)
-
 
         nombre_prov = 'NOMBRE_PROV'
 
@@ -6001,7 +6118,7 @@ class Functions:
                 break
         # print ('codigo_provincia = ', codigo_provincia, '  nombre_prov = ', nombre_prov, '(fun.consultaCatastroCodProvtoProvincia lin:1774)')
         return nombre_prov
-    
+
 
     def consultaCatastroCodMunitoMunicipio(self,nombre_prov, codigo_muni):
         # consultaCatastroCodMunitoMunicipio(self,nombre_prov, codigo_muni)
@@ -6017,13 +6134,18 @@ class Functions:
             }
         data = urllib.parse.urlencode(params)
         # print ('consultaCatastroCodMunitoMunicipio -'+ url+data)
+        # try:
+            # req = urllib.request.urlopen(url+data, timeout=TIMEOUT_SEGUNDOS)
         try:
-            req = urllib.request.urlopen(url+data)
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+            # req = urllib.request.urlopen(url+data)
         except:
             QApplication.restoreOverrideCursor()
             self.showMessage(u"Error de conexión a internet (fun.consultaCatastroCodMunitoMunicipio lin:1865)")
             return ("ERROR")
-        xml_txt =  req.read()
+        xml_txt =  response.read()
         xml = ET.fromstring(xml_txt)
 
         # print ('nombre_prov = '+nombre_prov, '  codigo_muni = '+codigo_muni, '(fun.consultaCatastroCodMunitoMunicipio lin:1869)')
@@ -6202,19 +6324,71 @@ class Functions:
                         # print (url)
 
                         urlALT = 'https://www.catastro.hacienda.gob.es/INSPIRE/CadastralParcels/ES.SDGC.CP.atom.xml'
-                        response = urllib.request.urlopen(urlALT, timeout=100)
+
+                        # try:
+                            # response = urllib.request.urlopen(urlALT, timeout=TIMEOUT_SEGUNDOS)
+                        try:
+                            response = requests.get(urlALT, timeout=TIMEOUT_SEGUNDOS)
+                            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+                            response = response.json()  # Esto ya es el JSON parseado
+                            # response = urllib.request.urlopen(urlALT)
+                        except urllib.error.URLError as e:
+                            QApplication.restoreOverrideCursor()
+                            text = f"Error al conectar con Catastro\n\n{urlALT}"
+                            self.showMessage(text, '', 'Consulta a Catastro')
+                            return 'ERROR', 'ERROR'
+                        except TimeoutError:
+                            QApplication.restoreOverrideCursor()
+                            self.showMessage("Timeout: El servidor de Catastro no responde", '', 'Consulta a Catastro')
+                            return 'ERROR', 'ERROR'
+                        # response = urllib.request.urlopen(urlALT, timeout=100)
                         html = response.read()
                         # print (html)
 
                         try:
-                            xmldoc = minidom.parse(urllib.request.urlopen(url))
-                        except:
-                            # Si hay un error, muestra el mensaje
-                            text = f"Error al analizar el XML mediante la url \n\n{url}"
+                            response = requests.get(url, timeout=TIMEOUT_SEGUNDOS)
+                            response.raise_for_status()
+                            xmldoc = minidom.parseString(response.text)
+                        except requests.exceptions.Timeout:
                             QApplication.restoreOverrideCursor()
-                            resp = self.showMessage( text,'','Consulta a Catastro' )
-                            iface.mainWindow().statusBar().clearMessage()
+                            self.showMessage("Timeout: El servidor de Catastro no responde", '', 'Consulta a Catastro')
                             return 'ERROR', 'ERROR'
+                        except requests.exceptions.ConnectionError as e:
+                            text = f"Error al conectar con Catastro\n\n{url}\n\n{str(e)}"
+                            QApplication.restoreOverrideCursor()
+                            self.showMessage(text, '', 'Consulta a Catastro')
+                            return 'ERROR', 'ERROR'
+                        except requests.exceptions.HTTPError as e:
+                            text = f"Error HTTP {e.response.status_code} al conectar con Catastro\n\n{url}"
+                            QApplication.restoreOverrideCursor()
+                            self.showMessage(text, '', 'Consulta a Catastro')
+                            return 'ERROR', 'ERROR'
+                        except requests.exceptions.RequestException as e:
+                            text = f"Error al conectar con Catastro\n\n{url}\n\n{str(e)}"
+                            QApplication.restoreOverrideCursor()
+                            self.showMessage(text, '', 'Consulta a Catastro')
+                            return 'ERROR', 'ERROR'
+                        # try:
+                            # xmldoc = minidom.parse(urllib.request.urlopen(url, timeout=TIMEOUT_SEGUNDOS))
+                        # except urllib.error.URLError as e:
+                            # text = f"Error al analizar el XML mediante la url \n\n{url}"
+                            # QApplication.restoreOverrideCursor()
+                            # self.showMessage(text, '', 'Consulta a Catastro')
+                            # iface.mainWindow().statusBar().clearMessage()
+                            # return 'ERROR', 'ERROR'
+                        # except TimeoutError:
+                            # QApplication.restoreOverrideCursor()
+                            # self.showMessage("Timeout: El servidor de Catastro no responde", '', 'Consulta a Catastro')
+                            # return 'ERROR', 'ERROR'
+                        # try:
+                            # xmldoc = minidom.parse(urllib.request.urlopen(url))
+                        # except:
+                            # # Si hay un error, muestra el mensaje
+                            # text = f"Error al analizar el XML mediante la url \n\n{url}"
+                            # QApplication.restoreOverrideCursor()
+                            # resp = self.showMessage( text,'','Consulta a Catastro' )
+                            # iface.mainWindow().statusBar().clearMessage()
+                            # return 'ERROR', 'ERROR'
 
                         itemlist = xmldoc.getElementsByTagName('link')
                         zip_file_url = ''
@@ -6235,21 +6409,71 @@ class Functions:
                             return 'ERROR', 'ERROR'
 
                         filelist = []
+
                         try:
-                            # print ('Descargado el fichero de '+ cpcmc +' - '+ nombre_muni+ '\n')
-                            url = urllib.request.urlopen(zip_file_url)
-                            z = zipfile.ZipFile(io.BytesIO(url.read()))
+                            # Descargar el archivo ZIP con requests
+                            response = requests.get(zip_file_url, timeout=TIMEOUT_SEGUNDOS)
+                            response.raise_for_status()  # Lanza excepción para códigos HTTP 4xx/5xx
+
+                            # Procesar el ZIP desde la memoria
+                            z = zipfile.ZipFile(io.BytesIO(response.content))
                             z.extractall(dest)
+
                             for file in z.namelist():
-                                # filelist.append(file[4:])
                                 filelist.append(file)
-                                # print file[4:]
+
                             result = 'OK'
 
-                        except Exception as e:
-                            print ('No se puede descargar el fichero de '+ cpcmc +' - '+ nombre_muni+ '\n'+ str(e))
+                        except requests.exceptions.Timeout:
+                            print(f'Timeout al descargar el fichero de {cpcmc} - {nombre_muni}')
                             QApplication.restoreOverrideCursor()
                             result = 'ERROR'
+
+                        except requests.exceptions.ConnectionError as e:
+                            print(f'No se puede descargar el fichero de {cpcmc} - {nombre_muni}\n{str(e)}')
+                            QApplication.restoreOverrideCursor()
+                            result = 'ERROR'
+
+                        except requests.exceptions.HTTPError as e:
+                            print(f'Error HTTP {response.status_code} al descargar el fichero de {cpcmc} - {nombre_muni}\n{str(e)}')
+                            QApplication.restoreOverrideCursor()
+                            result = 'ERROR'
+
+                        except requests.exceptions.RequestException as e:
+                            print(f'No se puede descargar el fichero de {cpcmc} - {nombre_muni}\n{str(e)}')
+                            QApplication.restoreOverrideCursor()
+                            result = 'ERROR'
+
+                        except Exception as e:
+                            print(f'No se puede descargar el fichero de {cpcmc} - {nombre_muni}\n{str(e)}')
+                            QApplication.restoreOverrideCursor()
+                            result = 'ERROR'
+
+                        # try:
+                            # # print ('Descargado el fichero de '+ cpcmc +' - '+ nombre_muni+ '\n')
+                            # url = urllib.request.urlopen(zip_file_url, timeout=TIMEOUT_SEGUNDOS) ## VER ESTO
+                            # # url = urllib.request.urlopen(zip_file_url)
+                            # z = zipfile.ZipFile(io.BytesIO(url.read()))
+                            # z.extractall(dest)
+                            # for file in z.namelist():
+                                # # filelist.append(file[4:])
+                                # filelist.append(file)
+                                # # print file[4:]
+                            # result = 'OK'
+
+                        # except urllib.error.URLError as e:      ## VER ESTO
+                            # print(f'No se puede descargar el fichero de {cpcmc} - {nombre_muni}\n{str(e)}')
+                            # QApplication.restoreOverrideCursor()
+                            # result = 'ERROR'
+                        # except TimeoutError:                    ## VER ESTO
+                            # print(f'Timeout al descargar el fichero de {cpcmc} - {nombre_muni}')
+                            # QApplication.restoreOverrideCursor()
+                            # result = 'ERROR'
+
+                        # except Exception as e:
+                            # print ('No se puede descargar el fichero de '+ cpcmc +' - '+ nombre_muni+ '\n'+ str(e))
+                            # QApplication.restoreOverrideCursor()
+                            # result = 'ERROR'
 
                     # dest = result[1]
                     epsg = int(srs[5:])
@@ -6430,7 +6654,15 @@ class Functions:
         data = urllib.parse.urlencode(params)
         print ('getMunicipiosCatastro - ', url+data)
 
-        req = self.uptime_bot(url+data)
+        try:
+            req = self.uptime_bot(url+data)         ## VER ESTO
+            if req == 'Error de internet' or req == 'Timeout':
+                self.showMessage(u"Error de conexión a catastro en LISTA MUNICIPIOS")
+                return
+        except Exception as e:
+            self.showMessage(u"Error de conexión a catastro en LISTA MUNICIPIOS")
+            return
+        # req = self.uptime_bot(url+data)
 
         try:
             xml_txt =  req.read()
@@ -6469,14 +6701,28 @@ class Functions:
             ]
         data = urllib.parse.urlencode(params)
         print ('getMuniCode - ', url+data)
+        # try:
+            # req = urllib.request.urlopen(url+data, timeout=TIMEOUT_SEGUNDOS)
         try:
-            req = urllib.request.urlopen(url+data)
-        except:
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+        except urllib.error.URLError as e:
             QApplication.restoreOverrideCursor()
-            self.showMessage(u"Error de conexión a internet (fun.getMuniCode lin:1877)")
+            self.showMessage(u"Error de conexión a internet (fun.getMuniCode)")
             return
+        except TimeoutError:
+            QApplication.restoreOverrideCursor()
+            self.showMessage(u"Timeout: El servidor de Catastro no responde")
+            return
+        # try:
+            # req = urllib.request.urlopen(url+data)
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # self.showMessage(u"Error de conexión a internet (fun.getMuniCode lin:1877)")
+            # return
 
-        xml_txt =  req.read()
+        xml_txt =  response.read()
         xml = ET.fromstring(xml_txt)
 
         codigo_muni = ''
@@ -6506,14 +6752,28 @@ class Functions:
 
         data = urllib.parse.urlencode(params)
         print ('consultaCatastroDATPARCELA - ', url+data)
+        # try:
+            # req = urllib.request.urlopen(url+data, timeout=TIMEOUT_SEGUNDOS)
         try:
-            req = urllib.request.urlopen(url+data)
-        except:
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+        except urllib.error.URLError as e:
             QApplication.restoreOverrideCursor()
-            self.showMessage(u"Error de conexión a internet (fun.consultaCatastroDATPARCELA lin:3917)")
-            return ('ERROR', 'Error de conexión a internet (fun.consultaCatastroDATPARCELA lin:3917)')
+            self.showMessage(u"Error de conexión a internet (fun.consultaCatastroDATProMunPolPar)")
+            return ('ERROR', 'Error de conexión a internet')
+        except TimeoutError:
+            QApplication.restoreOverrideCursor()
+            self.showMessage(u"Timeout: El servidor de Catastro no responde")
+            return ('ERROR', 'Timeout: El servidor de Catastro no responde')
+        # try:
+            # req = urllib.request.urlopen(url+data)
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # self.showMessage(u"Error de conexión a internet (fun.consultaCatastroDATPARCELA lin:3917)")
+            # return ('ERROR', 'Error de conexión a internet (fun.consultaCatastroDATPARCELA lin:3917)')
 
-        xml_txt =  req.read()
+        xml_txt =  response.read()
         xml = ET.fromstring(xml_txt)
 
         try:
@@ -6561,15 +6821,32 @@ class Functions:
         url = self.conf.catastro_tool["url_catastro_rc"]
         data = urllib.parse.urlencode(params)
         # print ('getPointFromRC - ', url+data)
+        # try:
+            # req = urllib.request.urlopen(url+data, timeout=TIMEOUT_SEGUNDOS)
         try:
-            req = urllib.request.urlopen(url+data)
-        except:
+            response = requests.get(url+data, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
+        except urllib.error.URLError as e:
             QApplication.restoreOverrideCursor()
             if mess == 'SI':
-                self.showMessage(u"Error de conexión a internet (fun.getPointFromRC lin:1931)")
+                self.showMessage(u"Error de conexión a internet (fun.getPointFromRC)")
             return
+        except TimeoutError:
+            QApplication.restoreOverrideCursor()
+            if mess == 'SI':
+                self.showMessage(u"Timeout: El servidor de Catastro no responde")
+            return
+        # try:
+            # req = urllib.request.urlopen(url+data, timeout=TIMEOUT_SEGUNDOS)
+            # req = urllib.request.urlopen(url+data)
+        # except:
+            # QApplication.restoreOverrideCursor()
+            # if mess == 'SI':
+                # self.showMessage(u"Error de conexión a internet (fun.getPointFromRC lin:1931)")
+            # return
 
-        xml_txt =  req.read()
+        xml_txt =  response.read()
         xml = ET.fromstring(xml_txt)
 
         # print (xml_txt)
@@ -6607,7 +6884,6 @@ class Functions:
 
             return ["OK",point,ldt]
 
-        pass
 
     """
     ##################################################################################################################
@@ -6644,7 +6920,7 @@ class Functions:
         if point is not None:
             puntoData = [point, rc]
             menu.listaRCs.addItem(rc)
-            
+
             # NUEVO: Actualizar estado de controles
             if hasattr(menu, 'actualizar_estado_controles'):
                 menu.actualizar_estado_controles()
@@ -7008,11 +7284,11 @@ class Functions:
                     layerPARC.updateExtents()
 
             menu.listaRCs.takeItem(index)
-            
+
         # NUEVO: Actualizar estado de controles después de quitar
         if hasattr(menu, 'actualizar_estado_controles'):
             menu.actualizar_estado_controles()
-        
+
         if menu.objectName() == 'herrDP_informes_invasionDPdlg':
             # Se añade numero de parcelas que se van cargando. CASO MENU ANALISIS INVASIÓN
             menu.lblListaREFS.setText(u'Lista de REF CAT (%s)'%(menu.listaRCs.count()))
@@ -7025,7 +7301,7 @@ class Functions:
         current_lista_rc =  [str(menu.listaRCs.item(i).text()) for i in range(menu.listaRCs.count())]
         for i in range(len(current_lista_rc)):
             menu.listaRCs.takeItem(0)
-            
+
         # NUEVO: Actualizar estado de controles después de limpiar
         if hasattr(menu, 'actualizar_estado_controles'):
             menu.actualizar_estado_controles()
@@ -7553,25 +7829,43 @@ class Functions:
     def uptime_bot(self, url):
         delayer = 60
         counter = 0
-        # while True:
 
+        # try:
+            # conn = urllib.request.urlopen(url, timeout=TIMEOUT_SEGUNDOS)
         try:
-            conn = urllib.request.urlopen(url)
+            response = requests.get(url, timeout=TIMEOUT_SEGUNDOS)
+            response.raise_for_status()  # Lanza excepción si hay error HTTP (4xx, 5xx)
+            response = response.json()  # Esto ya es el JSON parseado
         except urllib.error.HTTPError as e:
-            # Email admin / log
-            print(f'HTTPError: {e.code} for {url}')
+            # print(f'HTTPError: {e.code} for {url}')
             return f'HTTPError: {e.code} for {url}'
         except urllib.error.URLError as e:
-            # Email admin / log
-            # print(f'URLError: {e.code} for {url}')
+            # print(f'URLError: {e} for {url}')
             return 'Error de internet'
+        except TimeoutError:
+            # print(f'Timeout: {url}')
+            return 'Timeout'
         else:
-            # Website is up
-            # print(f'{url} is up')
-            return conn
-        # time.sleep(delayer)
-        # counter = counter + 1
-        pass
+            return response
+        # try:
+            # conn = urllib.request.urlopen(url, timeout=TIMEOUT_SEGUNDOS)
+            # # conn = urllib.request.urlopen(url)
+        # except urllib.error.HTTPError as e:
+            # # Email admin / log
+            # print(f'HTTPError: {e.code} for {url}')
+            # return f'HTTPError: {e.code} for {url}'
+        # except urllib.error.URLError as e:
+            # # Email admin / log
+            # # print(f'URLError: {e.code} for {url}')
+            # return 'Error de internet'
+        # else:
+            # # Website is up
+            # # print(f'{url} is up')
+            # return conn
+
+        # # time.sleep(delayer)
+        # # counter = counter + 1
+        # pass
 
     def convertTOurl(self, text):
         text = unicode(text.replace(u" ", u"%20" ))
@@ -7679,7 +7973,7 @@ class Functions:
     def getListLayerGPKG(self, file, tipos):
         """
         Rutina que devuelve un listado de las tablas de un GPKG según sus tipos.
-        
+
         :param file: Ruta al archivo GPKG
         :param tipos: Lista de tipos de geometría a incluir
         :return: Lista de nombres de capas que cumplen el criterio
@@ -7687,21 +7981,21 @@ class Functions:
         listLayers = []
         if not os.path.isfile(file):
             return listLayers
-        
+
         try:
             from osgeo import ogr
             ds = ogr.Open(file)
             if ds is None:
                 return listLayers
-            
+
             for i in range(ds.GetLayerCount()):
                 layer = ds.GetLayerByIndex(i)
                 name = layer.GetName()
-                
+
                 # Obtener el primer feature para determinar el tipo
                 feature = layer.GetNextFeature()
                 layer.ResetReading()
-                
+
                 if feature:
                     geom = feature.GetGeometryRef()
                     if geom:
@@ -7720,38 +8014,38 @@ class Functions:
                     geom_name = tipo_nombres.get(geom_type, '')
                     if geom_name in tipos:
                         listLayers.append(name)
-            
+
             ds = None
         except Exception as e:
             print(f"Error al leer GPKG: {e}")
-        
+
         return listLayers
-    
-    
+
+
     # def getListLayerGPKG(self, file, tipos):
         # """
         # Rutina que devuelve un listado de las tablas de un GPKG según sus tipos.
         # """
         # listLayers = []
-        
+
         # if not os.path.isfile(file):
             # print(f"Archivo no encontrado: {file}")
             # return listLayers
-        
+
         # try:
             # ds = ogr.Open(file)
             # if ds is None:
                 # print(f"No se pudo abrir: {file}")
                 # return listLayers
-            
+
             # for i in range(ds.GetLayerCount()):
                 # layer = ds.GetLayerByIndex(i)
                 # name = layer.GetName()
-                
+
                 # # Intentar obtener el primer feature para determinar el tipo
                 # feature = layer.GetNextFeature()
                 # layer.ResetReading()  # Importante: resetear después de GetNextFeature
-                
+
                 # if feature is None:
                     # # Capa vacía - intentar obtener tipo de la definición
                     # geom_type = layer.GetGeomType()
@@ -7766,10 +8060,10 @@ class Functions:
                         # geom_name = geom.GetGeometryName()
                         # if tipos[0] == 'all' or geom_name in tipos:
                             # listLayers.append(name)
-                
+
         # except Exception as e:
             # print(f"Error: {e}")
-        
+
         # return listLayers
 
     def _tipo_en_lista(self, geom_type, tipos):
@@ -7789,78 +8083,9 @@ class Functions:
             ogr.wkbMultiLineString25D: 'MULTILINESTRING25D',
             ogr.wkbMultiPolygon25D: 'MULTIPOLYGON25D',
         }
-        
+
         nombre = tipo_nombres.get(geom_type, '')
         return nombre in tipos
-
-
-
-
-    # def getListLayerGPKG(self, file, tipos):
-        # # Rutina que devulve un listado de las tablas de un GPKG según sus tipos:
-        # #   tipos_lineas = ['LINESTRING', 'MULTILINESTRING', 'LINESTRINGZ', 'MULTILINESTRINGZ', 'LINESTRINGM',
-        # #       'MULTILINESTRINGM', 'LINESTRINGZM', 'MULTILINESTRINGZM', 'LINESTRING25D', 'MULTILINESTRING25D']
-        # #   tipos_poligonos = ['POLYGON','MULTIPOLYGON','POLYGONZ','MULTIPOLYGONZ','POLYGONM','MULTIPOLYGONM',
-        # #       'POLYGONZM','MULTIPOLYGONZM','POLYGON25D','MULTIPOLYGON25D']
-
-
-        # listLayers = []
-        # # print (file)
-        # if not os.path.isfile(file):
-            # return listLayers
-        # for layer in ogr.Open(file):
-            # nameLayer = layer.GetName()
-            # print(nameLayer)
-            # try:
-                # feature0 = layer[1]
-                # geometry = feature0.GetGeometryRef()
-                # if geometry is not None:
-                    # tipoGeom = geometry.GetGeometryName()
-                    # print(u'   Tipo:  '+ tipoGeom)
-                    # if tipoGeom in tipos or tipos[0] == 'all':
-                        # listLayers.append(nameLayer)
-                # else:
-                    # print(u'   NO TIENE GEOMETRÍA')
-            # except:
-                # # print(u'   NO TIENE NINGUN ELEMENTO')
-                # pass
-
-        # return listLayers
-        
-
-    # def getListLayerGPKG01(self, file, tipos):
-        # # from qgis.core import QgsVectorLayer, QgsProject
-        # listLayers = []
-        # if not os.path.isfile(file):
-            # return listLayers
-        # layer = QgsVectorLayer(file,"test","ogr")
-        # subLayers =layer.dataProvider().subLayers()
-
-        # for subLayer in subLayers:
-            # name = subLayer.split('!!::!!')[1]
-            # uri = "%s|layername=%s" % (file, name,)
-            # sub_vlayer = QgsVectorLayer(uri, name, 'ogr')
-            # # tipo = qgis.core.QgsWkbTypes.displayString(int(subLayer.wkbType()))
-            # tipo = QgsWkbTypes.displayString(int(sub_vlayer.wkbType()))
-            # numFeats = sub_vlayer.featureCount()
-            # listLayers.append([uri, name, tipo, numFeats])
-
-        # # for layer in ogr.Open(file):
-            # # name = layer.GetName()
-            # # uri = "%s|layername=%s" % (file, name,)
-            # # tipo = ''
-            # # try:
-                # # feature0 = layer[1]
-                # # geometry = feature0.GetGeometryRef()
-                # # if geometry is not None:
-                    # # tipo = geometry.GetGeometryName()
-            # # except:
-                # # tipo = 'None'
-                # # print(u'   NO TIENE NINGUN ELEMENTO')
-            # # listLayers.append([uri, name, tipo])
-
-        # return listLayers
-
 
 
     """

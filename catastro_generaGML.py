@@ -62,6 +62,7 @@ import re
 import configparser
 import urllib
 import requests
+from requests.exceptions import Timeout, ConnectionError, RequestException
 
 import json
 from time import sleep, gmtime, localtime, strftime
@@ -84,6 +85,9 @@ from .settings import Settings           # CLASE DE CONFIGURACIÓN DE VARIABLES 
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), './menus/catastro_generaGML.ui'))
+
+# Constante para el timeout de las peticiones HTTP (segundos)
+TIMEOUT_SEGUNDOS = 5
 
 # class herrExpro_generaGML(QDialog, FORM_CLASS):
 class catastro_generaGML(QDialog, FORM_CLASS):
@@ -328,13 +332,6 @@ class catastro_generaGML(QDialog, FORM_CLASS):
         QApplication.restoreOverrideCursor()
 
 
-    # import requests
-    # import urllib.parse
-    # from qgis.core import QgsGeometry, QgsVectorLayer, QgsCoordinateTransform, QgsProject
-    # from qgis.PyQt.QtWidgets import QApplication, QMessageBox
-    # import tempfile
-    # import os
-
     def descargaGmlParcCat(self, url, rc, crs):
         """
         Descarga el GML de una parcela catastral y extrae área y geometría
@@ -371,8 +368,21 @@ class catastro_generaGML(QDialog, FORM_CLASS):
         data = urllib.parse.urlencode(str_values)
         sourceCAPA = url + data
 
-        # Realizar la petición HTTP
-        response = requests.get(sourceCAPA)
+        # Realizar la petición HTTP con timeout
+        try:
+            response = requests.get(sourceCAPA, timeout=TIMEOUT_SEGUNDOS)
+        except Timeout:
+            QApplication.restoreOverrideCursor()
+            QgsMessageLog.logMessage(f"Timeout al descargar GML para RC: {rc}", "Catastro")
+            return 'ERROR', 'ERROR', 'ERROR'
+        except ConnectionError:
+            QApplication.restoreOverrideCursor()
+            QgsMessageLog.logMessage(f"Error de conexión al descargar GML para RC: {rc}", "Catastro")
+            return 'ERROR', 'ERROR', 'ERROR'
+        except RequestException as e:
+            QApplication.restoreOverrideCursor()
+            QgsMessageLog.logMessage(f"Error en petición para RC {rc}: {str(e)}", "Catastro")
+            return 'ERROR', 'ERROR', 'ERROR'
 
         destDir = r"c:/Temp/"
         nombreGML = destDir + 'GMLprov.gml'
@@ -406,29 +416,10 @@ class catastro_generaGML(QDialog, FORM_CLASS):
         return response, areagml, geomParcela
 
 
-
-
     def descargaGmlParcCatANT(self, url, rc, srsname):
-        # Obtención del GML de la parcela (EJEMPLO)
-        #   http://ovc.catastro.meh.es/INSPIRE/wfsCP.aspx?
-        #     service=wfs&
-        #     version=2&
-        #     request=getfeature&
-        #     STOREDQUERIE_ID=GetParcel&
-        #     refcat=3662001TF3136S&
-        #     srsname=EPSG::25830
-
-        # url = u'http://ovc.catastro.meh.es/INSPIRE/wfsCP.aspx?'
-        #####
-        #####     http://ovc.catastro.meh.es/INSPIRE/wfsCP.aspx?
-        ###         service=wfs&
-        ###         version=2&
-        ###         request=getfeature&
-        ###         typenames=cp:CadastralParcel&
-        ###         STOREDQUERIE_ID=GetNeighbourParcel&
-        ###         srsname=EPSG:25830&
-        ###         REFCAT=02055A01900035
-        #####
+        """
+        Método antiguo de descarga de GML (mantenido por compatibilidad)
+        """
         params = {
             'service': 'wfs',
             'version': 2,
@@ -447,13 +438,23 @@ class catastro_generaGML(QDialog, FORM_CLASS):
         print (url + data)
 
         try:
-            response = requests.get(sourceCAPA)
+            response = requests.get(sourceCAPA, timeout=TIMEOUT_SEGUNDOS)
             return response
-        except:
-            message = "ERROR: Problema de conexión"
+        except Timeout:
+            message = "ERROR: Timeout - La petición excedió el tiempo de espera"
             QApplication.restoreOverrideCursor()
+            QgsMessageLog.logMessage(message, "Catastro")
             return False
-        pass
+        except ConnectionError:
+            message = "ERROR: Problema de conexión con el servidor"
+            QApplication.restoreOverrideCursor()
+            QgsMessageLog.logMessage(message, "Catastro")
+            return False
+        except RequestException as e:
+            message = f"ERROR: Problema en la petición - {str(e)}"
+            QApplication.restoreOverrideCursor()
+            QgsMessageLog.logMessage(message, "Catastro")
+            return False
 
 
     def cancela(self):
@@ -670,207 +671,6 @@ class catastro_generaGML(QDialog, FORM_CLASS):
             log_csv_uri = u"file:///"+ log_csv +"?type=csv&geomType=none&subsetIndex=no&delimiter=%s&watchFile=no" % (";")
             log_lyr = QgsVectorLayer(log_csv_uri, 'Log GML','delimitedtext')
             project.addMapLayer(log_lyr)
-            
-            
-    # def crea_gml(self, layer_origen, nomCAPA, gml_salida_file, src, log_csv):
-        # # Transforma la información de la geometría de una capa al estándar de Catastro en formato GML.
-        # #   layer_origen:      Capa con la geometría de origen
-        # #   gml_salida_file:   Dirección del archivo en formato GML a sobreescribir con el resultado
-        # #   src:               Sistema de Referencia de Coordendas de la capa origen. Según cógigos  EPSG
-        # #   log_csv:           Capa de fichero log de resultados
-
-        # ## Definiciones principales
-        # layer = layer_origen[0]
-        # campoLocalid = self.cbx_campoLOCALID.currentText()  # Detección de campo LOCALID
-        # campoNamespace = self.cbx_campoNMSPC.currentText()  # Detección de campo NAMESPACE
-
-        # DecArea = self.spbDecArea.value()       # Decimales para el valor de area
-        # DecCoord = self.spbDecCoord.value()     # Decimales para las coordenadas
-
-        # # Se identifica si usar plantilla v3 o v4
-        # if self.rbtGMLV3.isChecked():
-            # self.versionGML = 'v3'
-            # from .catastroPlantillaGML import catGMLv3 as catGML
-        # else:
-            # self.versionGML = 'v4'
-            # from .catastroPlantillaGML import catGMLv4 as catGML
-        # # print ('VersionGML: ',self.versionGML)
-        # self.catGML=catGML
-
-        # ## Inicializando progress y lblINFO
-        # self.progressBar.setValue(0)
-        # self.lblINFO.show() == True
-        # self.lblINFO.setText("")
-
-        # ## Se obtiene la versión del plugin y fecha
-        # fileMetadata = os.path.join(os.path.dirname(__file__), 'metadata.txt')
-        # cfg = configparser.ConfigParser()
-        # cfg.read(fileMetadata)
-        # fecha = datetime.fromtimestamp(os.path.getmtime(fileMetadata)).strftime("%Y-%m-%dT%H:%M:%S")
-        # version = cfg.get('general', 'version')
-
-        # # Comprueba que el SRC es correcto
-        # if src not in self.catGML.SRC_DICT:
-            # mess= u'ERROR: El código SRC ({}) indicado es incorrecto.'.format(src)
-            # mess+= u'\n ' + 'Los SRC permitidos son 25828, 25829, 25830 o 25831'
-            # self.fun.showMessageERR( mess)
-            # return
-
-        # with open(gml_salida_file, 'w') as filegml:
-            # ## Obtenemos el número de features a meter en GML
-            # if self.chbELEMSELEC.isChecked():
-                # feats = layer.selectedFeatures()
-                # numfeats = layer.selectedFeatureCount()
-                # if numfeats == 0:
-                    # feats = layer.getFeatures()
-                    # numfeats = layer.featureCount()
-            # else:
-                # feats = layer.getFeatures()
-                # numfeats = layer.featureCount()
-
-            # ## Se escribe PLANTILLA_1. Encabezados y versión del plugin
-            # filegml.writelines(self.catGML.PLANTILLA_1.format(version=version, fecha=fecha, numfeats=numfeats, versGML=self.versionGML))      # Añade el encabezamiento al GML
-
-            # nfeat = 0
-
-            # fracfeats = 0
-
-            # errorGML = False
-            # listaerrorGML = []
-            # for feature in feats:
-
-                # attrs = feature.attributes()
-                # valCampoLocalid = feature[campoLocalid]
-                # if valCampoLocalid:
-                    # localidf = str(valCampoLocalid)
-                # else:
-                    # localidf = '01'
-
-                # valCampoNamespace = feature[campoNamespace]
-                # if not valCampoNamespace:
-                    # valCampoNamespace = 'ES.LOCAL.CP'
-
-
-                # nmspcf = str(valCampoNamespace)
-                # geom = feature.geometry()
-
-                # # Comprobamos si la RC es válida y no repetida
-                # respRcOrigen = ''
-                # respRC = [valCampoLocalid, valCampoNamespace, 'OK']
-                # if valCampoNamespace != 'ES.LOCAL.CP':
-                    # respRC = self.compruebaRC_gml(layer, campoLocalid, valCampoLocalid, valCampoNamespace)
-
-                    # # Comprobamos si la parcela es idéntica a la original
-                    # if self.cbxCTRL_RRCC_identicas.isChecked():
-                        # url = self.conf.catastro_tool["url_catastro_DescGML"]
-                        # respRcOrigen = self.compruebaRCorigen(localidf, feature.geometry())
-
-
-                # if respRC[2] != 'OK' or  respRcOrigen == 'IGUAL':
-                    # # Verificar si respRC[0] ya existe en el primer elemento de alguna lista
-                    # existe = any(respRC[0] == error[0] for error in listaerrorGML)
-
-                    # if not existe:
-                        # errorGML = True
-                        # ## escribir linea en log
-                        # target = codecs.open(log_csv, 'a', encoding='utf-8')
-                        # # linea = u'' + localidf + ';' + nmspcf + ';' + respRC[2]
-                        # if respRcOrigen == 'IGUAL':
-                            # linea = u'' + localidf + ';' + nmspcf + ';Idéntica. No se incluye en GML'
-                            # listaerrorGML.append([valCampoLocalid,valCampoNamespace,'Idéntica. No se incluye en GML'])
-                        # else:
-                            # linea = u'' + localidf + ';' + nmspcf + ';' + respRC[2]
-                            # listaerrorGML.append(respRC)
-                        # target.write(linea)
-                        # target.write("\n")
-                        # target.close()
-
-                # if self.cbxCTRL_RRCC_identicas.isChecked() and respRcOrigen == 'IGUAL':
-                    # continue
-
-                # # Si es un NAMESPACE incorrecto, se continua
-                # if nmspcf != 'ES.SDGC.CP' and  nmspcf != 'ES.SDGC.BU' and  nmspcf != 'ES.LOCAL.CP': continue
-
-                # # Si es una geometría vacía, se continua
-                # if geom is None: continue
-
-                # # Se comprueba si la RC puede ser de 14 caracteres, incluso, si existe
-                # if len(localidf) == 14 and (nmspcf == 'ES.SDGC.CP' and nmspcf == 'ES.SDGC.BU'):
-                    # pass
-                # else:
-                    # # Si no es RC (nmspcf == 'ES.SDGC.CP' o  'ES.SDGC.BU') se asigna nmspcf = 'ES.LOCAL.CP'
-                    # nmspcf = 'ES.LOCAL.CP'
-
-                # area = round(geom.area(), DecArea)
-                # nfeat += 1
-
-                # # Se escribe PLANTILLA_2. Encabezamiento de cada Feature al GML
-                # filegml.writelines(self.catGML.PLANTILLA_2.format(area=str(area), nmspc=nmspcf, localid=localidf, src=src))
-
-                # if geom.wkbType() == 3:
-                    # n, nElim = self.describe_polygon(feature, localidf, nmspcf, src, filegml)
-
-                # elif geom.wkbType() == 6:
-                    # n, nElim = self.describe_multipolygon(feature, localidf, nmspcf, src, filegml)
-
-                # if nElim != 0:
-                    # print (localidf +', Eliminados '+ str(nElim) +' nodos')
-
-                # prog = 100 * nfeat/numfeats
-                # self.progressBar.setValue(int(prog))
-
-                # # Se escribe PLANTILLA_3. Añade la parte posterior a las coordenadas de cada feature al GML
-                # filegml.writelines(self.catGML.PLANTILLA_3.format(localidf=localidf,nmspc=nmspcf))
-                # fracfeats += 1/numfeats
-
-            # # Se escribe PLANTILLA_4. Añade el final al GML
-            # filegml.writelines(self.catGML.PLANTILLA_4)     # Añade el final al GML
-
-
-        # # Carga del GML en la TOC
-        # if self.chbCARGAGML.isChecked() and nfeat > 0:
-            # crs = QgsCoordinateReferenceSystem(int(src),QgsCoordinateReferenceSystem.EpsgCrsId)
-            # layerGML = QgsVectorLayer(gml_salida_file, nomCAPA+"_GML" , 'ogr')
-
-            # layerGML.setCrs(crs,False)
-
-            # QgsProject.instance().addMapLayer(layerGML)
-
-            # root = QgsProject.instance().layerTreeRoot()
-
-            # # Ponemos la capa arriba
-            # myvl = root.findLayer(layerGML.id())
-            # parent = myvl.parent()
-            # myvlclone = myvl.clone()
-            # root.insertChildNode(0, myvlclone)
-            # try:
-                # parent.removeChildNode(myvl)
-            # except:
-                # print ('parent - ', parent.name(), type(parent), '   IMPOSIBLE BORRAR')
-
-        # QApplication.restoreOverrideCursor()
-
-        # self.close()
-
-        # if errorGML == True:
-            # if nfeat == 0:
-                # textINFO = '--- NO SE CARGA GML ---'
-            # else:
-                # textINFO = '---EL FICHERO PUEDE NO SER VÁLIDO PARA CATASTRO---'
-
-            # self.showDialog(listaerrorGML, layer, nomCAPA, gml_salida_file, textINFO)
-
-            # project = QgsProject.instance()
-            # # Eliminar capas LOG existentes
-            # for lyr in project.mapLayers().values():
-                # if lyr.name() == 'Log GML':
-                    # project.removeMapLayer(lyr.id())
-
-            # # Creación de la capa de LOG
-            # log_csv_uri = u"file:///"+ log_csv +"?type=csv&geomType=none&subsetIndex=no&delimiter=%s&watchFile=no" % (";")
-            # log_lyr = QgsVectorLayer(log_csv_uri, 'Log GML','delimitedtext')
-            # project.addMapLayer(log_lyr)
-
 
 
     def compruebaRCorigen(self, rc, featGeom, precis=1):
@@ -888,6 +688,11 @@ class catastro_generaGML(QDialog, FORM_CLASS):
         areaGML = featGeom.area()
 
         response, areaParcela, geomParcela = self.descargaGmlParcCat(url, rc, crs)
+        
+        # Verificar si hubo error en la descarga
+        if response == 'ERROR' or areaParcela == 'ERROR' or geomParcela == 'ERROR':
+            print(f'Error al descargar la parcela {rc}')
+            return 'DISTINTA'
 
         # Filtro rápido por superficie
         print ('rc:', rc, 'areaGML: ', areaGML, 'areaParcela: ', areaParcela)
@@ -931,25 +736,6 @@ class catastro_generaGML(QDialog, FORM_CLASS):
 
         print(f'La parcela {rc} es idéntica a la original de catastro')
         return 'IGUAL'
-
-
-    # def compruebaRCorigen_aant(self, rc, featGeom):
-        # # Revisar RRCC identicas a origen: Se analizan las parcelas con NAMESPACE  'ES.SDGC.CP',
-        # #   analizando si tienen una coincidencia absoluta de geometría con la parcela descargada de catastro.
-        # crs = 'EPSG:25830'
-        # srsname = crs.replace( 'EPSG:', 'EPSG::')
-        # url = self.conf.catastro_tool["url_catastro_DescGML"]
-        # areaGML = featGeom.area()
-
-        # response, areaParcela, geomParcela = self.descargaGmlParcCat(url, rc, crs)
-        # # print ('rc: ', rc, 'areaParcela; ', areaParcela, 'geomParcela: ', geomParcela)
-        # if round(areaGML, 0) != round(areaParcela, 0):
-            # # Si la supericie no es idéntica (en el primer decimal), se deja de revisar
-            # return 'DISTINTA'
-        # else:
-            # inters = [hacerla]
-            # print(f'La parcela {rc} es idéntica a la original de catastro')
-            # return 'IGUAL'
 
 
     def showDialog(self, listaerrorGML, layer, nomCAPA, gml_salida_file, textINFO, tittle="GML CATASTRO"):
